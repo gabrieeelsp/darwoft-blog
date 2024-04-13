@@ -1,0 +1,31 @@
+services:
+  web:
+    build: ./web
+    image: blog-web-img
+    container_name: blog-web-cont
+    ports:
+      - ${PORT_EXT_WEB}:5173
+    volumes:
+      - ./web:/app
+    depends_on:
+      - api
+    command: sh -c "npm install && npm run dev"
+    networks:
+      blog_network:
+  api:
+    build: ./api
+    image: blog-api-img
+    container_name: blog-api-cont
+    ports: 
+      - ${PORT_EXT_API}:${PORT_INT_API}
+    environment:
+      - PORT_INT_API=${PORT_INT_API}
+      - DB_URI=${DB_URI}
+    volumes:
+      - ./api:/app
+    command: sh -c "npm install && npm run dev"
+    networks:
+      blog_network:
+
+networks:
+  blog_network:
