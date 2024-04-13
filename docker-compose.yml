@@ -21,6 +21,7 @@ services:
     environment:
       - PORT_INT_API=${PORT_INT_API}
       - DB_URI=${DB_URI}
+      - JWT_SECRET=${JWT_SECRET}
     volumes:
       - ./api:/app
     command: sh -c "npm install && npm run dev"
