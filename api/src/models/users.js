@@ -15,6 +15,10 @@ const UserSchema = new mongoose.Schema(
         password: {
             type: String,
         },
+        tokensRevokedAt: {
+            type: Date,
+            default: Date.now(),
+        },
     },
     {
         timestamps: true,
