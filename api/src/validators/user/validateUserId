@@ -1,0 +1,10 @@
+const { param } = require('express-validator');
+const { validateResult } = require('../../helpers/validateHelper');
+
+module.exports = [
+    param('id').isNumeric().withMessage('Error de ID.'),
+
+    (req, res, next) => {
+        validateResult(req, res, next);
+    },
+];
