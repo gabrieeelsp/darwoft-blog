@@ -1,4 +1,4 @@
-const roles = ['author', 'editor', 'administrador'];
+const roles = ['autor', 'editor', 'administrador'];
 
 module.exports = {
     roles,

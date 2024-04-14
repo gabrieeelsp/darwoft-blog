@@ -5,6 +5,7 @@ const update = async (id, data) => {
     const newData = { ...data };
     if (data.roles) {
         const user = await userModel.findById({ _id: id });
+        if (!user) throw new Error('No se encontro el usuario.');
 
         const { roles: userRoles } = user;
 
