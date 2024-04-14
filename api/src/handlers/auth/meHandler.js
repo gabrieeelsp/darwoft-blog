@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 const meHandler = (req, res) => {
-    const { user: userDoc } = req;
+    const { authUser: userDoc } = req;
 
     const user = userDoc.toObject();
 

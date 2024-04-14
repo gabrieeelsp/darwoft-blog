@@ -9,7 +9,6 @@ const refresh = async (token) => {
     if (resp.valid) return token;
 
     if (resp.error === 'jwt expired') {
-        console.log(resp);
         const response = verifyToken(token, true);
 
         const query = userModel.findById(response.payload.id);

@@ -22,7 +22,7 @@ const authMiddleware = async (req, res, next) => {
     }
 
     const query = userModel.findById(resp.payload.id);
-    // query.select('tokensRevokedAt');
+    query.select('_id name surname email roles tokensRevokedAt');
     const user = await query.exec();
 
     if (!user)
@@ -33,9 +33,10 @@ const authMiddleware = async (req, res, next) => {
             .status(401)
             .json({ error: { message: 'Token inválido fecha' } });
 
-    req.user = user;
+    req.authUser = user.toObject();
+    delete req.authUser.tokensRevokedAt;
 
-    next();
+    return next();
 };
 
 module.exports = authMiddleware;
