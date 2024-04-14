@@ -1,5 +1,19 @@
 const mongoose = require('mongoose');
 
+const RolSchema = new mongoose.Schema({
+    name: {
+        type: String,
+    },
+    isEnable: {
+        type: Boolean,
+        default: true,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now(),
+    },
+});
+
 const UserSchema = new mongoose.Schema(
     {
         name: {
@@ -18,6 +32,9 @@ const UserSchema = new mongoose.Schema(
         tokensRevokedAt: {
             type: Date,
             default: Date.now(),
+        },
+        roles: {
+            type: [RolSchema],
         },
     },
     {

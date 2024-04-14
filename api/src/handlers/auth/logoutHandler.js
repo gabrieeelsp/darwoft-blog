@@ -2,8 +2,7 @@
 const logout = require('../../controllers/user/logout');
 
 const logoutHandler = async (req, res) => {
-    const { _id } = req.user;
-    console.log(_id);
+    const { _id } = req.authUser;
     try {
         await logout(_id);
         return res.status(200).json({

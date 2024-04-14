@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const validateRegister = require('../validators/user/register');
-const validateLogin = require('../validators/user/login');
+const validateRegister = require('../validators/auth/register');
+const validateLogin = require('../validators/auth/login');
 const authMiddleware = require('../middlewares/authMiddleware');
 const registerHandler = require('../handlers/auth/registerHandler');
 const loginHandler = require('../handlers/auth/loginHandler');
