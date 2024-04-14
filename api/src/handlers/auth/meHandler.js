@@ -1,14 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 const meHandler = (req, res) => {
-    const { authUser: userDoc } = req;
-
-    const user = userDoc.toObject();
+    const { authUser } = req;
 
     const resp = {
-        _id: user._id,
-        name: user.name,
-        surname: user.surname,
-        email: user.email,
+        _id: authUser._id,
+        name: authUser.name,
+        surname: authUser.surname,
+        email: authUser.email,
+        roles: authUser.roles,
     };
 
     return res
