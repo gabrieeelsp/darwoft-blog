@@ -7,6 +7,7 @@ const CategorySchema = new mongoose.Schema({
     },
     isVisible: {
         type: Boolean,
+        default: false,
     },
     description: {
         type: String,

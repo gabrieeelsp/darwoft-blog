@@ -1,9 +1,12 @@
 /* eslint-disable no-underscore-dangle */
+const mongoose = require('mongoose');
 const { userModel } = require('../../models');
 
 const updateRoles = async (id, oldRoles) => {
+    if (!mongoose.Types.ObjectId.isValid(id)) return null;
+
     const user = await userModel.findById({ _id: id });
-    if (!user) throw new Error('No se encontro el usuario.');
+    if (!user) return null;
 
     const { roles: userRoles } = user;
 

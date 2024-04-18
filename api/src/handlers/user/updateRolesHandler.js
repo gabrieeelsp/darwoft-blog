@@ -1,37 +1,30 @@
 const { matchedData } = require('express-validator');
-const getErrorDBName = require('../../utils/getErrorDBName');
-const haveSomeRole = require('../../utils/haveSomeRole');
 const updateRoles = require('../../controllers/user/updateRoles');
+const ClientError = require('../../errors/ClientError');
+const responseHelper = require('../../helpers/responseHelper');
 
-const updateRolesHandler = async (req, res) => {
+const updateRolesHandler = async (req, res, next) => {
     const data = matchedData(req);
-    const { userId } = req.objectsId;
 
-    const { authUser } = req;
+    const { userId } = req.params;
 
-    let allowed = false;
-    if (userId.toString() === authUser._id.toString()) allowed = true; // permitido modificar mi propio perfil
-    if (haveSomeRole(authUser, 'administrador')) allowed = true; // permitido modificar el otro perfil si soy administrador
-    if (!allowed)
-        return res.status(403).json({
-            error: {
-                message: 'No tiene permisos para realizar esta acción.',
-            },
-        });
-
+    let user = null;
     try {
-        const user = await updateRoles(userId, data.roles);
+        user = await updateRoles(userId, data.roles);
         return res
             .status(203)
             .json({ message: 'Usuario actualizado con éxito', data: user });
     } catch (error) {
-        console.log(error);
-        return res.status(400).json({
-            error: {
-                message: getErrorDBName(error) || error.message,
-            },
-        });
+        next(error);
     }
+
+    if (!user) return next(new ClientError(404, 'Usuario no encontrado', null));
+
+    return responseHelper(res, {
+        statusCode: 200,
+        message: 'Usuario actualizado con éxito',
+        data: user,
+    });
 };
 
 module.exports = updateRolesHandler;

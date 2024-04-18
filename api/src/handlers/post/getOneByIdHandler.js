@@ -1,19 +1,24 @@
 const getOneById = require('../../controllers/post/getOneById');
+const ClientError = require('../../errors/ClientError');
+const responseHelper = require('../../helpers/responseHelper');
 
-const getOneByIdHamdler = async (req, res) => {
-    const { postId } = req.objectsId;
+const getOneByIdHamdler = async (req, res, next) => {
+    const { postId } = req.params;
 
+    let post = null;
     try {
-        const post = await getOneById(postId);
-        if (!post) throw new Error('Post no encontrado');
-        return res.status(200).json({ message: 'Post Encontrado', data: post });
+        post = await getOneById(postId);
     } catch (error) {
-        return res.status(400).json({
-            error: {
-                message: error.message,
-            },
-        });
+        return next(error);
     }
+
+    if (!post) return next(new ClientError(404, 'Post no encontrado', null));
+
+    return responseHelper(res, {
+        statusCode: 200,
+        message: 'Post encontrado',
+        data: post,
+    });
 };
 
 module.exports = getOneByIdHamdler;

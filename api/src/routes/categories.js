@@ -4,7 +4,6 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const createHandler = require('../handlers/category/createHandler');
 const validateRolMiddleware = require('../middlewares/validateRolMiddleware');
 const updateHandler = require('../handlers/category/updateHandler');
-const validateIdMiddleware = require('../middlewares/validateIdMiddleware');
 
 const router = Router();
 
@@ -17,10 +16,9 @@ router.post(
 );
 router.put(
     '/:categoryId',
-    authMiddleware,
-    validateRolMiddleware(['administrador']),
-    validateIdMiddleware('categoryId'),
-    validateCreate,
+    authMiddleware, // authentication
+    validateRolMiddleware(['administrador']), // authorization
+    validateCreate, // valida el formulario
     updateHandler,
 );
 

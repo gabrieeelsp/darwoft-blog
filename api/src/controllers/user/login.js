@@ -8,10 +8,9 @@ const login = async (email, password) => {
 
     let user = await query.exec();
 
-    if (!user) throw new Error('Email o Password incorrecto.');
+    if (!user) return null;
 
-    const isPasswordCorrect = compare(password, user.password);
-    if (!isPasswordCorrect) throw new Error('Email o Password incorrecto.');
+    if (!compare(password, user.password)) return null;
 
     user = user.toObject();
     delete user.password;
