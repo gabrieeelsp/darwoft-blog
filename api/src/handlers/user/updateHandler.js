@@ -1,35 +1,40 @@
 const { matchedData } = require('express-validator');
 const update = require('../../controllers/user/update');
-const getErrorDBName = require('../../utils/getErrorDBName');
 const haveSomeRole = require('../../utils/haveSomeRole');
+const ClientError = require('../../errors/ClientError');
+const responseHelper = require('../../helpers/responseHelper');
 
-const updateHandler = async (req, res) => {
+const updateHandler = async (req, res, next) => {
     const data = matchedData(req);
-    const { userId } = req.objectsId;
+
+    const { userId } = req.params;
     const { authUser } = req;
 
     let allowed = false;
-    if (userId.toString() === authUser._id.toString()) allowed = true; // permitido modificar mi propio perfil
+    if (userId === authUser._id.toString()) allowed = true; // permitido modificar mi propio perfil
     if (haveSomeRole(authUser, 'administrador')) allowed = true; // permitido modificar el otro perfil si soy administrador
     if (!allowed)
-        return res.status(403).json({
-            error: {
-                message: 'No tiene permisos para realizar esta acción.',
-            },
-        });
+        return next(
+            new ClientError(
+                403,
+                'No tiene permisos para realizar esta acción.',
+            ),
+        );
 
+    let user = null;
     try {
-        const user = await update(userId, data);
-        return res
-            .status(203)
-            .json({ message: 'Usuario actualizado con éxito', data: user });
+        user = await update(userId, data);
     } catch (error) {
-        return res.status(400).json({
-            error: {
-                message: getErrorDBName(error) || error.message,
-            },
-        });
+        return next(error);
     }
+
+    if (!user) return next(new ClientError(404, 'Usuario no encontrado', null));
+
+    return responseHelper(res, {
+        statusCode: 200,
+        message: 'Usuario actualizado con éxito',
+        data: user,
+    });
 };
 
 module.exports = updateHandler;

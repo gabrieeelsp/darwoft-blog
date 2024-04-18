@@ -1,8 +1,10 @@
+const responseHelper = require('../../helpers/responseHelper');
+
 /* eslint-disable no-underscore-dangle */
 const meHandler = (req, res) => {
     const { authUser } = req;
 
-    const resp = {
+    const data = {
         _id: authUser._id,
         name: authUser.name,
         surname: authUser.surname,
@@ -10,9 +12,11 @@ const meHandler = (req, res) => {
         roles: authUser.roles,
     };
 
-    return res
-        .status(200)
-        .json({ message: 'Se ha encontrado el usuario.', data: resp });
+    return responseHelper(res, {
+        statusCode: 200,
+        message: 'Se ha encontrado el usuario.',
+        data,
+    });
 };
 
 module.exports = meHandler;

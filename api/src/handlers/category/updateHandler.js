@@ -1,25 +1,27 @@
 const { matchedData } = require('express-validator');
 const update = require('../../controllers/category/update');
-const getErrorDBName = require('../../utils/getErrorDBName');
+const ClientError = require('../../errors/ClientError');
+const responseHelper = require('../../helpers/responseHelper');
 
-const updateHandler = async (req, res) => {
+const updateHandler = async (req, res, next) => {
     const data = matchedData(req);
-    const { categoryId } = req.objectsId;
+    const { categoryId } = req.params;
 
+    let category = null;
     try {
-        const category = await update(categoryId, data);
-
-        return res.status(203).json({
-            message: 'Categoría actualizada con éxito',
-            data: category,
-        });
+        category = await update(categoryId, data);
     } catch (error) {
-        return res.status(500).json({
-            error: {
-                message: getErrorDBName(error) || error.message,
-            },
-        });
+        return next(error);
     }
+
+    if (!category)
+        return next(new ClientError(404, 'Categoría no encontrada', null));
+
+    return responseHelper(res, {
+        statusCode: 200,
+        message: 'Categoría actualizada con exito',
+        data: category,
+    });
 };
 
 module.exports = updateHandler;

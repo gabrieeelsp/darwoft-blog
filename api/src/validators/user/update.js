@@ -1,6 +1,5 @@
 const { check } = require('express-validator');
 const { validateResult } = require('../../helpers/validateHelper');
-const { roles } = require('../../utils/constantes');
 
 module.exports = [
     check('name')

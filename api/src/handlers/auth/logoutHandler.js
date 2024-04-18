@@ -1,19 +1,17 @@
 /* eslint-disable no-unused-vars */
 const logout = require('../../controllers/user/logout');
+const responseHelper = require('../../helpers/responseHelper');
 
-const logoutHandler = async (req, res) => {
-    const { _id } = req.authUser;
+const logoutHandler = async (req, res, next) => {
+    const { authUser } = req;
     try {
-        await logout(_id);
-        return res.status(200).json({
+        await logout(authUser._id);
+        return responseHelper(res, {
+            statusCode: 200,
             message: 'Logout satisfactorio',
         });
     } catch (error) {
-        return res.status(500).json({
-            error: {
-                message: 'Se ha producido un error',
-            },
-        });
+        next(error);
     }
 };
 
