@@ -4,7 +4,7 @@ const { generateToken } = require('../../services/jwtService');
 
 const login = async (email, password) => {
     const query = userModel.findOne({ email });
-    query.select('name surname email password');
+    query.select('name surname email password roles');
 
     let user = await query.exec();
 

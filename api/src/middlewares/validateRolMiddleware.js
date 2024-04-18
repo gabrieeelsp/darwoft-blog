@@ -1,8 +1,10 @@
+const haveSomeRole = require('../utils/haveSomeRole');
+
 const validateRolMiddleware = (allowedRoles) => {
     return (req, res, next) => {
         const { authUser } = req;
 
-        if (authUser.roles.some((rol) => allowedRoles.includes(rol.name))) {
+        if (haveSomeRole(authUser, allowedRoles)) {
             next();
         } else {
             return res

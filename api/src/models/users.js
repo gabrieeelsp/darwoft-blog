@@ -1,18 +1,5 @@
+/* eslint-disable func-names */
 const mongoose = require('mongoose');
-
-const RolSchema = new mongoose.Schema({
-    name: {
-        type: String,
-    },
-    isEnable: {
-        type: Boolean,
-        default: true,
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now(),
-    },
-});
 
 const UserSchema = new mongoose.Schema(
     {
@@ -33,13 +20,26 @@ const UserSchema = new mongoose.Schema(
             type: Date,
             default: Date.now(),
         },
-        roles: {
-            type: [RolSchema],
-        },
+        roles: [
+            {
+                _id: false,
+                name: {
+                    type: String,
+                },
+                isEnable: {
+                    type: Boolean,
+                    default: true,
+                },
+                createdAt: {
+                    type: Date,
+                    default: Date.now(),
+                },
+            },
+        ],
     },
     {
         timestamps: true,
     },
 );
 
-module.exports = mongoose.model('users', UserSchema);
+module.exports = mongoose.model('User', UserSchema);
