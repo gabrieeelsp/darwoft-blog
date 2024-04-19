@@ -4,10 +4,10 @@ const responseHelper = require('../../helpers/responseHelper');
 const ClientError = require('../../errors/ClientError');
 
 const loginHandler = async (req, res, next) => {
-    const data = matchedData(req);
-
     let user = null;
     try {
+        const data = matchedData(req);
+
         user = await login(data.email, data.password);
     } catch (error) {
         next(error);

@@ -1,19 +1,19 @@
 const { userModel } = require('../../models');
 const { hash } = require('../../services/hashService');
+const cleanDocument = require('../../utils/cleanDocument');
 
 const create = async (data) => {
-    let user = await userModel.create({
+    const user = await userModel.create({
         ...data,
         password: hash(data.password),
     });
 
-    user = user.toObject(); // toma un documento y devuelve un objeto javascript
-    delete user.password;
-    delete user.tokensRevokedAt;
-    delete user.createdAt;
-    delete user.updatedAt;
-
-    return user;
+    return cleanDocument(user, [
+        'password',
+        'tokensRevokedAt',
+        'createdAt',
+        'updatedAt',
+    ]);
 };
 
 module.exports = create;

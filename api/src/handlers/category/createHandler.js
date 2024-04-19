@@ -3,9 +3,8 @@ const create = require('../../controllers/category/create');
 const responseHelper = require('../../helpers/responseHelper');
 
 const createHandler = async (req, res, next) => {
-    const data = matchedData(req);
-
     try {
+        const data = matchedData(req);
         const category = await create(data);
 
         return responseHelper(res, {

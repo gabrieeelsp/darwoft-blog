@@ -5,7 +5,6 @@ const responseHelper = require('../../helpers/responseHelper');
 const getOneById = require('../../controllers/post/getOneById');
 
 const updateHandler = async (req, res, next) => {
-    const data = matchedData(req);
     const { postId } = req.params;
     const { authUser } = req;
 
@@ -23,6 +22,7 @@ const updateHandler = async (req, res, next) => {
 
     let post = null;
     try {
+        const data = matchedData(req);
         post = await update(postId, data);
     } catch (error) {
         return next(error);
