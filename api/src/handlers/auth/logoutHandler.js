@@ -4,6 +4,7 @@ const responseHelper = require('../../helpers/responseHelper');
 
 const logoutHandler = async (req, res, next) => {
     const { authUser } = req;
+
     try {
         await logout(authUser._id);
         return responseHelper(res, {

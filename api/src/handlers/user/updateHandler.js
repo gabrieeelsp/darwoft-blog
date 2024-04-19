@@ -5,8 +5,6 @@ const ClientError = require('../../errors/ClientError');
 const responseHelper = require('../../helpers/responseHelper');
 
 const updateHandler = async (req, res, next) => {
-    const data = matchedData(req);
-
     const { userId } = req.params;
     const { authUser } = req;
 
@@ -23,6 +21,8 @@ const updateHandler = async (req, res, next) => {
 
     let user = null;
     try {
+        const data = matchedData(req);
+
         user = await update(userId, data);
     } catch (error) {
         return next(error);

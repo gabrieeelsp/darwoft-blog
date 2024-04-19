@@ -4,11 +4,11 @@ const ClientError = require('../../errors/ClientError');
 const responseHelper = require('../../helpers/responseHelper');
 
 const updateHandler = async (req, res, next) => {
-    const data = matchedData(req);
     const { categoryId } = req.params;
 
     let category = null;
     try {
+        const data = matchedData(req);
         category = await update(categoryId, data);
     } catch (error) {
         return next(error);
