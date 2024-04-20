@@ -5,10 +5,10 @@ const responseHelper = require('../../helpers/responseHelper');
 const createHandler = async (req, res, next) => {
     const { authUser } = req;
 
-    data.author = authUser._id;
-
     try {
         const data = matchedData(req);
+        data.author = authUser._id;
+
         const post = await create(data);
         return responseHelper(res, {
             statusCode: 201,
