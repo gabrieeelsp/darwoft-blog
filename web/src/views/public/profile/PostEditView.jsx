@@ -1,6 +1,10 @@
+import EditPostForm from "../../../components/public/profile/EditPostForm"
+
 const PostEditView = () => {
     return (
-        <div>PostEditView</div>
+        <>
+            <EditPostForm />
+        </>
     )
 }
 

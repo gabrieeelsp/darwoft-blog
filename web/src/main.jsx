@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import { HomeView, CategoryView, PostView, PersonalDataView, PostEditView, PublicLayout, AdminLayout, PostsListView } from './views'
 import Profile from './views/public/profile/Profile.jsx'
+import PostCreateView from './views/public/profile/PostCreateView.jsx'
 
 const router = createBrowserRouter([
     {
@@ -38,8 +39,21 @@ const router = createBrowserRouter([
                     },
                     {
                         path: 'publicaciones',
-                        element: <PostsListView />
-                    }
+                        children: [
+                            {
+                                index: true,
+                                element: <PostsListView />,
+                            },
+                            {
+                                path: 'nuevo-post',
+                                element: <PostCreateView />
+                            },
+                            {
+                                path: ':postId/edit',
+                                element: <PostEditView />
+                            },
+                        ]
+                    },
                 ]
             }
         ]
