@@ -33,7 +33,7 @@ const posts = [
 const PostsList = () => {
     return (
         <>
-            <div className="p-3">
+            <div className="mt-4">
                 <table className="w-full text-sm">
                     <thead className="border-b-2 border-b-slate-500 text-left">
                         <th className="pl-3">Título</th>

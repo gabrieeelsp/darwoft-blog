@@ -11,7 +11,9 @@ const Profile = () => {
                 </div>
                 <div className="ml-3 w-full border border-slate-300">
                     <ProfileMenu />
-                    <Outlet />
+                    <div className="p-3">
+                        <Outlet />
+                    </div>
                 </div>
             </div>
         </>
