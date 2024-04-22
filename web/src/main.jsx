@@ -2,9 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import { HomeView, CategoryView, PostView, PersonalDataVew, PostsListView, PostEditView, PublicLayout, AdminLayout } from './views'
+import { HomeView, CategoryView, PostView, PersonalDataView, PostEditView, PublicLayout, AdminLayout, PostsListView } from './views'
+import Profile from './views/public/profile/Profile.jsx'
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,20 @@ const router = createBrowserRouter([
             {
                 path: '/admin',
                 element: <AdminLayout />
+            },
+            {
+                path: '/perfil',
+                element: <Profile />,
+                children: [
+                    {
+                        index: true,
+                        element: <PersonalDataView />
+                    },
+                    {
+                        path: 'publicaciones',
+                        element: <PostsListView />
+                    }
+                ]
             }
         ]
     }

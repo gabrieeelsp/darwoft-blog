@@ -2,7 +2,7 @@ import HomeView         from "./public/publications/HomeView";
 import CategoryView     from "./public/publications/CategoryView";
 import PostView         from "./public/publications/PostView";
 
-import PersonalDataVew  from "./public/profile/PersonalDataVew";
+import PersonalDataView  from "./public/profile/PersonalDataView";
 import PostsListView    from "./public/profile/PostsListView";
 import PostEditView     from "./public/profile/PostEditView";
 
@@ -15,7 +15,7 @@ export {
     CategoryView,
     PostView,
 
-    PersonalDataVew,
+    PersonalDataView,
     PostsListView,
     PostEditView,
 

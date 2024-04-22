@@ -1,6 +1,15 @@
+import Post from "../../../components/public/post/Post"
+
+
+
 const PostView = () => {
+
+
     return (
-        <div>PostView</div>
+        <div className="p-5">
+            <Post />
+        </div>
+
     )
 }
 
