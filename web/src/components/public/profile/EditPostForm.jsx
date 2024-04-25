@@ -1,11 +1,15 @@
-import { useState } from 'react';
-import Editor from 'react-simple-wysiwyg';
+import EditorWYSWYG from "../../editor/EditorWYSWYG";
+
 
 const EditPostForm = () => {
-    const [html, setHtml] = useState('my <b>HTML</b>');
-    function onChange(e) {
-        setHtml(e.target.value);
-      }
+
+
+//   const saveHTMLToDatabase = () => {
+//     const contentState = editorState.getCurrentContent();
+//     const contentHTML = stateToHTML(contentState); // Convierte a HTML
+//     // Aquí puedes enviar contentHTML a tu servidor o guardarlo en la base de datos
+//     console.log(contentHTML);
+//   };
     return (
         <>
             <div className="p-3">
@@ -34,20 +38,23 @@ const EditPostForm = () => {
                 <div className="grid grid-cols-12 mt-2">
                     <label className="col-span-3" htmlFor="">Contenido</label>
                     <div className='col-span-9'>
-                        <Editor 
-                            containerProps={{ style: { resize: 'vertical', height: '400px' } }}
-                        value={html} onChange={onChange} />
+                        <EditorWYSWYG />
                     </div>
                 </div>
-                {html}
+
+                
+                
                 <div className="grid grid-cols-12 mt-2">
                     <div className="col-start-4 col-span-8">
                         <button 
                             className=" bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-1 px-4 rounded"
                             >Guardar</button>
+
                     </div>
                 </div>
             </div>
+
+
         </>
     )
 }

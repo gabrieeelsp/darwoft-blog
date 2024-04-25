@@ -1,6 +1,7 @@
 const ClientError = require('../errors/ClientError');
 const { userModel } = require('../models');
 const { verifyToken } = require('../services/jwtService');
+const cleanDocument = require('../utils/cleanDocument');
 
 const authMiddleware = async (req, res, next) => {
     let token = req.headers.authorization;
@@ -27,7 +28,7 @@ const authMiddleware = async (req, res, next) => {
     if (resp.payload.createdAt < user.tokensRevokedAt.getTime())
         return next(new ClientError(403, 'Token inválido.'));
 
-    req.authUser = user.toObject();
+    req.authUser = cleanDocument(user, ['tokensRevokedAt']);
     delete req.authUser.tokensRevokedAt;
 
     return next();
