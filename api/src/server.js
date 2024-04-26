@@ -1,11 +1,19 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 const router = require('./routes');
 const ClientError = require('./errors/ClientError');
 const getErrorDBName = require('./utils/getErrorDBName');
 
 const server = express();
 
+server.use((req, res, next) => {
+    setTimeout(() => {
+        next();
+    }, 2000);
+});
+
+server.use(cors());
 server.use(morgan('dev'));
 server.use(express.json());
 
