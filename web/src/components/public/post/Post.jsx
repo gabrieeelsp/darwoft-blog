@@ -1,8 +1,9 @@
 import moment from 'moment/min/moment-with-locales';
 import Comments from './comments/Comments'
+import { useSelector } from 'react-redux';
 
 
-const post = {
+const postw = {
     title: 'CIQ proporciona versiones recientes del kernel para Rocky Linux',
     content: (
         <section>
@@ -42,6 +43,8 @@ const post = {
 
 const Post = () => {
 
+    const { post } = useSelector((state) => state.posts)
+
     moment.locale('es');
     const hoy = Date.now();                // obtenemos la fecha actual
     console.log(moment(hoy).format("YYYY-MM-DD hh:mm A")); // 2021-02-16 05:46 PM
@@ -53,7 +56,7 @@ const Post = () => {
             <article>
                 <h2
                     className="text-2xl italic font-bold"
-                >{post.category.name}</h2>
+                >{ /* post.category.name */ 'categoria'}</h2>
                 <h1
                     className="text-3xl mt-2"
                 >{post.title}</h1>
