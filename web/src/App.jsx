@@ -1,7 +1,14 @@
 import { Routes, Route } from 'react-router-dom';
 import { AdminView, CategoryView, LoginView, RegisterView, PostView, PublicView } from './views';
+import { useDispatch } from 'react-redux';
+import { me } from './features/auth/authSlice';
 
 function App() {
+    const dispatch = useDispatch();
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+        dispatch(me());
+    }
 
     return (
         <>

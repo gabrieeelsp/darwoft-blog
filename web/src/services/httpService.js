@@ -8,7 +8,10 @@ const httpService = axios.create({
 httpService.interceptors.request.use(
     (config) => {
         const { auth } = store.getState();
-        if ( auth.accessToken ) config.headers.Authorization = auth.accessToken
+        
+        let token = auth.accessToken;
+        if (!token) token = localStorage.getItem('accessToken');
+        if ( token ) config.headers.Authorization = `Bearer ${token}`
 
         return config;
     },
