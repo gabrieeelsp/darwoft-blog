@@ -46,9 +46,6 @@ const Post = () => {
     const { post } = useSelector((state) => state.posts)
 
     moment.locale('es');
-    const hoy = Date.now();                // obtenemos la fecha actual
-    console.log(moment(hoy).format("YYYY-MM-DD hh:mm A")); // 2021-02-16 05:46 PM
-    console.log(moment(hoy).format("D MMMM YYYY"));        // 16 Febrero 2021
 
     const fecha_convertida = moment(post.createdAt).format('LL');
     return (

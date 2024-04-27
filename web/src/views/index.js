@@ -1,7 +1,7 @@
 import PublicView from "./public/PublicView";
 
-import LoginView from "./public/auth/LoginView";
-import RegisterView from "./public/auth/RegisterView";
+import LoginView from "./auth/LoginView";
+import RegisterView from "./auth/RegisterView";
 
 import HomeView         from "./public/publications/HomeView";
 import CategoryView     from "./public/publications/CategoryView";

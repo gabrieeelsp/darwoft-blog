@@ -4,10 +4,15 @@ import { Link } from "react-router-dom"
 import { userValidator as validator } from "../../validators/userValidator"
 import { validateField } from "../../validators"
 import { login } from "../../features/auth/authSlice"
+import { useSelector } from 'react-redux';
+import loading from '../../assets/loading.gif'
 
 
 const LoginForm = () => {
     const dispatch = useDispatch()
+    const { status, error } = useSelector((state) => state.auth)
+    const [isShowMessage, setIsShowMessage] = useState(false)
+    
 
     const formFields = {
         email: '',
@@ -20,6 +25,8 @@ const LoginForm = () => {
     const [isRememberMe, setIsRememberMe] = useState(false)
     
     const handlerChange = (event) => {
+        setIsShowMessage(false)
+
         const property = event.target.name;
         const value = event.target.value;
 
@@ -30,7 +37,7 @@ const LoginForm = () => {
 
     const handlerSubmit = (event) => {
         event.preventDefault();
-
+        
         const errors = {}
         Object.keys(formData).forEach((property) => {
             errors[property] = validateField(validator, property, formData[property], 'login');
@@ -39,6 +46,7 @@ const LoginForm = () => {
         
         if ( Object.values(errors).some((value) => value) ) return
         
+        setIsShowMessage(true)
         dispatch(login({...formData, isRememberMe}))
     }
 
@@ -70,10 +78,19 @@ const LoginForm = () => {
                     </div>
 
                     <div className="flex flex-col mb-1">
-                        <button className="bg-purple-500 w-full text-sm hover:bg-purple-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                        <button 
+                            className="bg-purple-500 w-full text-sm hover:bg-purple-700 disabled:bg-purple-300 text-white font-bold py-2 px-4 rounded" 
+                            type="submit"
+                            disabled={isShowMessage && status === 'pending'}
+                            >
                             Sign In
                         </button>
-                        <div className="min-h-4 mt-1 ml-2 text-xs text-red-400"></div>
+                        <div className="min-h-5 max-h-5 mt-2 ml-2 text-sm text-red-400 flex justify-center">
+                            { isShowMessage && status === 'pending' && <img src={loading} className="max-h-5 object-contain" />}
+                            { isShowMessage && status === 'succeeded' && <span className="text-green-800">Se ha Registrado exitosamente</span>}
+                            { isShowMessage && status === 'error' && !error.data && <span>{error.message}</span>}
+                            { isShowMessage && status === 'error' && error.data && <ul>{error.data.map(e => <li key={e.field}>{e.message}</li>)}</ul>}
+                        </div>
                         
                         
                     </div>
