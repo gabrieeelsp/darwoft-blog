@@ -1,6 +1,19 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import httpService from '../../services/httpService'
 
+export const me = createAsyncThunk('auth/me', async (_, { rejectWithValue }) => {
+    try {
+        const response = await httpService.get('auth/me');
+        
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data.error)
+            return rejectWithValue(error.response.data.error);
+
+        return rejectWithValue(error.message);
+    }
+})
+
 export const register = createAsyncThunk('auth/register', async ({name, surname, email, password, passwordConfirmation}, { rejectWithValue }) => {
     try {
         const response = await httpService.post('auth/signup', {
@@ -45,7 +58,7 @@ export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValu
 
         localStorage.removeItem('accessToken');
         
-        return response;
+        return response.data;
     } catch (error) {
         if (error.response && error.response.data.error) 
             return rejectWithValue(error.response.data.error);
@@ -83,6 +96,20 @@ const authSlice = createSlice({
                 state.error = action.payload
             })
 
+            .addCase(me.pending, (state) => {
+                state.status = 'pending'
+            })
+            .addCase(me.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.user = action.payload.data
+                state.accessToken = localStorage.getItem('accessToken') // repensar si esta bien llamar al localstorage desde aca o se prefiere que la api devuelva el token
+                state.error = null
+            })
+            .addCase(me.rejected, (state, action) => {
+                state.status = 'error'
+                state.error = action.payload
+            })
+
             .addCase(register.pending, (state) => {
                 state.status = 'pending'
             })
@@ -99,7 +126,7 @@ const authSlice = createSlice({
             .addCase(logout.pending, (state) => {
                 state.status = 'pending'
             })
-            .addCase(logout.fulfilled, (state, action) => {
+            .addCase(logout.fulfilled, (state) => {
                 state.status = 'succeeded'
                 state.user = null
                 state.accessToken = null
@@ -109,6 +136,8 @@ const authSlice = createSlice({
                 state.status = 'error'
                 state.error = action.payload
             })
+
+            
     }
 })
 
