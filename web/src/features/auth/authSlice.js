@@ -1,23 +1,22 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import httpService from '../../services/httpService'
 
-export const register = createAsyncThunk('auth/register', async ({name, surname, email, password, passwordconfirmation}, { rejectWithValue }) => {
+export const register = createAsyncThunk('auth/register', async ({name, surname, email, password, passwordConfirmation}, { rejectWithValue }) => {
     try {
-        const response = await httpService.post('auth/register', {
+        const response = await httpService.post('auth/signup', {
             name,
             surname,
             email,
             password,
-            "password-confirmation": passwordconfirmation,
+            "password-confirmation": passwordConfirmation,
         })
 
         return response.data;
     } catch (error) {
-        if (error.response && error.response.data.error.messsage)
-            return rejectWithValue(error.response.data.error.message);
+        if (error.response && error.response.data.error)
+            return rejectWithValue(error.response.data.error);
 
         return rejectWithValue(error.message);
-
     }
 })
 
@@ -33,8 +32,23 @@ export const login = createAsyncThunk('auth/login', async ({ email, password, is
 
         return response.data;
     } catch (error) {
-        if (error.response && error.response.data.error.message) 
-            return rejectWithValue(error.response.data.error.message);
+        if (error.response && error.response.data.error) 
+            return rejectWithValue(error.response.data.error);
+        
+        return rejectWithValue(error.message);
+    }
+})
+
+export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValue }) => {
+    try {
+        const response = await httpService.post('auth/signout')
+
+        localStorage.removeItem('accessToken');
+        
+        return response;
+    } catch (error) {
+        if (error.response && error.response.data.error) 
+            return rejectWithValue(error.response.data.error);
         
         return rejectWithValue(error.message);
     }
@@ -65,7 +79,7 @@ const authSlice = createSlice({
                 state.error = null
             })
             .addCase(login.rejected, (state, action) => {
-                state.status = 'errror'
+                state.status = 'error'
                 state.error = action.payload
             })
 
@@ -78,7 +92,21 @@ const authSlice = createSlice({
                 state.error = null
             })
             .addCase(register.rejected, (state, action) => {
-                state.status = 'errror'
+                state.status = 'error'
+                state.error = action.payload
+            })
+
+            .addCase(logout.pending, (state) => {
+                state.status = 'pending'
+            })
+            .addCase(logout.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.user = null
+                state.accessToken = null
+                state.error = null
+            })
+            .addCase(logout.rejected, (state, action) => {
+                state.status = 'error'
                 state.error = action.payload
             })
     }

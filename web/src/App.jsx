@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { AdminView, CategoryView, LoginView, PostView, PublicView } from './views';
-import RegisterView from './views/public/auth/RegisterView';
+import { AdminView, CategoryView, LoginView, RegisterView, PostView, PublicView } from './views';
 
 function App() {
 

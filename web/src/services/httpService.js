@@ -9,7 +9,7 @@ httpService.interceptors.request.use(
     (config) => {
         const { auth } = store.getState();
         if ( auth.accessToken ) config.headers.Authorization = auth.accessToken
-        console.log(config)
+
         return config;
     },
     (error) => {

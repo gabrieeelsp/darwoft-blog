@@ -1,12 +1,18 @@
 import { Link, Outlet } from "react-router-dom"
 import { Footer, Header } from "../../components"
+import { useSelector, useDispatch } from 'react-redux'
+import { logout } from "../../features/auth/authSlice";
 
 const PublicLayout = () => {
+    const dispatch = useDispatch();
+    const { user } = useSelector((state) => state.auth)
     return (
         <>
             <div className="flex flex-col min-h-screen">
-                <div className="text-right text-sm bg-black text-slate-300 py-1/2">
-                    <Link to='/auth/login' className="mr-10 hover:text-white">Acceder</Link>
+                <div className="text-right text-sm pr-10 bg-black text-slate-300 py-1/2">
+                    { user && <><span className="mr-2">{user.email}</span><button onClick={() => dispatch(logout())}>Salir</button></> }
+                    {!user && <Link to='/auth/login' className="hover:text-white">Acceder</Link>}
+                    
                 </div>
                 <header className="">
                     <Header />
