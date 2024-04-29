@@ -7,6 +7,7 @@ export const me = createAsyncThunk('auth/me', async (_, { rejectWithValue }) => 
         
         return response.data;
     } catch (error) {
+        localStorage.removeItem('accessToken');
         if (error.response && error.response.data.error)
             return rejectWithValue(error.response.data.error);
 

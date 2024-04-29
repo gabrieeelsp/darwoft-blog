@@ -6,7 +6,7 @@ const PostListItem = (props) => {
         <tr className='hover:bg-sky-100'>
             <td className='pl-3 py-[8px]'>{post.title}</td>
             <td className='text-center'>{post.category.name}</td>
-            <td className='text-center'><Link to='#' >Editar</Link></td>
+            <td className='text-center'><Link to={`${post.id}/editar`} >Editar</Link></td>
         </tr>
     )
 }

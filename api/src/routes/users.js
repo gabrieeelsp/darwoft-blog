@@ -5,8 +5,11 @@ const validateUpdate = require('../validators/user/update');
 const validateUpdateRoles = require('../validators/user/updateRoles');
 const updateRolesHandler = require('../handlers/user/updateRolesHandler');
 const validateRolMiddleware = require('../middlewares/validateRolMiddleware');
+const getOneByIdHandler = require('../handlers/user/getOneByIdHandler');
 
 const router = Router();
+
+router.get('/:userId', getOneByIdHandler);
 
 router.put('/:userId', authMiddleware, validateUpdate, updateHandler);
 

@@ -1,5 +1,6 @@
 /* eslint-disable func-names */
 const mongoose = require('mongoose');
+const { genders } = require('../utils/constants');
 
 const UserSchema = new mongoose.Schema(
     {
@@ -12,6 +13,10 @@ const UserSchema = new mongoose.Schema(
         email: {
             type: String,
             unique: true, // crea un indice en la base de dato, no es validacion
+        },
+        gender: {
+            type: String,
+            enum: genders,
         },
         password: {
             type: String,

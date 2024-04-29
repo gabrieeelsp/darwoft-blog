@@ -8,7 +8,12 @@ const validateRolMiddleware = (allowedRoles) => {
         if (haveSomeRole(authUser, allowedRoles)) {
             next();
         } else {
-            return next(new ClientError(403, 'Acceso Prohibido.'));
+            return next(
+                new ClientError(
+                    403,
+                    'No tiene permisos para realizar esta acción.',
+                ),
+            );
         }
         return undefined;
     };

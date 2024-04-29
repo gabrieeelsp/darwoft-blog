@@ -16,6 +16,20 @@ export const findOne = createAsyncThunk('posts/findOne', async (id, { rejectWith
     }
 })
 
+export const create = createAsyncThunk('posts/create', async ({ title, categoryId }, { rejectWithValue }) => {
+    console.log({title, categoryId})
+    try {
+        const response = await httpService.post('/posts', { title, categoryId });
+
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data.error) 
+            return rejectWithValue(error.response.data.error);
+
+        return rejectWithValue(error.message);
+    }
+})
+
 const initialState = {
     post: null,
     status: null,
@@ -44,6 +58,20 @@ const postsSlice = createSlice({
                 state.error = null
             })
             .addCase(findOne.rejected, (state, action) => {
+                state.post = null
+                state.status = 'error'
+                state.error = action.payload
+            })
+
+            .addCase(create.pending, (state) => {
+                state.status = 'pending'
+            })
+            .addCase(create.fulfilled, (state, action) => {
+                state.post = action.payload.data
+                state.status = 'succedded'
+                state.error = null
+            })
+            .addCase(create.rejected, (state, action) => {
                 state.post = null
                 state.status = 'error'
                 state.error = action.payload

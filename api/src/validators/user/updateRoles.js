@@ -1,6 +1,6 @@
 const { check } = require('express-validator');
 const { validateResult } = require('../../helpers/validateHelper');
-const { roles } = require('../../utils/constantes');
+const { roles } = require('../../utils/constants');
 
 module.exports = [
     check('roles').optional(),

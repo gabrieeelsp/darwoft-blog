@@ -6,12 +6,12 @@ export const userValidator = {
     
     name: (input, method) => {
         if (!input) return ERROR_IS_REQUIRE
-        if (!validator.isAlpha(input)) return ERROR_IS_ALFA
+        if (!validator.isAlpha(input.trim().replace(' ', ''))) return ERROR_IS_ALFA
     },
     
     surname: (input, method) => {
         if (!input) return ERROR_IS_REQUIRE
-        if (!validator.isAlpha(input)) return ERROR_IS_ALFA
+        if (!validator.isAlpha(input.trim().replace(' ', ''))) return ERROR_IS_ALFA
     },
     
     email: (input, method) => {

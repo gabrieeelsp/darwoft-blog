@@ -36,9 +36,11 @@ const PostsList = () => {
             <div className="mt-4">
                 <table className="w-full text-sm">
                     <thead className="border-b-2 border-b-slate-500 text-left">
-                        <th className="pl-3">Título</th>
-                        <th>Categoría</th>
-                        <th>Acción</th>
+                        <tr>
+                            <th className="pl-3">Título</th>
+                            <th>Categoría</th>
+                            <th>Acción</th>
+                        </tr>
                     </thead>
                     <tbody>
                         { posts?.map((post) => <PostListItem key={post.id} post={post} />)}

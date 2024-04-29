@@ -1,22 +1,24 @@
-const getOneById = require('../../controllers/post/getOneById');
+const getOneById = require('../../controllers/user/getOneById');
 const ClientError = require('../../errors/ClientError');
 const responseHelper = require('../../helpers/responseHelper');
 
 const getOneByIdHandler = async (req, res, next) => {
-    const { postId } = req.params;
-    let post = null;
+    const { userId } = req.params;
+    let user = null;
     try {
-        post = await getOneById(postId);
+        user = await getOneById(userId);
     } catch (error) {
         return next(error);
     }
 
-    if (!post) return next(new ClientError(404, 'Post no encontrado', null));
+    if (!user) return next(new ClientError(404, 'Usuario no encontrado', null));
 
     return responseHelper(res, {
         statusCode: 200,
-        message: 'Post encontrado',
-        data: post,
+        message: 'Usuario encontrado',
+        data: {
+            user,
+        },
     });
 };
 

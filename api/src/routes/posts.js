@@ -3,13 +3,13 @@ const validateCreate = require('../validators/post/create');
 const validateUpdate = require('../validators/post/update');
 const authMiddleware = require('../middlewares/authMiddleware');
 const createHandler = require('../handlers/post/createHandler');
-const getOneByIdHamdler = require('../handlers/post/getOneByIdHandler');
+const getOneByIdHandler = require('../handlers/post/getOneByIdHandler');
 const validateRolMiddleware = require('../middlewares/validateRolMiddleware');
 const updateHandler = require('../handlers/post/updateHandler');
 
 const router = Router();
 
-router.get('/:postId', getOneByIdHamdler);
+router.get('/:postId', getOneByIdHandler);
 
 router.post(
     '/',

@@ -7,9 +7,12 @@ import HomeView         from "./public/publications/HomeView";
 import CategoryView     from "./public/publications/CategoryView";
 import PostView         from "./public/publications/PostView";
 
-import PersonalDataView  from "./public/profile/PersonalDataView";
+import Profile          from './public/profile/Profile';
+import PersonalDataView from "./public/profile/PersonalDataView";
 import PostsListView    from "./public/profile/PostsListView";
 import PostEditView     from "./public/profile/PostEditView";
+import PostCreateView   from "./public/profile/PostCreateView"
+
 
 import AdminView     from "./admin/AdminView";
 
@@ -23,9 +26,13 @@ export {
     CategoryView,
     PostView,
 
+    Profile,
     PersonalDataView,
     PostsListView,
     PostEditView,
+    PostCreateView,
+    
+
 
     AdminView,
 }
