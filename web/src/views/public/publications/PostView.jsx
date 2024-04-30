@@ -10,6 +10,7 @@ const PostView = () => {
     const dispatch = useDispatch();
 
     const { post, status, error } = useSelector((state) => state.posts)
+    const { categories } = useSelector((state) => state.app)
 
     useEffect(() => {
         dispatch(findOne(postSlug))
@@ -36,7 +37,7 @@ const PostView = () => {
 
             
             <ProgressBar loading={status === 'pending'} />
-            { content }
+            { categories && content }
         </div>
 
     )

@@ -18,7 +18,11 @@ const PersonalDataForm = () => {
         gender: '',
     }
 
-    const [formData, setFormData] = useState({name: user.name, surname: user.surname, gender: user.gender})
+    const [formData, setFormData] = useState({
+        name: user.name, 
+        surname: user.surname, 
+        gender: user.gender
+    })
 
     const [formErrors, setFormErrors] = useState({...formFields})
 

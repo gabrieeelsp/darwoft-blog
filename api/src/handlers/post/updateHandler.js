@@ -23,6 +23,11 @@ const updateHandler = async (req, res, next) => {
     let post = null;
     try {
         const data = matchedData(req);
+        if (data['category-id']) {
+            data.category = data['category-id'];
+            delete data['category-id'];
+        }
+
         post = await update(postId, data);
     } catch (error) {
         return next(error);

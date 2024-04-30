@@ -20,6 +20,7 @@ const PostSchema = new mongoose.Schema(
             type: String,
         },
         author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
         slug: {
             type: String,
             unique: true,

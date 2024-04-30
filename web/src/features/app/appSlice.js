@@ -46,4 +46,6 @@ const appSlice = createSlice({
     }
 })
 
+export const getCategoryBySlug = (state, slug) => state.app.categories.find((category) => category.slug === slug )
+export const getCategoryById = (state, id) => state.app.categories.find((category) => category._id === id )
 export default appSlice.reducer;

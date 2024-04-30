@@ -83,7 +83,7 @@ const PersonalDataForm = () => {
                                 type="submit"
                                 disabled={isShowMessage && status === 'pending'}
                             >Guardar</button>
-                            <div className="min-h-5 max-h-5 mt-2 ml-2 text-sm text-red-400 ">
+                            <div className="min-h-5 max-h-5 mt-2 text-sm text-red-400 ">
                                 { isShowMessage && status === 'pending' && <img src={loading} className="max-h-5 object-contain" />}
                                 { isShowMessage && status === 'succeeded' && <span className="text-green-800">Su publicación se ha creado exitosamente</span>}
                                 { isShowMessage && status === 'error' && !error.data && <span>{error.message}</span>}

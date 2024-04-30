@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 
 const Profile = () => {
     const { user } = useSelector((state) => state.auth)
+    const { categories } = useSelector((state) => state.app)
     return (
         <>
             <div className="flex p-3">
@@ -14,7 +15,7 @@ const Profile = () => {
                 <div className="ml-3 w-full border border-slate-300 bg-white shadow-md">
                     <ProfileMenu />
                     <div className="p-6">
-                        { user && <Outlet /> }
+                        { user && categories && <Outlet /> }
                     </div>
                 </div>
             </div>

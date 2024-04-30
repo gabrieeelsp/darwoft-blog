@@ -1,6 +1,28 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import httpService from "../../services/httpService";
 
+export const findAll = createAsyncThunk('posts/findAll', async ({authorId, categoryId, title, limit, page}, { rejectWithValue }) => {
+    try {
+        let url = `posts?`
+
+        if (authorId) url = url.concat(`author-id=${authorId}&`);
+        if (categoryId) url = url.concat(`category-id=${categoryId}&`);
+        if (title) url = url.concat(`title=${title}&`);
+
+        if (limit) url = url.concat(`limit=${limit}&`);
+        if (page) url = url.concat(`page=${page}&`);
+
+        const response = await httpService.get(url);
+
+        return response.data;        
+    } catch (error) {
+        if (error.response && error.response.data.error) 
+            return rejectWithValue(error.response.data.error);
+
+        return rejectWithValue(error.message);
+    }
+})
+
 export const findOne = createAsyncThunk('posts/findOne', async (id, { rejectWithValue }) => {
     try {
         const url = `posts/${id}`
@@ -9,17 +31,30 @@ export const findOne = createAsyncThunk('posts/findOne', async (id, { rejectWith
         return response.data;
     } catch (error) {
         // error.response => es un mensaje de error que yo envié
-        if (error.response && error.response.data.error.message) 
-            return rejectWithValue(error.response.data.error.message);
+        if (error.response && error.response.data.error) 
+            return rejectWithValue(error.response.data.error);
 
         return rejectWithValue(error.message);
     }
 })
 
 export const create = createAsyncThunk('posts/create', async ({ title, categoryId }, { rejectWithValue }) => {
-    console.log({title, categoryId})
     try {
-        const response = await httpService.post('/posts', { title, categoryId });
+        const response = await httpService.post('/posts', { title, "category-id": categoryId });
+
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data.error) 
+            return rejectWithValue(error.response.data.error);
+
+        return rejectWithValue(error.message);
+    }
+})
+
+export const update = createAsyncThunk('posts/update', async ({id, title, categoryId, content}, { rejectWithValue }) => {
+    try {
+        const url = `posts/${id}`
+        const response = await httpService.put(url, {title, "category-id": categoryId, content});
 
         return response.data;
     } catch (error) {
@@ -31,7 +66,10 @@ export const create = createAsyncThunk('posts/create', async ({ title, categoryI
 })
 
 const initialState = {
+    posts: null,
     post: null,
+    pagination: null,
+
     status: null,
     error: null,
 }
@@ -54,11 +92,26 @@ const postsSlice = createSlice({
             })
             .addCase(findOne.fulfilled, (state, action) => {
                 state.post = action.payload.data
-                state.status = 'succedded'
+                state.status = 'succeeded'
                 state.error = null
             })
             .addCase(findOne.rejected, (state, action) => {
                 state.post = null
+                state.status = 'error'
+                state.error = action.payload
+            })
+
+            .addCase(findAll.pending, (state) => {
+                state.status = 'pending'
+            })
+            .addCase(findAll.fulfilled, (state, action) => {
+                state.posts = action.payload.data.posts
+                state.pagination = action.payload.data.pagination
+                state.status = 'succeeded'
+                state.error = null
+            })
+            .addCase(findAll.rejected, (state, action) => {
+                state.posts = null
                 state.status = 'error'
                 state.error = action.payload
             })
@@ -68,10 +121,24 @@ const postsSlice = createSlice({
             })
             .addCase(create.fulfilled, (state, action) => {
                 state.post = action.payload.data
-                state.status = 'succedded'
+                state.status = 'succeeded'
                 state.error = null
             })
             .addCase(create.rejected, (state, action) => {
+                state.post = null
+                state.status = 'error'
+                state.error = action.payload
+            })
+
+            .addCase(update.pending, (state) => {
+                state.status = 'pending'
+            })
+            .addCase(update.fulfilled, (state, action) => {
+                state.post = action.payload.data
+                state.status = 'succeeded'
+                state.error = null
+            })
+            .addCase(update.rejected, (state, action) => {
                 state.post = null
                 state.status = 'error'
                 state.error = action.payload

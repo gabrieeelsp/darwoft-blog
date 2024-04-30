@@ -8,6 +8,8 @@ const createHandler = async (req, res, next) => {
     try {
         const data = matchedData(req);
         data.author = authUser._id;
+        data.category = data['category-id'];
+        delete data['category-id'];
 
         const post = await create(data);
         return responseHelper(res, {
