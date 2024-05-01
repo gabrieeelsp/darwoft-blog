@@ -1,7 +1,9 @@
 import moment from 'moment/min/moment-with-locales';
 import Comments from './comments/Comments'
 import { useSelector } from 'react-redux';
-
+import parse from 'html-react-parser';
+import { applyClassesToHTML } from '../../../utils/PostClasses';
+import { getCategoryById, getCategoryBySlug } from '../../../features/app/appSlice';
 
 const postw = {
     title: 'CIQ proporciona versiones recientes del kernel para Rocky Linux',
@@ -45,6 +47,9 @@ const Post = () => {
 
     const { post } = useSelector((state) => state.posts)
 
+
+    const category = useSelector((state) => getCategoryById(state, post.category))
+
     moment.locale('es');
 
     const fecha_convertida = moment(post.createdAt).format('LL');
@@ -53,7 +58,7 @@ const Post = () => {
             <article>
                 <h2
                     className="text-2xl italic font-bold"
-                >{ /* post.category.name */ 'categoria'}</h2>
+                >{category.name}</h2>
                 <h1
                     className="text-3xl mt-2"
                 >{post.title}</h1>
@@ -74,7 +79,7 @@ const Post = () => {
                 <div
                     className="mt-4 space-y-3"
                 >
-                    {post.content}
+                    {parse(applyClassesToHTML(post.content))}
                 </div>
 
             </article>

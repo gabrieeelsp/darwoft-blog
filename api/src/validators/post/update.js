@@ -9,6 +9,11 @@ module.exports = [
         .not()
         .isEmpty()
         .withMessage('El título no puede quedar vacío'),
+    check('category-id')
+        .exists()
+        .withMessage('La categoría es obligatoria')
+        .isMongoId()
+        .withMessage('Error de formato'),
     check('content').optional().trim(),
 
     (req, res, next) => validateResult(req, res, next),

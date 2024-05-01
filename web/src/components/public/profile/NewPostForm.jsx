@@ -1,38 +1,62 @@
-const NewPostForm = () => {
+import { useDispatch, useSelector } from "react-redux";
+import { postValidator as validator } from "../../../validators/postValidator";
+import { create } from "../../../features/posts/postsSlice";
+import useForm from "../../../hooks/useForm";
+import TextInput from "../../utils/form/profile/TextInput";
+import SelectInput from "../../utils/form/profile/SelectInput";
+import FormSubmit from "../../utils/form/profile/FormSubmit";
+
+const PersonalDataForm = () => {
+    const dispatch = useDispatch(); 
+    const { status, error } = useSelector((state) => state.posts)
+    const { categories } = useSelector((state) => state.app)
+
+    const formFields = {
+        title: '',
+        categoryId: '',
+    }
+
+    const onSubmit = () => {
+        dispatch(create({...formData}))
+    }
+
+    const {formData, formErrors, handlerInputChange, handlerSubmit, showResponseMessage} = useForm({initialState: formFields, onSubmit, validator})
+
+
     return (
         <>
-            <div className="p-3">
-                <div className="grid grid-cols-12">
-                    <label className="col-span-3" htmlFor="">Título</label>
-                    <input
-                        className="col-span-9 focus:outline-none border border-slate-300 bg-slate-100"
-                        type="text" 
-                        placeholder="Título"
-                        />
+            <form onSubmit={handlerSubmit} >
+                <div className="p-3">
+                    <TextInput 
+                        handlerInputChange={handlerInputChange}
+                        name='title'
+                        isPassword={false}
+                        error={formErrors.title}
+                        placeholder='Título'
+                        label='Título'
+                        value={formData.title}
+                    />
+
+                    <SelectInput 
+                        handlerInputChange={handlerInputChange}
+                        name='categoryId'
+                        error={formErrors.categoryId}
+                        label='Categoría'
+                        value={formData.categoryId}
+                        options={categories}
+                    />
+                    
+                    <FormSubmit 
+                        showResponseMessage={showResponseMessage}
+                        error={error}
+                        status={status}
+                        succeededMessage='Su publicación se ha creado exitosamente'
+                    />
                 </div>
-                <div className="grid grid-cols-12 mt-2">
-                    <label className="col-span-3" htmlFor="">Apellidos</label>
-                    <select 
-                        className="col-span-9 focus:outline-none bg-white border border-slate-300 rounded-sm px-2 "
-                    >
-                        <option value=""
-                            className="text-slate-300"
-                            >Categoría</option>
-                        <option value="">Linux</option>
-                        <option value="">Fisica</option>
-                        <option value="">Programación</option>
-                    </select>
-                </div>
-                <div className="grid grid-cols-12 mt-2">
-                    <div className="col-start-4 col-span-8">
-                        <button 
-                            className=" bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-1 px-4 rounded"
-                            >Guardar</button>
-                    </div>
-                </div>
-            </div>
+                
+            </form>
         </>
     )
 }
 
-export default NewPostForm
+export default PersonalDataForm

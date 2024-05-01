@@ -1,31 +1,70 @@
+import { useDispatch, useSelector } from "react-redux";
+import { userValidator as validator } from "../../../validators/userValidator";
+import { update } from "../../../features/user/usersSlice";
+import useForm from "../../../hooks/useForm";
+import TextInput from "../../utils/form/profile/TextInput";
+import SelectInput from "../../utils/form/profile/SelectInput";
+import FormSubmit from "../../utils/form/profile/FormSubmit";
+
 const PersonalDataForm = () => {
+    const dispatch = useDispatch(); 
+    const { user, status, error } = useSelector((state) => state.users)
+    const { genders } = useSelector((state) => state.app)
+
+    const formFields = {
+        name: user.name, 
+        surname: user.surname, 
+        gender: user.gender
+    }
+    
+    const onSubmit = () => {
+        dispatch(update({...formData, id: user._id}))
+    }
+
+    const {formData, formErrors, handlerInputChange, handlerSubmit, showResponseMessage} = useForm({initialState: formFields, onSubmit, validator})
+
     return (
         <>
-            <div className="p-3">
-                <div className="grid grid-cols-12">
-                    <label className="col-span-3" htmlFor="">Nombres</label>
-                    <input
-                        className="col-span-9 focus:outline-none border border-slate-300 bg-slate-100"
-                        type="text" 
-                        placeholder="Nombre"
-                        />
+            <form onSubmit={handlerSubmit} >
+                <div className="p-3">
+                    <TextInput 
+                        handlerInputChange={handlerInputChange}
+                        name='name'
+                        isPassword={false}
+                        error={formErrors.name}
+                        placeholder='Nombres'
+                        label='Nombres'
+                        value={formData.name}
+                    />
+
+                    <TextInput 
+                        handlerInputChange={handlerInputChange}
+                        name='surname'
+                        isPassword={false}
+                        error={formErrors.surname}
+                        placeholder='Apellidos'
+                        label='Apellidos'
+                        value={formData.surname}
+                    />
+
+                    <SelectInput 
+                        handlerInputChange={handlerInputChange}
+                        name='gender'
+                        error={formErrors.gender}
+                        label='Género'
+                        value={formData.gender}
+                        options={genders}
+                    />
+                    <FormSubmit 
+                        showResponseMessage={showResponseMessage}
+                        error={error}
+                        status={status}
+                        succeededMessage='Su perfil se ha actualizado exitosamente'
+                    />
+                
                 </div>
-                <div className="grid grid-cols-12 mt-2">
-                    <label className="col-span-3" htmlFor="">Apellidos</label>
-                    <input
-                        className="col-span-9 focus:outline-none border border-slate-300 bg-slate-100"
-                        type="text" 
-                        placeholder="Nombre"
-                        />
-                </div>
-                <div className="grid grid-cols-12 mt-2">
-                    <div className="col-start-4 col-span-8">
-                        <button 
-                            className=" bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-1 px-4 rounded"
-                            >Guardar</button>
-                    </div>
-                </div>
-            </div>
+                
+            </form>
         </>
     )
 }

@@ -2,7 +2,7 @@ const getOneById = require('../../controllers/post/getOneById');
 const ClientError = require('../../errors/ClientError');
 const responseHelper = require('../../helpers/responseHelper');
 
-const getOneByIdHamdler = async (req, res, next) => {
+const getOneByIdHandler = async (req, res, next) => {
     const { postId } = req.params;
     let post = null;
     try {
@@ -20,4 +20,4 @@ const getOneByIdHamdler = async (req, res, next) => {
     });
 };
 
-module.exports = getOneByIdHamdler;
+module.exports = getOneByIdHandler;

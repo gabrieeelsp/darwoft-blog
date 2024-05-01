@@ -1,62 +1,77 @@
+import { useDispatch, useSelector } from "react-redux";
+import { postValidator as validator } from "../../../validators/postValidator";
+import { update } from "../../../features/posts/postsSlice";
+import useForm from "../../../hooks/useForm";
+import TextInput from "../../utils/form/profile/TextInput";
+import SelectInput from "../../utils/form/profile/SelectInput";
+import FormSubmit from "../../utils/form/profile/FormSubmit";
 import EditorWYSWYG from "../../editor/EditorWYSWYG";
 
+const PersonalDataForm = () => {
+    const dispatch = useDispatch(); 
+    const { post, status, error } = useSelector((state) => state.posts)
+    const { categories } = useSelector((state) => state.app)
 
-const EditPostForm = () => {
+    const formFields = {
+        title: post.title,
+        categoryId: post.category,
+        content: post.content ? post.content : ''
+    }
+
+    const onSubmit = () => {
+        dispatch(update({...formData, id: post._id}))
+    }
+
+    const {formData, formErrors, handlerInputChange, handlerSubmit, showResponseMessage} = useForm({initialState: formFields, onSubmit, validator})
 
 
-//   const saveHTMLToDatabase = () => {
-//     const contentState = editorState.getCurrentContent();
-//     const contentHTML = stateToHTML(contentState); // Convierte a HTML
-//     // Aquí puedes enviar contentHTML a tu servidor o guardarlo en la base de datos
-//     console.log(contentHTML);
-//   };
     return (
         <>
-            <div className="p-3">
-                <div className="grid grid-cols-12">
-                    <label className="col-span-3" htmlFor="">Título</label>
-                    <input
-                        className="col-span-9 focus:outline-none border border-slate-300 bg-slate-100"
-                        type="text" 
-                        placeholder="Título"
-                        />
-                </div>
-                <div className="grid grid-cols-12 mt-2">
-                    <label className="col-span-3" htmlFor="">Apellidos</label>
-                    <select 
-                        disabled
-                        className="col-span-9 focus:outline-none bg-white border border-slate-300 rounded-sm px-2 "
-                    >
-                        <option value=""
-                            className="text-slate-300"
-                            >Categoría</option>
-                        <option value="">Linux</option>
-                        <option value="">Fisica</option>
-                        <option value="">Programación</option>
-                    </select>
-                </div>
-                <div className="grid grid-cols-12 mt-2">
-                    <label className="col-span-3" htmlFor="">Contenido</label>
-                    <div className='col-span-9'>
-                        <EditorWYSWYG />
+            <form onSubmit={handlerSubmit} >
+                <div className="p-3">
+                    <TextInput 
+                        handlerInputChange={handlerInputChange}
+                        name='title'
+                        isPassword={false}
+                        error={formErrors.title}
+                        placeholder='Título'
+                        label='Título'
+                        value={formData.title}
+                    />
+
+                    <SelectInput 
+                        handlerInputChange={handlerInputChange}
+                        name='categoryId'
+                        error={formErrors.categoryId}
+                        label='Categoría'
+                        value={formData.categoryId}
+                        options={categories}
+                        showEmptyOption={false}
+                    />
+                    
+                    
+
+                    <div className="grid grid-cols-12">
+                        <label className="col-start-2 mt-1 col-span-2" htmlFor="">Contenido</label>
+                        <div className='col-span-9'>
+                            <EditorWYSWYG 
+                                value={formData.content}
+                                handlerChange={handlerInputChange}
+                            />
+                        </div>
                     </div>
+
+                    <FormSubmit 
+                        showResponseMessage={showResponseMessage}
+                        error={error}
+                        status={status}
+                        succeededMessage='Su publicación se ha actualizado exitosamente'
+                    />
                 </div>
-
                 
-                
-                <div className="grid grid-cols-12 mt-2">
-                    <div className="col-start-4 col-span-8">
-                        <button 
-                            className=" bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-1 px-4 rounded"
-                            >Guardar</button>
-
-                    </div>
-                </div>
-            </div>
-
-
+            </form>
         </>
     )
 }
 
-export default EditPostForm
+export default PersonalDataForm

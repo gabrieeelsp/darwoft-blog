@@ -33,7 +33,9 @@ const updateHandler = async (req, res, next) => {
     return responseHelper(res, {
         statusCode: 200,
         message: 'Usuario actualizado con éxito',
-        data: user,
+        data: {
+            user,
+        },
     });
 };
 

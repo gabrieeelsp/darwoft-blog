@@ -1,7 +1,10 @@
 import { Link, NavLink } from "react-router-dom"
 import logo from '../../../assets/LogoBlog.png'
+import { useSelector } from 'react-redux'
 
 const Header = () => {
+    const { categories } = useSelector ((state) => state.app);
+
     return (
         <>
             
@@ -24,21 +27,7 @@ const Header = () => {
                     </div>
                 </div>
                 <div className="w-full flex justify-center gap-8 py-2" >
-                    <NavLink to='/seccion/fisica' >Física</NavLink>   
-                    <span>|</span>  
-                    <NavLink to='/seccion/linux' >Linux</NavLink>  
-                    <span>|</span> 
-                    <NavLink to='/seccion/progamacion' >Programación</NavLink>  
-                    <span>|</span> 
-                    <NavLink to='/seccion/devops' >Devops</NavLink>  
-                    <span>|</span> 
-                    <NavLink to='/seccion/ia' >IA</NavLink> 
-                    <span>|</span> 
-                    <NavLink to='/nuevo-titulo-para-el-gran-pez' >pez</NavLink> 
-                    <span>|</span> 
-                    <NavLink to='/nuevo-titulo-para-el-gran-peze' >peze</NavLink>    
-                    <span>|</span> 
-                    <NavLink to='/nuevo-titulo-para-el-gran-pezeq' >pezeq</NavLink>      
+                    {categories && categories.map((category) => <NavLink key={category._id} to={`/seccion/${category.slug}`} >{category.name}</NavLink> )}
                 </div>
             </div>
             <hr className="border-0 max-w-5xl mx-auto h-[1px] bg-slate-500" />

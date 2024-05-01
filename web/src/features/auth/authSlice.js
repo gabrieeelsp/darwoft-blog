@@ -7,6 +7,7 @@ export const me = createAsyncThunk('auth/me', async (_, { rejectWithValue }) => 
         
         return response.data;
     } catch (error) {
+        localStorage.removeItem('accessToken');
         if (error.response && error.response.data.error)
             return rejectWithValue(error.response.data.error);
 
@@ -33,14 +34,14 @@ export const register = createAsyncThunk('auth/register', async ({name, surname,
     }
 })
 
-export const login = createAsyncThunk('auth/login', async ({ email, password, isRememberMe }, { rejectWithValue }) => {
+export const login = createAsyncThunk('auth/login', async ({ email, password, rememberMe }, { rejectWithValue }) => {
     try {
         const response = await httpService.post('auth/signin', {
             email,
             password,
         })
 
-        if (isRememberMe )
+        if (rememberMe )
             localStorage.setItem('accessToken', response.data.data.token)
 
         return response.data;
