@@ -25,7 +25,7 @@ const PostsListView = () => {
             authorId: _id, 
             title, 
             categoryId: category ? category._id : undefined, 
-            limit: limit ? limit : 3, 
+            limit: limit ? limit : 6, 
             page: page ? page : 1}))
     }, [dispatch, _id, title, category, limit, page])
     return (

@@ -16,6 +16,7 @@ server.use((req, res, next) => {
 server.use(cors());
 server.use(morgan('dev'));
 server.use(express.json());
+server.use(express.static('public'));
 
 server.use('/api', router);
 

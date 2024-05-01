@@ -1,3 +1,5 @@
 **/node_modules/
 **/.env
+api/public/images
+api/uploads
 db/

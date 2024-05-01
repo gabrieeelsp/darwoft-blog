@@ -1,5 +1,8 @@
 import { useSearchParams } from "react-router-dom"
 import PaginationButton from "./PaginationButton";
+import { LuChevronLeft, LuChevronsLeft, LuChevronRight, LuChevronsRight } from "react-icons/lu";
+
+
 
 const Pagination = (props) => {
 
@@ -19,14 +22,15 @@ const Pagination = (props) => {
                     isDisable={current_page === 1}  
                     handleClick={handleClick}
                     link={1}
-                    text={'First'}
+                    text={<LuChevronsLeft />
+                }
                     />
 
                 <PaginationButton 
                     isDisable={current_page === 1} 
                     handleClick={handleClick}
                     link={current_page - 1}
-                    text={'Prev'}
+                    text={<LuChevronLeft />}
                     />
 
                 {current_page === total_pages && total_pages > 2 && 
@@ -67,14 +71,14 @@ const Pagination = (props) => {
                     isDisable={total_pages === current_page} 
                     handleClick={handleClick}
                     link={current_page + 1}
-                    text={'Next'}
+                    text={<LuChevronRight />}
                     />
 
                 <PaginationButton 
                     isDisable={current_page === total_pages} 
                     handleClick={handleClick}
                     link={total_pages}
-                    text={'Last'}
+                    text={<LuChevronsRight />}
                     />
             </div>
             

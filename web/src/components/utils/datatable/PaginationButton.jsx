@@ -4,7 +4,7 @@ const PaginationButton = (props) => {
     return (
         <>
             <button
-                className={`p-1 border border-slate-300 rounded-md ${isDisable ? 'text-slate-400 bg-sky-100' : 'text-slate-600 bg-sky-300'}`} 
+                className={`px-2 border border-slate-300 rounded-sm ${isDisable ? 'text-slate-400' : 'text-sky-600'}`} 
                 disabled={isDisable}  onClick={() => handleClick(link)}
                 >{text}</button>
             </>

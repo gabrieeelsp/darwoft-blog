@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux"
 import EditPostForm from "../../../components/public/profile/EditPostForm"
 import { useParams } from 'react-router-dom'
 import { useEffect } from "react";
-import { findOne } from "../../../features/posts/postsSlice";
+import { cleanSlice, findOne } from "../../../features/posts/postsSlice";
+import EditPostImageForm from "../../../components/public/profile/EditPostImageForm";
 
 const PostEditView = () => {
     const dispatch = useDispatch();
@@ -11,11 +12,21 @@ const PostEditView = () => {
 
     useEffect(() => {
         dispatch(findOne(postId));
+
+        return () => {
+            dispatch(cleanSlice())
+        }
     }, [dispatch, postId])
 
     return (
         <>
-            {post && <EditPostForm />}
+            {post && 
+                <>
+                    <EditPostForm />
+                    <EditPostImageForm />
+                </>
+                }
+            
         </>
     )
 }

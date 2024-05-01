@@ -11,6 +11,5 @@ export const applyClassesToHTML = (html) => {
     Object.keys(classList).forEach((tag) => {
         temp = temp.replace(classList[tag].node, classList[tag].node.replace('>', ` className="${classList[tag].class}" >`))
     })
-    console.log(temp)
     return temp;
 }

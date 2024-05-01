@@ -2,7 +2,7 @@ const multer = require('multer');
 const path = require('path');
 
 const storage = multer.diskStorage({
-    destination: 'uploads/',
+    destination: 'public/images/',
     filename: (req, file, cb) => {
         // generar el nombre del archivo
         const { postId } = req.params;
