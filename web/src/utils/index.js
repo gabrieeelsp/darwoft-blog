@@ -1,4 +1,5 @@
 export const capitalize = (input, every = false) => {
+    if (!input) return ''
     if (every)
         return input.split(' ').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
 

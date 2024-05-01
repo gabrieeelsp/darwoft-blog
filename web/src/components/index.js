@@ -5,7 +5,7 @@ import Footer           from "./public/footer/Footer";
 import LoginForm        from "./auth/LoginForm";
 import RegisterForm     from "./auth/RegisterForm";
 
-import Pagination       from "./utils/pagination/Pagination";
+import Pagination       from "./utils/datatable/Pagination";
 
 export {
     Header,

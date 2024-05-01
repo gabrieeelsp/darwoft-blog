@@ -55,7 +55,7 @@ const EditorWYSWYG = (props) => {
                 onEditorStateChange={onChange}
                 blockStyleFn={blockStyleFn}
                 wrapperClassName=""
-                editorClassName="border border-slate-200 px-2 py-1 min-h-72"
+                editorClassName="border border-slate-200 px-2 mt-1 min-h-72"
                 toolbarClassName="border border-slate-400 bg-slate-800"
                 toolbar={options}
                 />  

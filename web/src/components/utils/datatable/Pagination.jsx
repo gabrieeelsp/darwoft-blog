@@ -3,7 +3,7 @@ import PaginationButton from "./PaginationButton";
 
 const Pagination = (props) => {
 
-    const { current_page, total_pages } = props.pagination
+    const { current_page, total_pages } = props
 
     const [currentQueryParameters, setSearchParams] = useSearchParams();
 

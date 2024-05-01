@@ -1,16 +1,14 @@
 import { Link, useSearchParams } from "react-router-dom"
 import PostsList from "../../../components/public/profile/PostsList"
-import PostListFilter from "../../../components/public/profile/postsList/PostListFilter"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { findAll } from "../../../features/posts/postsSlice"
 import { getCategoryBySlug } from "../../../features/app/appSlice"
-import { Pagination } from "../../../components"
 
 const PostsListView = () => {
     const dispatch = useDispatch()
+    const { posts } = useSelector((state) => state.posts)
     const { _id } = useSelector((state) => state.auth.user)
-    const { pagination }= useSelector((state) => state.posts)
 
     const [currentQueryParameters, setSearchParams] = useSearchParams();
 
@@ -41,9 +39,9 @@ const PostsListView = () => {
                 </Link>
             </div>
                 
-            <PostListFilter />
-            <PostsList />
-            { pagination && <Pagination pagination={pagination} /> }
+            
+            {posts && <PostsList />}
+            
             
         </>
     )

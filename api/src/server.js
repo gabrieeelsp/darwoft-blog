@@ -10,7 +10,7 @@ const server = express();
 server.use((req, res, next) => {
     setTimeout(() => {
         next();
-    }, 1);
+    }, 20);
 });
 
 server.use(cors());
