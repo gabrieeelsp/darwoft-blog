@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
-import { cleanSlice, findOne } from '../../../features/posts/postsSlice'
+import { cleanSlice, findAll, findOne } from '../../../features/posts/postsSlice'
 import { Post } from "../../../components";
 import ProgressBar from "../../../utils/ProgressBar";
 
@@ -19,6 +19,10 @@ const PostView = () => {
             // dispatch(cleanSlice())
         }
     }, [dispatch, postSlug])
+
+    useEffect(() => {
+        post && dispatch(findAll({categoryId: post.category._id}))
+    }, [dispatch, post])
 
     useEffect(() => {
         

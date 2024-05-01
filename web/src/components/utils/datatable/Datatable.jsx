@@ -18,18 +18,18 @@ const Datatable = (porps) => {
 
     return (
         <>
-            <div className="mt-4">
-                <table className="w-full text-sm">
-                    <thead className="border-b-2 border-b-slate-500 text-left">
+            <div className="">
+                <table className="w-full text-sm my-4">
+                    <thead className="border-b-2 border-b-slate-200 text-left">
                         <tr>
-                            {data.header.map((col) => <th key={col.property} className={col.columClassName}>{col.value}</th>)}
+                            {data.header.map((col) => <th key={col.property} className="py-2 pl-2">{col.value}</th>)}
                         </tr>
                     </thead>
                     <tbody>
                         { data.body.map((row, key) => 
-                            <tr key={key}>
+                            <tr key={key} className="border-b border-slate-200">
                                 {data.header.map((col, index) => 
-                                    <td className={data.header.find(h => h.property === col.property).rowClassName} key={key+'-'+index }>
+                                    <td className={`py-2 ${index === 0 ? 'pl-2': 'text-center'}`} key={key+'-'+index }>
                                         <span >{row[col.property]}</span>
                                     </td>
                                 )}

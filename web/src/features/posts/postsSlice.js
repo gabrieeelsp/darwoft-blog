@@ -4,7 +4,7 @@ import httpService from "../../services/httpService";
 export const findAll = createAsyncThunk('posts/findAll', async ({authorId, categoryId, title, limit, page}, { rejectWithValue }) => {
     try {
         let url = `posts?`
-
+        console.log('buscand')
         if (authorId) url = url.concat(`author-id=${authorId}&`);
         if (categoryId) url = url.concat(`category-id=${categoryId}&`);
         if (title) url = url.concat(`title=${title}&`);
@@ -41,6 +41,20 @@ export const findOne = createAsyncThunk('posts/findOne', async (id, { rejectWith
 export const create = createAsyncThunk('posts/create', async ({ title, categoryId }, { rejectWithValue }) => {
     try {
         const response = await httpService.post('/posts', { title, "category-id": categoryId });
+
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data.error) 
+            return rejectWithValue(error.response.data.error);
+
+        return rejectWithValue(error.message);
+    }
+})
+
+export const uploadImage = createAsyncThunk('posts/uploadImage', async ({ id, formData }, { rejectWithValue }) => {
+    try {
+        const url = `/posts/${id}/upload-image`
+        const response = await httpService.post(url, formData, { headers: {'Content-Type': 'multipart/form-data' }});
 
         return response.data;
     } catch (error) {
@@ -139,6 +153,20 @@ const postsSlice = createSlice({
                 state.error = null
             })
             .addCase(update.rejected, (state, action) => {
+                state.post = null
+                state.status = 'error'
+                state.error = action.payload
+            })
+
+            .addCase(uploadImage.pending, (state) => {
+                state.status = 'pending'
+            })
+            .addCase(uploadImage.fulfilled, (state, action) => {
+                state.post = action.payload.data
+                state.status = 'succeeded'
+                state.error = null
+            })
+            .addCase(uploadImage.rejected, (state, action) => {
                 state.post = null
                 state.status = 'error'
                 state.error = action.payload
