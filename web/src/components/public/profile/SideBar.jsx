@@ -2,6 +2,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { capitalize } from "../../../utils"
 import { logout } from "../../../features/auth/authSlice"
 import { useNavigate } from "react-router-dom"
+import ImageProfile from "./sidebar/ImageProfile"
+import UserMenu from "./sidebar/UserMenu"
+
 
 const SideBar = () => {
     const navigate = useNavigate();
@@ -19,11 +22,13 @@ const SideBar = () => {
     return (
         <>
             <div className="flex flex-col items-center py-3 px-2 ">
-                <div className="w-20 h-20 rounded-full border border-slate-400 bg-slate-200"></div>
+                <ImageProfile />
                 <span className="mt-2 text-slate-800 text-center">{ `${capitalize(name, true)} ${capitalize(surname, true)}` }</span>
                 <span className="text-sm italic text-slate-500">
                     { roles.map((rol) => capitalize(rol.name)).join(' - ') }
                 </span>
+
+                <UserMenu />
                 <span className="text-sm italic text-slate-500 mt-20">Vistas: 524</span>
                 <span className="text-sm italic text-slate-500">Comentarios: 684</span>
                 <span className="text-sm italic text-slate-500">Seguidores: 24</span>

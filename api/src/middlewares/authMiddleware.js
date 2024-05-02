@@ -20,7 +20,7 @@ const authMiddleware = async (req, res, next) => {
     }
 
     const query = userModel.findById(resp.payload.id);
-    query.select('_id name surname email roles tokensRevokedAt');
+    query.select('_id name surname email roles tokensRevokedAt image');
     const user = await query.exec();
 
     if (!user) return next(new ClientError(403, 'Token inválido.'));

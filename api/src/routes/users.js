@@ -6,6 +6,8 @@ const validateUpdateRoles = require('../validators/user/updateRoles');
 const updateRolesHandler = require('../handlers/user/updateRolesHandler');
 const validateRolMiddleware = require('../middlewares/validateRolMiddleware');
 const getOneByIdHandler = require('../handlers/user/getOneByIdHandler');
+const uploadMiddleware = require('../middlewares/uploadMiddleware');
+const upload = require('../validators/user/upload');
 
 const router = Router();
 
@@ -19,6 +21,18 @@ router.put(
     validateRolMiddleware(['administrador']),
     validateUpdateRoles,
     updateRolesHandler,
+);
+
+router.post(
+    '/:userId/upload-image',
+    authMiddleware,
+    uploadMiddleware.single('file'),
+    (req, res, next) => {
+        req.body.image = req.file.filename;
+        next();
+    },
+    upload,
+    updateHandler,
 );
 
 module.exports = router;

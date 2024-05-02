@@ -5,7 +5,7 @@ const cleanDocument = require('../../utils/cleanDocument');
 
 const login = async (email, password) => {
     const query = userModel.findOne({ email });
-    query.select('name surname email password roles');
+    query.select('name surname email password roles image');
 
     let user = await query.exec();
 
