@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { findAll } from "../../../features/posts/postsSlice"
 import { getCategoryBySlug } from "../../../features/app/appSlice"
+import { FiPlus } from "react-icons/fi";
 
 const PostsListView = () => {
     const dispatch = useDispatch()
@@ -30,17 +31,21 @@ const PostsListView = () => {
     }, [dispatch, _id, title, category, limit, page])
     return (
         <>
-            <div className="flex justify-end mb-3">
+            <div className="flex justify-between gap-3 py-3 px-3 text-md bg-gray-50 border-b border-b-slate-200 font-bold text-slate-600">
+                <span>Mis Publicaciones</span>  
                 <Link 
-                to='nuevo'
-                    className="bg-sky-500 hover:bg-sky-600 text-white font-bold px-4 h-6 rounded-sm"
-                    >
-                    Crear Publicación
-                </Link>
+                    to='nuevo'
+                        className="flex gap-2 items-center bg-sky-500 hover:bg-sky-600 text-white  px-3 h-6 rounded-sm"
+                        >
+                            <FiPlus />
+                            <span>Nuevo</span>
+                        
+                    </Link>  
             </div>
-                
+            <div className="p-6">
+                {posts && <PostsList />}
+            </div>
             
-            {posts && <PostsList />}
             
             
         </>

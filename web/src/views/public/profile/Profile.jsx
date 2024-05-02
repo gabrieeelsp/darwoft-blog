@@ -13,8 +13,8 @@ const Profile = () => {
                     { user && <SideBar />}
                 </div>
                 <div className="ml-3 w-full border border-slate-300 bg-white shadow-md">
-                    <ProfileMenu />
-                    <div className="p-6">
+                    
+                    <div className="">
                         { user && categories && <Outlet /> }
                     </div>
                 </div>

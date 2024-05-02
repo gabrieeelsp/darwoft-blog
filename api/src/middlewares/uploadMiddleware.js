@@ -5,10 +5,10 @@ const storage = multer.diskStorage({
     destination: 'public/images/',
     filename: (req, file, cb) => {
         // generar el nombre del archivo
-        const { postId } = req.params;
+        const { userId } = req.params;
         const ext = path.extname(file.originalname);
 
-        const filename = `${postId}-${Date.now()}${ext}`;
+        const filename = `${userId}-${Date.now()}${ext}`;
 
         cb(null, filename);
     },

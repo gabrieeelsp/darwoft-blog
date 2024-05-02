@@ -14,6 +14,9 @@ const UserSchema = new mongoose.Schema(
             type: String,
             unique: true, // crea un indice en la base de dato, no es validacion
         },
+        image: {
+            type: String,
+        },
         gender: {
             type: String,
             enum: genders,

@@ -15,6 +15,20 @@ export const findOne = createAsyncThunk( 'users/findOne', async (id, { rejectWit
     }
 })
 
+export const uploadImage = createAsyncThunk('posts/uploadImage', async ({ id, formData }, { rejectWithValue }) => {
+    try {
+        const url = `/users/${id}/upload-image`
+        const response = await httpService.post(url, formData, { headers: {'Content-Type': 'multipart/form-data' }});
+
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data.error) 
+            return rejectWithValue(error.response.data.error);
+
+        return rejectWithValue(error.message);
+    }
+})
+
 export const update = createAsyncThunk('users/update', async ({ id, name, surname, gender }, { rejectWithValue }) => {
     try {
         const url = `users/${id}`;
@@ -71,6 +85,19 @@ const usersSlice = createSlice({
                 state.error = null
             })
             .addCase(update.rejected, (state, action) => {
+                state.status = 'error'
+                state.error = action.payload
+            })
+
+            .addCase(uploadImage.pending, (state) => {
+                state.status = 'pending'
+            })
+            .addCase(uploadImage.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.user = action.payload.data.user
+                state.error = null
+            })
+            .addCase(uploadImage.rejected, (state, action) => {
                 state.status = 'error'
                 state.error = action.payload
             })

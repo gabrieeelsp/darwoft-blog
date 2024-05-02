@@ -10,6 +10,7 @@ const meHandler = (req, res) => {
         surname: authUser.surname,
         email: authUser.email,
         roles: authUser.roles,
+        image: authUser.image,
     };
 
     return responseHelper(res, {
