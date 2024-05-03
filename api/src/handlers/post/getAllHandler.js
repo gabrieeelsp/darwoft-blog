@@ -26,8 +26,6 @@ const getOptionsSearch = (options) => {
 
     if (options.exclude) filters._id = { $ne: options.exclude };
 
-    console.log(filters);
-
     return {
         filters,
         modifiers,

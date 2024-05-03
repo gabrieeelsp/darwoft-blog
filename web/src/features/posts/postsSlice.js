@@ -5,7 +5,7 @@ export const findAll = createAsyncThunk('posts/findAll', async ({authorId, categ
 
     try {
         let url = `posts?`
-        console.log('buscand')
+
         if (authorId) url = url.concat(`author-id=${authorId}&`);
         if (categoryId) url = url.concat(`category-id=${categoryId}&`);
         if (title) url = url.concat(`title=${title}&`);
@@ -15,7 +15,7 @@ export const findAll = createAsyncThunk('posts/findAll', async ({authorId, categ
         if (page) url = url.concat(`page=${page}&`);
         const response = await httpService.get(url);
 
-        if (!save) response.data.updateState = false
+        response.data.updateState = save
         return response.data;        
     } catch (error) {
         if (error.response && error.response.data.error) 
@@ -67,10 +67,10 @@ export const uploadImage = createAsyncThunk('posts/uploadImage', async ({ id, fo
     }
 })
 
-export const update = createAsyncThunk('posts/update', async ({id, title, categoryId, content}, { rejectWithValue }) => {
+export const update = createAsyncThunk('posts/update', async ({id, title, categoryId, content, excerpt}, { rejectWithValue }) => {
     try {
         const url = `posts/${id}`
-        const response = await httpService.put(url, {title, "category-id": categoryId, content});
+        const response = await httpService.put(url, {title, "category-id": categoryId, content, excerpt});
 
         return response.data;
     } catch (error) {

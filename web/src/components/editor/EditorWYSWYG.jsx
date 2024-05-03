@@ -23,7 +23,7 @@ const optionsDefault = {
 }
 
 const EditorWYSWYG = (props) => {
-    const { options = optionsDefault, handlerChange, value } = props;
+    const { options = optionsDefault, handlerChange, value, name, alto = 36 } = props;
 
     const contentBlocks = convertFromHTML(value);
     const contentState = ContentState.createFromBlockArray(contentBlocks);
@@ -42,11 +42,12 @@ const EditorWYSWYG = (props) => {
         const html = stateToHTML(editorState.getCurrentContent());
         handlerChange({
             target: {
-                name: 'content',
+                name: name,
                 value: html,
             }
         })
     }
+
 
     return (
         <>
@@ -55,7 +56,7 @@ const EditorWYSWYG = (props) => {
                 onEditorStateChange={onChange}
                 blockStyleFn={blockStyleFn}
                 wrapperClassName=""
-                editorClassName="border border-slate-200 px-2 mt-1 min-h-72"
+                editorClassName={`border border-slate-200 px-2 mt-1 min-h-${alto}`}
                 toolbarClassName="border border-slate-400 bg-slate-800"
                 toolbar={options}
                 />  

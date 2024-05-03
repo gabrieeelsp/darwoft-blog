@@ -16,18 +16,9 @@ const PostView = () => {
         dispatch(findOne(postSlug))
         
         return () => {
-            // dispatch(cleanSlice())
-        }
-    }, [dispatch, postSlug])
-
-    
-
-    useEffect(() => {
-        
-        return () => {
             dispatch(cleanSlice())
         }
-    }, [dispatch])
+    }, [dispatch, postSlug])
 
     const content = post ? 
         <Post /> : 
