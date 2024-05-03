@@ -18,19 +18,23 @@ const Post = () => {
     return (
         <>
             <article>
-                <h2
-                    className="text-2xl italic font-bold"
-                >{category.name}</h2>
-                <h1
-                    className="text-3xl mt-2"
-                >{post.title}</h1>
+                <h2 className="text-2xl italic font-bold" >{category.name}</h2>
+                <h1 className="text-3xl mt-2 border-b border-slate-300 pb-3" >{post.title}</h1>
 
-                <div className="flex text-sm gap-2 mt-2 text-slate-600">
+                <div className="flex items-center text-sm gap-2 mt-3 text-slate-600">
+                    <div className="w-7 h-7 rounded-full border border-slate-400 shadow-lg bg-slate-200 overflow-hidden">
+                        <img
+                            className="w-full h-full object-cover z-0" 
+                            src={`http://localhost:8001/images/${post.author.image}`} alt="" />
+                    </div>
+
+
+        
                     <span >{post.author.name} {post.author.surname}</span>
                     <span>|</span>
                     <span className='italic'>{fecha_convertida}</span>
                 </div>
-                <div className='grid grid-cols-12 gap-5 mt-5 '>
+                <div className='grid grid-cols-12 gap-5 mt-3 '>
                     <div className='col-span-8'>
                         <div className="w-full h-64 overflow-hidden rounded-md" >
                             <img className="w-full h-full object-cover" src={`http://localhost:8001/images/${post.image}`} />
@@ -39,16 +43,18 @@ const Post = () => {
                         <div className="mt-4 space-y-3" >
                             {post.content && parse(applyClassesToHTML(post.content))}
                         </div>
+
+                        <Comments post={post} />
                     </div>
                     <div className='col-span-4'>
-                        <RelatedPosts />
+                        <RelatedPosts postId={post._id} categoryId={post.category} />
                     </div>
                 </div>
 
                 
 
             </article>
-            <Comments post={post} />
+            
             
         </>
     )

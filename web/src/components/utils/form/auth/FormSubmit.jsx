@@ -10,7 +10,7 @@ const FormSubmit = (props) => {
         <>
             <div className="flex flex-col mt-2 mb-1">
                 <button 
-                    className="bg-purple-500 w-full text-sm hover:bg-purple-700 disabled:bg-purple-300 text-white font-bold py-2 px-4 rounded" 
+                    className="bg-sky-500 w-full text-sm hover:bg-sky-700 disabled:bg-sky-300 text-white font-bold py-2 px-4 rounded" 
                     type="submit"
                     disabled={showResponseMessage && status === 'pending'}
                     >

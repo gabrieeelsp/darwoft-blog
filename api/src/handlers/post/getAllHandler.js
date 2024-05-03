@@ -24,6 +24,10 @@ const getOptionsSearch = (options) => {
     if (options['author-id']) filters.author = options['author-id'];
     if (options['category-id']) filters.category = options['category-id'];
 
+    if (options.exclude) filters._id = { $ne: options.exclude };
+
+    console.log(filters);
+
     return {
         filters,
         modifiers,

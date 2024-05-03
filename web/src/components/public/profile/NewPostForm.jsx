@@ -5,8 +5,10 @@ import useForm from "../../../hooks/useForm";
 import TextInput from "../../utils/form/profile/TextInput";
 import SelectInput from "../../utils/form/profile/SelectInput";
 import FormSubmit from "../../utils/form/profile/FormSubmit";
+import { useNavigate } from 'react-router-dom'
 
 const PersonalDataForm = () => {
+    const navigate = useNavigate()
     const dispatch = useDispatch(); 
     const { status, error } = useSelector((state) => state.posts)
     const { categories } = useSelector((state) => state.app)
@@ -17,7 +19,8 @@ const PersonalDataForm = () => {
     }
 
     const onSubmit = () => {
-        dispatch(create({...formData}))
+        dispatch(create({...formData})).unwrap()
+            .then((resp) => navigate(`/perfil/publicaciones/${resp.data.post._id}/editar`, { replace: true}) )
     }
 
     const {formData, formErrors, handlerInputChange, handlerSubmit, showResponseMessage} = useForm({initialState: formFields, onSubmit, validator})

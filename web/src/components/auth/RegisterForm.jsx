@@ -28,7 +28,7 @@ const RegisterForm = () => {
     return (
         <>
             <form onSubmit={handlerSubmit} >
-                <div className="bg-white shadow-md rounded px-8 pt-6 pb-4 mb-4 flex flex-col border-purple-400 border-t-8">
+                <div className="bg-white shadow-md rounded px-8 pt-6 pb-4 mb-4 flex flex-col border-sky-400 border-t-8">
                     <TextInput 
                         handlerInputChange={handlerInputChange}
                         name='name'
@@ -77,7 +77,7 @@ const RegisterForm = () => {
                 </div>
             </form>
             <div className="text-center">
-                <p className="text-grey-dark text-sm text-slate-500">¿Ya tienes una cuenta? <Link to='/auth/login' className="no-underline text-blue font-bold text-purple-400 hover:text-purple-500">Ingresar</Link>.</p>
+                <p className="text-grey-dark text-sm text-slate-500">¿Ya tienes una cuenta? <Link to='/auth/login' className="no-underline text-blue font-bold text-sky-400 hover:text-sky-500">Ingresar</Link>.</p>
             </div>
         </>
     )

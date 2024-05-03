@@ -5,6 +5,7 @@ import useForm from "../../../hooks/useForm";
 import TextInput from "../../utils/form/profile/TextInput";
 import SelectInput from "../../utils/form/profile/SelectInput";
 import FormSubmit from "../../utils/form/profile/FormSubmit";
+import { updateUser } from "../../../features/auth/authSlice";
 
 const PersonalDataForm = () => {
     const dispatch = useDispatch(); 
@@ -18,7 +19,8 @@ const PersonalDataForm = () => {
     }
     
     const onSubmit = () => {
-        dispatch(update({...formData, id: user._id}))
+        dispatch(update({...formData, id: user._id})).unwrap()
+            .then((payload) => dispatch(updateUser(payload)))
     }
 
     const {formData, formErrors, handlerInputChange, handlerSubmit, showResponseMessage} = useForm({initialState: formFields, onSubmit, validator})

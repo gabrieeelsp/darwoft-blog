@@ -1,19 +1,21 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import httpService from "../../services/httpService";
 
-export const findAll = createAsyncThunk('posts/findAll', async ({authorId, categoryId, title, limit, page}, { rejectWithValue }) => {
+export const findAll = createAsyncThunk('posts/findAll', async ({authorId, categoryId, title, limit, exclude, page, save = true}, { rejectWithValue }) => {
+
     try {
         let url = `posts?`
         console.log('buscand')
         if (authorId) url = url.concat(`author-id=${authorId}&`);
         if (categoryId) url = url.concat(`category-id=${categoryId}&`);
         if (title) url = url.concat(`title=${title}&`);
+        if (exclude) url = url.concat(`exclude=${exclude}&`)
 
         if (limit) url = url.concat(`limit=${limit}&`);
         if (page) url = url.concat(`page=${page}&`);
-
         const response = await httpService.get(url);
 
+        if (!save) response.data.updateState = false
         return response.data;        
     } catch (error) {
         if (error.response && error.response.data.error) 
@@ -96,7 +98,10 @@ const postsSlice = createSlice({
             state.status = null
             state.post = null
             state.error = null
-        }
+        },
+        removeImage: (state) => {
+            state.post.image = undefined;
+        },
 
     },
     extraReducers(builder) {
@@ -119,6 +124,7 @@ const postsSlice = createSlice({
                 state.status = 'pending'
             })
             .addCase(findAll.fulfilled, (state, action) => {
+                if ( !action.payload.updateState ) return
                 state.posts = action.payload.data.posts
                 state.pagination = action.payload.data.pagination
                 state.status = 'succeeded'
@@ -174,6 +180,6 @@ const postsSlice = createSlice({
     }
 })
 
-export const { cleanSlice } = postsSlice.actions;
+export const { cleanSlice, removeImage } = postsSlice.actions;
 
 export default postsSlice.reducer;
