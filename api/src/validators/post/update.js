@@ -15,6 +15,7 @@ module.exports = [
         .isMongoId()
         .withMessage('Error de formato'),
     check('content').optional().trim(),
+    check('excerpt').optional().trim(),
 
     (req, res, next) => validateResult(req, res, next),
 ];

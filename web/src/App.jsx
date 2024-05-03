@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { AdminView, CategoryView, LoginView, RegisterView, PostView, PublicView, Profile, PersonalDataView, PostsListView, PostCreateView, PostEditView } from './views';
+import { AdminView, CategoryView, LoginView, RegisterView, PostView, PublicView, Profile, PersonalDataView, PostsListView, PostCreateView, PostEditView, HomeView } from './views';
 import { useDispatch } from 'react-redux';
 import { me } from './features/auth/authSlice';
 import { getInitValues } from './features/app/appSlice';
@@ -18,6 +18,7 @@ function App() {
         <>
             <Routes>
                 <Route path='/' element={<PublicView />}> 
+                    <Route index element={<HomeView />} />
                     <Route path='seccion/:categorySlug' element={<CategoryView />} />
                     <Route path=':postSlug' element={<PostView />} />
                     <Route path='auth/login' element={<LoginView />} />

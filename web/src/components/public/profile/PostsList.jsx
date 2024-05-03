@@ -18,6 +18,8 @@ const PostsList = () => {
         body
     }
 
+    
+
     return (
         <>
             <PostListFilter />

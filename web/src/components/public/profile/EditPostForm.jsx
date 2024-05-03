@@ -15,10 +15,12 @@ const PersonalDataForm = () => {
     const formFields = {
         title: post.title,
         categoryId: post.category,
-        content: post.content ? post.content : ''
+        excerpt: post.excerpt || '',
+        content: post.content || '',
     }
 
     const onSubmit = () => {
+        console.log(formData)
         dispatch(update({...formData, id: post._id}))
     }
 
@@ -49,14 +51,26 @@ const PersonalDataForm = () => {
                         showEmptyOption={false}
                     />
                     
-                    
-
                     <div className="grid grid-cols-12">
+                        <label className="col-start-2 mt-1 col-span-2" htmlFor="">Extracto</label>
+                        <div className='col-span-9'>
+                            <EditorWYSWYG 
+                                value={formData.excerpt}
+                                handlerChange={handlerInputChange}
+                                name='excerpt'
+                                alto={24}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-12 mt-5">
                         <label className="col-start-2 mt-1 col-span-2" htmlFor="">Contenido</label>
                         <div className='col-span-9'>
                             <EditorWYSWYG 
                                 value={formData.content}
                                 handlerChange={handlerInputChange}
+                                name='content'
+                                alto={72}
                             />
                         </div>
                     </div>

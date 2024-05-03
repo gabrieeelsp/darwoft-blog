@@ -29,6 +29,7 @@ const PostsListView = () => {
             limit: limit ? limit : 6, 
             page: page ? page : 1}))
     }, [dispatch, _id, title, category, limit, page])
+
     return (
         <>
             <div className="flex justify-between gap-3 py-3 px-3 text-md bg-gray-50 border-b border-b-slate-200 font-bold text-slate-600">

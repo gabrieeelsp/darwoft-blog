@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 
 const PublicLayout = () => {
     const { user } = useSelector((state) => state.auth)
+    const { categories } = useSelector((state) => state.app)
     return (
         <>
             <div className="flex flex-col min-h-screen bg-slate-50" >
@@ -22,7 +23,8 @@ const PublicLayout = () => {
                     <Header />
                 </header>
                 <main className="flex-1 py-1  w-full mx-auto max-w-5xl text-slate-800">
-                    <Outlet />
+                    {categories && <Outlet />}
+                    
                 </main>
                 <footer className="">
                     <Footer />
