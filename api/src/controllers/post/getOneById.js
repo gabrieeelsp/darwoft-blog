@@ -8,7 +8,12 @@ const getOneById = async (id) => {
         ? postModel.findById({ _id: id })
         : postModel.findBySlug(id);
 
-    const post = await method.populate('author', 'name surname image').exec();
+    const post = await method
+        .populate('author', 'name surname image')
+        .populate({
+            path: 'comments',
+        })
+        .exec();
 
     return post;
 };

@@ -124,11 +124,14 @@ const postsSlice = createSlice({
                 state.status = 'pending'
             })
             .addCase(findAll.fulfilled, (state, action) => {
-                if ( !action.payload.updateState ) return
-                state.posts = action.payload.data.posts
-                state.pagination = action.payload.data.pagination
+                if ( action.payload.updateState ) {
+                    state.posts = action.payload.data.posts
+                    state.pagination = action.payload.data.pagination
+                    
+                }
                 state.status = 'succeeded'
                 state.error = null
+
             })
             .addCase(findAll.rejected, (state, action) => {
                 state.posts = null
