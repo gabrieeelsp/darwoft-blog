@@ -59,7 +59,7 @@ const usersSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
-
+        
     },
     extraReducers(builder) {
         builder

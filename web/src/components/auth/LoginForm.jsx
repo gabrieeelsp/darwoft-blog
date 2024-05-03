@@ -27,7 +27,7 @@ const LoginForm = () => {
     return (
         <>
             <form onSubmit={handlerSubmit} >
-                <div className="bg-white shadow-md rounded px-8 pt-6 pb-4 mb-4 flex flex-col border-purple-400 border-t-8">
+                <div className="bg-white shadow-md rounded px-8 pt-6 pb-4 mb-4 flex flex-col border-sky-400 border-t-8">
                     <TextInput 
                         handlerInputChange={handlerInputChange}
                         name='email'
@@ -58,14 +58,14 @@ const LoginForm = () => {
                         />
 
                         
-                        <Link to="#" className="inline-block align-baseline text-purple-400 font-bold text-sm text-blue hover:text-purple-500" >
+                        <Link to="#" className="inline-block align-baseline text-sky-400 font-bold text-sm text-blue hover:text-sky-500" >
                             Olvidaste la contraseña?
                         </Link>
                     </div>
                 </div>
             </form>
             <div className="text-center">
-                <p className="text-grey-dark text-sm text-slate-500">¿No tienes una cuenta? <Link to='/auth/register' className="no-underline text-blue font-bold text-purple-400 hover:text-purple-500">Crear una cuenta</Link>.</p>
+                <p className="text-grey-dark text-sm text-slate-500">¿No tienes una cuenta? <Link to='/auth/register' className="no-underline text-blue font-bold text-sky-400 hover:text-purple-500">Crear una cuenta</Link>.</p>
             </div>
         </>
     )

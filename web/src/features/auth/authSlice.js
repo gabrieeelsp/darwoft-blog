@@ -79,7 +79,11 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-
+        updateUser: (state, action) => {
+            const { name, surname } = action.payload.data.user;
+            state.user.name = name;
+            state.user.surname = surname;
+        }
     },
     extraReducers(builder) {
         builder
@@ -141,5 +145,7 @@ const authSlice = createSlice({
             
     }
 })
+
+export const { updateUser } = authSlice.actions;
 
 export default authSlice.reducer;
