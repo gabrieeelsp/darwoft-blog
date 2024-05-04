@@ -11,11 +11,11 @@ const createHandler = async (req, res, next) => {
         data.post = data['post-id'];
         delete data['post-id'];
 
-        const post = await create(data);
+        const comment = await create(data);
         return responseHelper(res, {
             statusCode: 201,
             message: 'Comntario creado con exito',
-            data: post,
+            data: comment,
         });
     } catch (error) {
         return next(error);

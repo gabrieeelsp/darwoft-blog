@@ -101,6 +101,19 @@ export const findAllComments = createAsyncThunk('posts/findAllComments', async (
     }
 })
 
+export const createComment = createAsyncThunk('posts/createComment', async ({postId, content}, {rejectWithValue}) => {
+    try {
+        const response = await httpService.post('/comments', { content, "post-id": postId });
+
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data.error) 
+            return rejectWithValue(error.response.data.error);
+
+        return rejectWithValue(error.message);
+    }
+})
+
 const initialState = {
     posts: null,
     post: null,
@@ -211,6 +224,19 @@ const postsSlice = createSlice({
             })
             .addCase(findAllComments.rejected, (state, action) => {
                 state.post = null
+                state.status = 'error'
+                state.error = action.payload
+            })
+
+            .addCase(createComment.pending, (state) => {
+                state.status = 'pending'
+            })
+            .addCase(createComment.fulfilled, (state, action) => {
+                state.post.comments.unshift(action.payload.data)
+                state.status = 'succeeded'
+                state.error = null
+            })
+            .addCase(createComment.rejected, (state, action) => {
                 state.status = 'error'
                 state.error = action.payload
             })

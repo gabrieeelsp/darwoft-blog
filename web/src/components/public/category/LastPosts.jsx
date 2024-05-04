@@ -20,8 +20,8 @@ const LastPosts = (props) => {
         <>
             {posts && (
                 <>
-                    <div className="grid grid-cols-7">
-                        <div className="col-span-4">
+                    <div className="grid grid-cols-8">
+                        <div className="col-span-5">
                             <PostPrincipal post={posts[0]} />
                         </div>
                         <div className="col-span-3">

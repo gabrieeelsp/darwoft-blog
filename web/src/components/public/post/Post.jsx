@@ -44,7 +44,7 @@ const Post = () => {
                             {post.content && parse(applyClassesToHTML(post.content))}
                         </div>
 
-                        <Comments post={post} />
+                        <Comments />
                     </div>
                     <div className='col-span-4'>
                         <RelatedPosts postId={post._id} categoryId={post.category} />
