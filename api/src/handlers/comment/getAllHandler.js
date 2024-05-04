@@ -20,7 +20,7 @@ const getOptionsSearch = (options) => {
         : undefined;
 
     if (options['author-id']) filters.author = options['author-id'];
-    if (options['post-id']) filters.category = options['post-id'];
+    if (options['post-id']) filters.post = options['post-id'];
 
     return {
         filters,
@@ -38,10 +38,10 @@ const getAllHandler = async (req, res, next) => {
 
         const { filters, modifiers } = getOptionsSearch(options);
 
-        const posts = await getAll(filters, modifiers);
+        const comments = await getAll(filters, modifiers);
 
         const data = {
-            posts,
+            comments,
         };
 
         let countPosts = null;

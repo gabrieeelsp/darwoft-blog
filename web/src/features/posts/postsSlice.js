@@ -81,6 +81,26 @@ export const update = createAsyncThunk('posts/update', async ({id, title, catego
     }
 })
 
+export const findAllComments = createAsyncThunk('posts/findAllComments', async ({postId, authorId, limit, page}, { rejectWithValue}) => {
+    try {
+        let url = `comments?`
+
+        if (postId) url = url.concat(`post-id=${postId}&`);
+        if (authorId) url = url.concat(`author-id=${authorId}&`);
+
+        if (limit) url = url.concat(`limit=${limit}&`);
+        if (page) url = url.concat(`page=${page}&`);
+        const response = await httpService.get(url);
+
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data.error) 
+            return rejectWithValue(error.response.data.error);
+
+        return rejectWithValue(error.message);
+    }
+})
+
 const initialState = {
     posts: null,
     post: null,
@@ -176,6 +196,20 @@ const postsSlice = createSlice({
                 state.error = null
             })
             .addCase(uploadImage.rejected, (state, action) => {
+                state.post = null
+                state.status = 'error'
+                state.error = action.payload
+            })
+
+            .addCase(findAllComments.pending, (state) => {
+                state.status = 'pending'
+            })
+            .addCase(findAllComments.fulfilled, (state, action) => {
+                state.post.comments = action.payload.data.comments
+                state.status = 'succeeded'
+                state.error = null
+            })
+            .addCase(findAllComments.rejected, (state, action) => {
                 state.post = null
                 state.status = 'error'
                 state.error = action.payload
