@@ -130,6 +130,8 @@ const postsSlice = createSlice({
         cleanSlice: (state) => {
             state.status = null
             state.post = null
+            state.posts = null
+            state.pagination = null
             state.error = null
         },
         removeImage: (state) => {

@@ -19,6 +19,7 @@ const SelectInput = (props) => {
             <div className="grid grid-cols-12 items-center">
                 <label className="col-start-2 col-span-2" htmlFor={name}>{label}</label>
                 <select
+                    id={name}
                     value={value} 
                     name={name}
                     onChange={handlerInputChange}

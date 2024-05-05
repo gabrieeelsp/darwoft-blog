@@ -24,7 +24,7 @@ const PostView = () => {
         <Post /> : 
         error 
             ? <Error /> 
-            : 'pending' 
+            : '' 
 
     return (
         <div className="">           

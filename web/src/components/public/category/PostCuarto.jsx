@@ -13,7 +13,7 @@ const PostCuarto = (props) => {
         <>
             <div key={post._id} className="flex flex-col cursor-pointer" onClick={handleClick}>
                 <div className="w-full h-24 overflow-hidden rounded-md" >
-                    <img className="w-full h-full object-cover" src={`http://localhost:8001/images/${post.image}`} />
+                    <img className="w-full h-full object-cover" src={`${import.meta.env.VITE_URL_API}/images/${post.image}`} />
                 </div>
                 <div className="flex flex-col pr-3">
                     {showCategory && <span className="italic text-xs">{post.category.name}</span>}

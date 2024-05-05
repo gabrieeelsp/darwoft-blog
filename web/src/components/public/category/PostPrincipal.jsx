@@ -25,7 +25,7 @@ const PostPrincipal = (props) => {
                     </div>
                 </div>
                 <div className="w-full h-52 overflow-hidden rounded-md" >
-                    <img className="w-full h-full object-cover" src={`http://localhost:8001/images/${post.image}`} />
+                    <img className="w-full h-full object-cover" src={`${import.meta.env.VITE_URL_API}/images/${post.image}`} />
                 </div>
                 
                 

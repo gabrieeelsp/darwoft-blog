@@ -20,11 +20,11 @@ const LastPosts = () => {
         <>
             {posts && (
                 <>
-                    <div className="grid grid-cols-8">
-                        <div className="col-span-5">
+                    <div className="grid md:grid-cols-8 mt-3">
+                        <div className="md:col-span-5">
                             <PostPrincipal post={posts[0]} showCategory={true} />
                         </div>
-                        <div className="col-span-3">
+                        <div className="md:col-span-3 border-l border-dotted border-slate-300">
                             {posts.slice(1,3).map((post) => <PostSecundario key={post._id} post={post} showCategory={true} /> )}
                         </div>
                     </div>

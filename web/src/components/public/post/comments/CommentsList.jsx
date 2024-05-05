@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import Comment from "./Comment"
 
-const CommentsList = (props) => {
+const CommentsList = () => {
     const { post } = useSelector((state) => state.posts)
     return (
         <>
