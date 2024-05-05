@@ -81,6 +81,39 @@ export const update = createAsyncThunk('posts/update', async ({id, title, catego
     }
 })
 
+export const findAllComments = createAsyncThunk('posts/findAllComments', async ({postId, authorId, limit, page}, { rejectWithValue}) => {
+    try {
+        let url = `comments?`
+
+        if (postId) url = url.concat(`post-id=${postId}&`);
+        if (authorId) url = url.concat(`author-id=${authorId}&`);
+
+        if (limit) url = url.concat(`limit=${limit}&`);
+        if (page) url = url.concat(`page=${page}&`);
+        const response = await httpService.get(url);
+
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data.error) 
+            return rejectWithValue(error.response.data.error);
+
+        return rejectWithValue(error.message);
+    }
+})
+
+export const createComment = createAsyncThunk('posts/createComment', async ({postId, content}, {rejectWithValue}) => {
+    try {
+        const response = await httpService.post('/comments', { content, "post-id": postId });
+
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data.error) 
+            return rejectWithValue(error.response.data.error);
+
+        return rejectWithValue(error.message);
+    }
+})
+
 const initialState = {
     posts: null,
     post: null,
@@ -97,6 +130,8 @@ const postsSlice = createSlice({
         cleanSlice: (state) => {
             state.status = null
             state.post = null
+            state.posts = null
+            state.pagination = null
             state.error = null
         },
         removeImage: (state) => {
@@ -124,11 +159,14 @@ const postsSlice = createSlice({
                 state.status = 'pending'
             })
             .addCase(findAll.fulfilled, (state, action) => {
-                if ( !action.payload.updateState ) return
-                state.posts = action.payload.data.posts
-                state.pagination = action.payload.data.pagination
+                if ( action.payload.updateState ) {
+                    state.posts = action.payload.data.posts
+                    state.pagination = action.payload.data.pagination
+                    
+                }
                 state.status = 'succeeded'
                 state.error = null
+
             })
             .addCase(findAll.rejected, (state, action) => {
                 state.posts = null
@@ -174,6 +212,33 @@ const postsSlice = createSlice({
             })
             .addCase(uploadImage.rejected, (state, action) => {
                 state.post = null
+                state.status = 'error'
+                state.error = action.payload
+            })
+
+            .addCase(findAllComments.pending, (state) => {
+                state.status = 'pending'
+            })
+            .addCase(findAllComments.fulfilled, (state, action) => {
+                state.post.comments = action.payload.data.comments
+                state.status = 'succeeded'
+                state.error = null
+            })
+            .addCase(findAllComments.rejected, (state, action) => {
+                state.post = null
+                state.status = 'error'
+                state.error = action.payload
+            })
+
+            .addCase(createComment.pending, (state) => {
+                state.status = 'pending'
+            })
+            .addCase(createComment.fulfilled, (state, action) => {
+                state.post.comments.unshift(action.payload.data)
+                state.status = 'succeeded'
+                state.error = null
+            })
+            .addCase(createComment.rejected, (state, action) => {
                 state.status = 'error'
                 state.error = action.payload
             })

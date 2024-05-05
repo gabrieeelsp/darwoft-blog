@@ -8,7 +8,7 @@ const PublicLayout = () => {
     return (
         <>
             <div className="flex flex-col min-h-screen bg-slate-50" >
-                <div className="text-right text-sm pr-10 bg-black text-slate-300 py-1/2">
+                <div className="text-right text-md pr-10 bg-black text-slate-300 py-1/2">
                     { user && 
                         <>
                             <span className="mr-2">{user.email}</span>

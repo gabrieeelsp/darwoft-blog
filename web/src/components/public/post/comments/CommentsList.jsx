@@ -1,11 +1,12 @@
+import { useSelector } from "react-redux"
 import Comment from "./Comment"
 
-const CommentsList = (props) => {
-    const { comments } = props.post
+const CommentsList = () => {
+    const { post } = useSelector((state) => state.posts)
     return (
         <>
             <div>
-                {comments?.map((comment) => <Comment key={comment.id} comment={comment} />)}
+                {post.comments && post.comments.map((comment) => <Comment key={comment._id} comment={comment} />)}
             </div>
             
         </>

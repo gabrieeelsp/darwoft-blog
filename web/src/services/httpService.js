@@ -2,7 +2,7 @@ import axios from 'axios';
 import { store } from '../app/store';
 
 const httpService = axios.create({
-    baseURL: 'http://localhost:8001/api/'
+    baseURL: `${import.meta.env.VITE_URL_API}/api/`
 })
 
 httpService.interceptors.request.use(

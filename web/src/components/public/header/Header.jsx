@@ -13,20 +13,14 @@ const Header = () => {
                 <div>
                     <span className="text-sm text-slate-600">Blog de ciencia y tecnologías en Español</span>
                 </div>
-                <div className="flex w-full justify-between items-center">
+                <div className="flex w-full justify-center md:justify-start items-center">
                     <div className="h-14">
                         <Link to='/' >
-                            <img 
-                                src={logo} 
-                                className="w-full h-full object-contain"
-                                />
+                            <img src={logo} className="w-full h-full object-contain" />
                         </Link>
                     </div>
-                    <div>
-                        
-                    </div>
                 </div>
-                <div className="w-full flex justify-center gap-8 py-2" >
+                <div className="w-full flex justify-center gap-8 py-2 text-lg font-bold" >
                     {categories && categories.map((category) => <NavLink key={category._id} to={`/seccion/${category.slug}`} >{category.name}</NavLink> )}
                 </div>
             </div>

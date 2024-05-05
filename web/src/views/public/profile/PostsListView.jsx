@@ -19,7 +19,7 @@ const PostsListView = () => {
     const page = currentQueryParameters.get('page')
 
     const category = useSelector((state) => getCategoryBySlug(state, categorySlug))
-
+    
     useEffect(() => {
 
         dispatch(findAll({

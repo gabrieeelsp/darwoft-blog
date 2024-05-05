@@ -20,17 +20,17 @@ const LastPosts = (props) => {
         <>
             {posts && (
                 <>
-                    <div className="grid grid-cols-7">
-                        <div className="col-span-4">
+                    <div className="grid grid-cols-8">
+                        <div className="col-span-5">
                             <PostPrincipal post={posts[0]} />
                         </div>
-                        <div className="col-span-3">
+                        <div className="col-span-3 border-l border-dotted border-slate-300">
                             {posts.slice(1,3).map((post) => <PostSecundario key={post._id} post={post} /> )}
                         </div>
                     </div>
                     <h2 className="ml-3 mt-5">Más Noticias</h2>
-                    <div className="grid grid-cols-5">
-                        {posts.slice(4,9).map((post) => <PostTerciario key={post._id} post={post} /> )}
+                    <div className="grid grid-cols-4">
+                        {posts.slice(4,8).map((post) => <PostTerciario key={post._id} post={post} /> )}
                     </div>
                 </>
             )}

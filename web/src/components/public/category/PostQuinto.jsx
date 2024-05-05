@@ -11,11 +11,11 @@ const PostQuinto = (props) => {
 
     return (
         <>
-            <div key={post._id} className="cursor-pointer" onClick={handleClick}>
+            <div key={post._id} className="cursor-pointer mb-1" onClick={handleClick}>
                 <div className="col-span-3 flex flex-col pr-3">
-                    {showCategory && <span className="italic text-xs">{post.category.name}</span>}
-                    <Link to={`/${post.slug}`} className="text-xs font-bold" >{post.title}</Link>
-                    <div className="text-xs text-slate-700 italic text-right" >
+                    {showCategory && <span className="italic text-sm">{post.category.name}</span>}
+                    <Link to={`/${post.slug}`} className="text-md font-bold" >{post.title}</Link>
+                    <div className="text-sm mt-1 text-slate-600 italic text-right" >
                         <span>por {capitalize(post.author.name)} {capitalize(post.author.surname)}</span>
                     </div>
 
