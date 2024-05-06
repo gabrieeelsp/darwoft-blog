@@ -34,6 +34,21 @@ export const register = createAsyncThunk('auth/register', async ({name, surname,
     }
 })
 
+export const verifyAccount = createAsyncThunk('auth/verifyAccount', async ({token}, { rejectWithValue }) => {
+    try {
+        const response = await httpService.post('auth/verify-account', {
+            token,
+        })
+
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data.error)
+            return rejectWithValue(error.response.data.error);
+
+        return rejectWithValue(error.message);
+    }
+})
+
 export const login = createAsyncThunk('auth/login', async ({ email, password, rememberMe }, { rejectWithValue }) => {
     try {
         const response = await httpService.post('auth/signin', {

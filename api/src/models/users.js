@@ -14,6 +14,10 @@ const UserSchema = new mongoose.Schema(
             type: String,
             unique: true, // crea un indice en la base de dato, no es validacion
         },
+        isEmailVerified: {
+            type: Boolean,
+            default: false,
+        },
         image: {
             type: String,
         },

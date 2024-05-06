@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 const { userModel } = require('../../models');
+const cleanDocument = require('../../utils/cleanDocument');
 
 const update = async (id, data) => {
     if (!mongoose.Types.ObjectId.isValid(id)) return null;
@@ -13,13 +14,15 @@ const update = async (id, data) => {
         delete values.gender;
     }
 
-    const user = await userModel.findByIdAndUpdate(
+    let user = await userModel.findByIdAndUpdate(
         { _id: id },
         { ...values, $unset: unset },
         {
             new: true,
         },
     );
+
+    user = cleanDocument(user, ['password']);
 
     return user;
 };
