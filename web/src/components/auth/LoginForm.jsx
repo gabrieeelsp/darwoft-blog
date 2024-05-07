@@ -58,7 +58,7 @@ const LoginForm = () => {
                         />
 
                         
-                        <Link to="#" className="inline-block align-baseline text-sky-400 font-bold text-sm text-blue hover:text-sky-500" >
+                        <Link to="/auth/forgot-password" className="inline-block align-baseline text-sky-400 font-bold text-sm text-blue hover:text-sky-500" >
                             Olvidaste la contraseña?
                         </Link>
                     </div>

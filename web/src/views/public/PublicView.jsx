@@ -22,7 +22,7 @@ const PublicLayout = () => {
                 <header className="px-3">
                     <Header />
                 </header>
-                <main className="flex-1 py-1  w-full mx-auto max-w-5xl text-slate-800">
+                <main className="flex-1 py-1 flex w-full mx-auto max-w-5xl text-slate-800">
                     {categories && <Outlet />}
                     
                 </main>

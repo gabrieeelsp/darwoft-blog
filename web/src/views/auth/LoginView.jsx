@@ -13,7 +13,7 @@ const LoginView = () => {
 
     return (
         <>
-            <div className="flex justify-center">
+            <div className="flex-1 flex items-center justify-center ">
                 <div className="w-96">
                     <LoginForm />
                 </div>

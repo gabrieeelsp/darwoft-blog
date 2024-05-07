@@ -15,6 +15,7 @@ import Comment          from "./public/post/comments/Comment";
 
 import LoginForm        from "./auth/LoginForm";
 import RegisterForm     from "./auth/RegisterForm";
+import ChangePasswordForm from "./auth/ChangePasswordForm"
 
 import Pagination       from "./utils/datatable/Pagination";
 
@@ -36,6 +37,7 @@ export {
 
     LoginForm,
     RegisterForm,
+    ChangePasswordForm,
 
     Pagination,
 }

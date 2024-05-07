@@ -5,11 +5,12 @@ const cleanDocument = require('../../utils/cleanDocument');
 
 const login = async (email, password) => {
     const query = userModel.findOne({ email });
-    query.select('name surname email password roles image');
+    query.select('name surname email password roles image isEmailVerified');
 
     let user = await query.exec();
 
-    if (!user || !compare(password, user.password)) return null;
+    if (!user || !user.isEmailVerified || !compare(password, user.password))
+        return null;
 
     user = cleanDocument(user, ['password']);
 

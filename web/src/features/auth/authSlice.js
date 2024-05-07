@@ -15,6 +15,21 @@ export const me = createAsyncThunk('auth/me', async (_, { rejectWithValue }) => 
     }
 })
 
+export const forgotPassword = createAsyncThunk('auth/forgotPassword', async ({email}, { rejectWithValue }) => {
+    try {
+        const response = await httpService.post('auth/forgot-password', {
+            email,
+        })
+
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data.error)
+            return rejectWithValue(error.response.data.error);
+
+        return rejectWithValue(error.message);
+    }
+})
+
 export const register = createAsyncThunk('auth/register', async ({name, surname, email, password, passwordConfirmation}, { rejectWithValue }) => {
     try {
         const response = await httpService.post('auth/signup', {
@@ -23,6 +38,38 @@ export const register = createAsyncThunk('auth/register', async ({name, surname,
             email,
             password,
             "password-confirmation": passwordConfirmation,
+        })
+
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data.error)
+            return rejectWithValue(error.response.data.error);
+
+        return rejectWithValue(error.message);
+    }
+})
+
+export const changePassword = createAsyncThunk('auth/changePassword', async ({password, passwordConfirmation, token}, { rejectWithValue }) => {
+    try {
+        const response = await httpService.post('auth/change-password', {
+            token,
+            password,
+            "password-confirmation": passwordConfirmation,
+        })
+
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data.error)
+            return rejectWithValue(error.response.data.error);
+
+        return rejectWithValue(error.message);
+    }
+})
+
+export const verifyAccount = createAsyncThunk('auth/verifyAccount', async ({token}, { rejectWithValue }) => {
+    try {
+        const response = await httpService.post('auth/verify-account', {
+            token,
         })
 
         return response.data;
@@ -83,6 +130,10 @@ const authSlice = createSlice({
             const { name, surname } = action.payload.data.user;
             state.user.name = name;
             state.user.surname = surname;
+        },
+        cleanStatus: (state) => {
+            state.status = null
+            state.error = null
         }
     },
     extraReducers(builder) {
@@ -97,6 +148,30 @@ const authSlice = createSlice({
                 state.error = null
             })
             .addCase(login.rejected, (state, action) => {
+                state.status = 'error'
+                state.error = action.payload
+            })
+
+            .addCase(forgotPassword.pending, (state) => {
+                state.status = 'pending'
+            })
+            .addCase(forgotPassword.fulfilled, (state) => {
+                state.status = 'succeeded'
+                state.error = null
+            })
+            .addCase(forgotPassword.rejected, (state, action) => {
+                state.status = 'error'
+                state.error = action.payload
+            })
+
+            .addCase(changePassword.pending, (state) => {
+                state.status = 'pending'
+            })
+            .addCase(changePassword.fulfilled, (state) => {
+                state.status = 'succeeded'
+                state.error = null
+            })
+            .addCase(changePassword.rejected, (state, action) => {
                 state.status = 'error'
                 state.error = action.payload
             })
@@ -146,6 +221,6 @@ const authSlice = createSlice({
     }
 })
 
-export const { updateUser } = authSlice.actions;
+export const { updateUser, cleanStatus } = authSlice.actions;
 
 export default authSlice.reducer;

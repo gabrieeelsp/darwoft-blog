@@ -1,26 +1,30 @@
 import { useDispatch } from "react-redux"
-import { Link } from "react-router-dom"
 import { userValidator as validator } from "../../validators/userValidator";
-import { register } from "../../features/auth/authSlice";
+import { changePassword } from "../../features/auth/authSlice";
 import { useSelector } from 'react-redux';
 import useForm from "../../hooks/useForm";
 import TextInput from "../utils/form/auth/TextInput";
 import FormSubmit from "../utils/form/auth/FormSubmit";
+import { useNavigate } from "react-router-dom";
 
-const RegisterForm = () => {
+const ChangePasswordForm = (props) => {
+    const navigate = useNavigate();
+    const { token } = props
     const dispatch = useDispatch();
     const { status, error } = useSelector((state) => state.auth)
 
     const formFields = {
-        name: '',
-        surname: '',
-        email: '',
         password: '',
         passwordConfirmation: ''
     }    
 
     const onSubmit = () => {
-        dispatch(register(formData))
+        dispatch(changePassword({...formData, token})).unwrap()
+        .then(() => {
+            setTimeout(() => {
+                navigate('/auth/login', { replace: true})
+            }, 3000)
+        })
     }
     
 
@@ -30,30 +34,6 @@ const RegisterForm = () => {
         <>
             <form onSubmit={handlerSubmit} >
                 <div className="bg-white shadow-md rounded px-8 pt-6 pb-4 mb-4 flex flex-col border-sky-400 border-t-8">
-                    <TextInput 
-                        handlerInputChange={handlerInputChange}
-                        name='name'
-                        isPassword={false}
-                        error={formErrors.name}
-                        placeholder='Nombres'
-                        label='Nombres'
-                    />
-                    <TextInput 
-                        handlerInputChange={handlerInputChange}
-                        name='surname'
-                        isPassword={false}
-                        error={formErrors.surname}
-                        placeholder='Apellidos'
-                        label='Apellidos'
-                    />
-                    <TextInput 
-                        handlerInputChange={handlerInputChange}
-                        name='email'
-                        isPassword={false}
-                        error={formErrors.email}
-                        placeholder='Email'
-                        label='Email'
-                    />
                     <TextInput 
                         handlerInputChange={handlerInputChange}
                         name='password'
@@ -77,11 +57,8 @@ const RegisterForm = () => {
                     />
                 </div>
             </form>
-            <div className="text-center">
-                <p className="text-grey-dark text-sm text-slate-500">¿Ya tienes una cuenta? <Link to='/auth/login' className="no-underline text-blue font-bold text-sky-400 hover:text-sky-500">Ingresar</Link>.</p>
-            </div>
         </>
     )
 }
 
-export default RegisterForm
+export default ChangePasswordForm
