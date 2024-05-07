@@ -1,23 +1,21 @@
 const { matchedData } = require('express-validator');
-const { verifyToken } = require('../../services/jwtService');
 const ClientError = require('../../errors/ClientError');
+const { verifyToken } = require('../../services/jwtService');
 const update = require('../../controllers/user/update');
 const responseHelper = require('../../helpers/responseHelper');
 
-const verfyAccountHandler = async (req, res, next) => {
+const changePasswordHandler = async (req, res, next) => {
     try {
-        const data = matchedData(req);
+        const { token, password } = matchedData(req);
 
-        const resp = verifyToken(data.token);
+        const resp = verifyToken(token);
         if (!resp.valid) return next(new ClientError(403, 'Token inválido.'));
 
-        const user = await update(resp.payload.id, { isEmailVerified: true });
-
-        if (!user) return next(new ClientError(403, 'Token inválido.'));
+        const user = await update(resp.payload.id, { password });
 
         return responseHelper(res, {
             statusCode: 201,
-            message: 'Email verificado con exito',
+            message: 'Contraseña cambiada con exito',
             data: {
                 _id: user.id,
                 name: user.name,
@@ -29,4 +27,4 @@ const verfyAccountHandler = async (req, res, next) => {
     }
 };
 
-module.exports = verfyAccountHandler;
+module.exports = changePasswordHandler;

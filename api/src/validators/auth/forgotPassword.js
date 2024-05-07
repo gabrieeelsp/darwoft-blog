@@ -8,13 +8,6 @@ module.exports = [
         .trim()
         .isEmail()
         .withMessage('El email no tiene un formato correcto.'),
-    check('password')
-        .exists()
-        .withMessage('El password es obligatorio.')
-        .trim()
-        .not()
-        .isEmpty()
-        .withMessage('El password no puede quedar vacío.'),
 
     (req, res, next) => {
         validateResult(req, res, next);

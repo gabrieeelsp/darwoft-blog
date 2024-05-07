@@ -2,26 +2,7 @@ const { check } = require('express-validator');
 const { validateResult } = require('../../helpers/validateHelper');
 
 module.exports = [
-    check('name')
-        .exists()
-        .withMessage('El nombre es obligatorio.')
-        .trim()
-        .not()
-        .isEmpty()
-        .withMessage('El nombre no puede quedar vacio.'),
-    check('surname')
-        .exists()
-        .withMessage('El apellido es obligatorio.')
-        .trim()
-        .not()
-        .isEmpty()
-        .withMessage('El apellido no puede quedar vacio.'),
-    check('email')
-        .exists()
-        .withMessage('El email es obligatorio.')
-        .trim()
-        .isEmail()
-        .withMessage('El email no tiene un formato correcto.'),
+    check('token').exists().withMessage('El token es obligatorio.'),
     check('password')
         .exists()
         .withMessage('El password es obligatorio.')

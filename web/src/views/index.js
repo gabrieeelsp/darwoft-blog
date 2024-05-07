@@ -3,6 +3,8 @@ import PublicView           from "./public/PublicView";
 import LoginView            from "./auth/LoginView";
 import RegisterView         from "./auth/RegisterView";
 import VerifyAccountView    from "./auth/VerifyAccountView";
+import ChangePasswordView   from "./auth/ChangePasswordView";
+
 
 import HomeView             from "./public/publications/HomeView";
 import CategoryView         from "./public/publications/CategoryView";
@@ -23,6 +25,7 @@ export {
     LoginView,
     RegisterView,
     VerifyAccountView,
+    ChangePasswordView,
 
     HomeView,
     CategoryView,

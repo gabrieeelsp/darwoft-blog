@@ -33,18 +33,23 @@ const send = async ({ to, subject, message }) => {
 };
 
 const createMessage = (template, args = {}) => {
+    let emailTemplatePath = path.resolve(__dirname, templatePath);
+
+    let templateFile;
     switch (template) {
         case 'emailValidation':
+            templateFile = 'EmailValidationTemplate.html';
+            break;
+
+        case 'changePassword':
+            templateFile = 'ChangePasswordTemplate.html';
             break;
 
         default:
             break;
     }
-    let emailTemplatePath = path.resolve(__dirname, templatePath);
-    emailTemplatePath = path.join(
-        emailTemplatePath,
-        'EmailValidationTemplate.html',
-    );
+
+    emailTemplatePath = path.join(emailTemplatePath, templateFile);
 
     let emailTemplate = fs.readFileSync(emailTemplatePath, 'utf8');
     emailTemplate = emailTemplate.replace(`{client-url}`, CLIENT_URL);
