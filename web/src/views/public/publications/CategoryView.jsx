@@ -13,7 +13,7 @@ const CategoryView = () => {
 
     return (
         <>
-            <div>
+            <div className="w-full">
                 <h1 className="ml-3 text-2xl font-bold">{category && capitalize(category.name)}</h1>
                 <LastPosts categoryId={category._id} />
             </div>

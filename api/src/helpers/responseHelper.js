@@ -1,6 +1,5 @@
-const responseHelper = (res, { statusCode = 200, message, data }) => {
+const responseHelper = (res, { statusCode = 200, data }) => {
     return res.status(statusCode).json({
-        message,
         data,
     });
 };

@@ -11,7 +11,10 @@ const changePasswordHandler = async (req, res, next) => {
         const resp = verifyToken(token);
         if (!resp.valid) return next(new ClientError(403, 'Token inválido.'));
 
-        const user = await update(resp.payload.id, { password });
+        const user = await update(resp.payload.id, {
+            password,
+            tokensRevokedAt: Date.now(),
+        });
 
         return responseHelper(res, {
             statusCode: 201,

@@ -8,11 +8,9 @@ const Header = () => {
     return (
         <>
             
-            <div className="flex flex-col items-center max-w-5xl mx-auto ">
+            <div className="flex flex-col items-center max-w-5xl mx-auto pt-5 ">
             
-                <div>
-                    <span className="text-sm text-slate-600">Blog de ciencia y tecnologías en Español</span>
-                </div>
+                
                 <div className="flex w-full justify-center md:justify-start items-center">
                     <div className="h-14">
                         <Link to='/' >
