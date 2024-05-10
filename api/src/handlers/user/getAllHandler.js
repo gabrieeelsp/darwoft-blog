@@ -1,5 +1,5 @@
-const count = require('../../controllers/post/count');
-const getAll = require('../../controllers/post/getAll');
+const count = require('../../controllers/user/count');
+const getAll = require('../../controllers/user/getAll');
 const responseHelper = require('../../helpers/responseHelper');
 
 const getOffset = (limit, page) => {
@@ -19,12 +19,7 @@ const getOptionsSearch = (options) => {
         ? getOffset(modifiers.limit, modifiers.page)
         : undefined;
 
-    if (options.title) filters.title = new RegExp(options.title, 'i');
-
-    if (options['author-id']) filters.author = options['author-id'];
-    if (options['category-id']) filters.category = options['category-id'];
-
-    if (options.exclude) filters._id = { $ne: options.exclude };
+    if (options.name) filters.name = new RegExp(options.name, 'i');
 
     return {
         filters,
@@ -42,20 +37,20 @@ const getAllHandler = async (req, res, next) => {
 
         const { filters, modifiers } = getOptionsSearch(options);
 
-        const posts = await getAll(filters, modifiers);
+        const users = await getAll(filters, modifiers);
 
         const data = {
-            posts,
+            users,
         };
 
-        let countPosts = null;
+        let countUsers = null;
         if (modifiers.page) {
-            countPosts = await count(filters);
+            countUsers = await count(filters);
 
             data.pagination = {
-                total_records: countPosts,
+                total_records: countUsers,
                 current_page: modifiers.page,
-                total_pages: getTotalPages(modifiers.limit, countPosts),
+                total_pages: getTotalPages(modifiers.limit, countUsers),
             };
         }
 

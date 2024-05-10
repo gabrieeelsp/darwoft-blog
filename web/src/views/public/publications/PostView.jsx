@@ -27,7 +27,7 @@ const PostView = () => {
             : 'pending' 
 
     return (
-        <div className="">           
+        <div className="w-full">          
             <ProgressBar loading={status === 'pending'} />
             {content}
         </div>

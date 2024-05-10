@@ -8,7 +8,6 @@ const getInitHandler = async (req, res, next) => {
 
         return responseHelper(res, {
             statusCode: 200,
-            message: 'Información de inicio.',
             data: {
                 genders,
                 roles,

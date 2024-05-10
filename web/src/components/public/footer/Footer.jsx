@@ -1,20 +1,40 @@
+import { useSelector } from 'react-redux'
+import logo from '../../../assets/LogoBlog-Bco-v2.png'
+import { Link } from 'react-router-dom'
+import { capitalize } from '../../../utils'
+import { FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
+
 const Footer = () => {
+    const { categories } = useSelector((state) => state.app)
     return (
         <>
-            <div 
-                className="flex justify-center items-center bg-sky-900 py-10"
-            >
-                <div className="flex flex-col">
-                    <span className="text-lg">Suscríbete a nuestra newsletter</span>
-                    <span className="text-sm">Lo mejor de nuestro sitio semanalmente en tu correo</span>
-                </div>
-                <div className="ml-16">
-                    <input 
-                        className="focus:outline-none border boder-slate-300 px-2 py-1"
-                        type="text" 
-                        placeholder="Email"
-                    />
-                    <button className="bg-slate-500 hover:bg-slate-600 text-white font-bold py-1 px-4 rounded ml-5">Darme de alta</button>
+            <div className=" bg-sky-900 text-slate-400 pb-5" >
+                <div className='mx-auto max-w-5xl flex justify-between'>
+                    <div className='flex flex-col items-start p-5'>
+                        <div className='h-9'>
+                            <img src={logo} alt="" className='w-full h-full object-contain' />
+                        </div>
+                        <span className=' mt-2 '>Blog de ciencia y tecnologías en español.</span>
+                    </div>
+
+                    { categories && 
+                    <div className='flex flex-col items-start p-5'>
+                        <h3 className='text-white'>Secciones</h3>
+                        <ul className=''>
+                            {categories.map((category) => <li key={category._id}><Link className='hover:text-white' to={`/seccion/${category.slug}`}>{capitalize(category.name)}</Link></li>)}
+                        </ul>
+                    </div>
+                    }
+
+                    <div className='flex flex-col items-start p-5'>
+                        <h3 className='text-white'>Redes Sociales</h3>
+                        <div className='flex gap-2 mt-2'>
+                            <Link to='#' className='hover:text-white'><FaGithub /></Link>
+                            <Link to='#' className='hover:text-white'><FaInstagram /></Link>
+                            <Link to='#' className='hover:text-white'><FaTwitter /></Link>
+                        </div>
+                    </div>
+                
                 </div>
             </div>
         </>

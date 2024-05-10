@@ -8,6 +8,7 @@ const validateRolMiddleware = require('../middlewares/validateRolMiddleware');
 const getOneByIdHandler = require('../handlers/user/getOneByIdHandler');
 const uploadMiddleware = require('../middlewares/uploadMiddleware');
 const upload = require('../validators/user/upload');
+const getAllHandler = require('../handlers/user/getAllHandler');
 
 const router = Router();
 
@@ -22,6 +23,8 @@ router.put(
     validateUpdateRoles,
     updateRolesHandler,
 );
+
+router.get('/', getAllHandler);
 
 router.post(
     '/:userId/upload-image',
