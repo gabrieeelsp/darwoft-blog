@@ -18,6 +18,10 @@ const UserSchema = new mongoose.Schema(
             type: Boolean,
             default: false,
         },
+        isEnable: {
+            type: Boolean,
+            default: true,
+        },
         image: {
             type: String,
         },

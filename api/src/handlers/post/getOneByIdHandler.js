@@ -4,9 +4,14 @@ const responseHelper = require('../../helpers/responseHelper');
 
 const getOneByIdHandler = async (req, res, next) => {
     const { postId } = req.params;
+
+    const options = req.query;
+    const filters = {};
+    if (options['is-visible']) filters.isVisible = options['is-visible'];
+
     let post = null;
     try {
-        post = await getOneById(postId);
+        post = await getOneById(postId, filters);
     } catch (error) {
         return next(error);
     }

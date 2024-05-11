@@ -21,6 +21,8 @@ const getOptionsSearch = (options) => {
 
     if (options.title) filters.title = new RegExp(options.title, 'i');
 
+    if (options['is-visible']) filters.isVisible = options['is-visible'];
+
     if (options['author-id']) filters.author = options['author-id'];
     if (options['category-id']) filters.category = options['category-id'];
 

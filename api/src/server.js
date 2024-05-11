@@ -7,11 +7,11 @@ const getErrorDBName = require('./utils/getErrorDBName');
 
 const server = express();
 
-// server.use((req, res, next) => {
-//     setTimeout(() => {
-//         next();
-//     }, 7000);
-// });
+server.use((req, res, next) => {
+    setTimeout(() => {
+        next();
+    }, 500);
+});
 
 server.use(cors());
 server.use(morgan('dev'));

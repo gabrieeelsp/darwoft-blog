@@ -15,6 +15,7 @@ const PostSchema = new mongoose.Schema(
         },
         isVisible: {
             type: Boolean,
+            default: false,
         },
         excerpt: {
             type: String,
