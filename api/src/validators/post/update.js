@@ -16,6 +16,9 @@ module.exports = [
         .withMessage('Error de formato'),
     check('content').optional().trim(),
     check('excerpt').optional().trim(),
+    check('isVisible')
+        .isBoolean()
+        .withMessage('Existe un error en el campo isVisible'),
 
     (req, res, next) => validateResult(req, res, next),
 ];

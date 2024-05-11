@@ -19,6 +19,10 @@ module.exports = [
         .optional()
         .isIn([...genders, null])
         .withMessage('El genero no es válido'),
+    check('isEnable')
+        .optional()
+        .isBoolean()
+        .withMessage('Existe un error en el campo isEnable'),
 
     (req, res, next) => {
         validateResult(req, res, next);
