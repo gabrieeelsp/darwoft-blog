@@ -105,6 +105,8 @@ const usersSlice = createSlice({
                 state.loading = 'failed'
                 state.error = action.payload
             })
+
+            
     }
 })
 

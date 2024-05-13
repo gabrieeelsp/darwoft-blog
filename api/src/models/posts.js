@@ -30,6 +30,14 @@ const PostSchema = new mongoose.Schema(
             unique: true,
         },
         comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }],
+        countVisits: {
+            type: Number,
+            default: 0,
+        },
+        countComments: {
+            type: Number,
+            default: 0,
+        },
     },
     {
         timestamps: true,

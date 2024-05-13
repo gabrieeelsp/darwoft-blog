@@ -16,6 +16,7 @@ const PostsList = () => {
 
     const title = currentQueryParameters.get('title')
     const categorySlug = currentQueryParameters.get('category')
+    const orderBy = currentQueryParameters.get('order-by')
     const limit = currentQueryParameters.get('limit')
     const page = currentQueryParameters.get('page')
 
@@ -27,9 +28,10 @@ const PostsList = () => {
             authorId: _id, 
             title, 
             categoryId: category ? category._id : undefined, 
+            orderBy,
             limit: limit ? limit : 6, 
             page: page ? page : 1}))
-    }, [dispatch, _id, title, category, limit, page])
+    }, [dispatch, _id, title, category, orderBy, limit, page])
 
     return (
         <>

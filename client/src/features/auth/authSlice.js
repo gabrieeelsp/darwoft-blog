@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {changePassword, forgotPassword, login, logout, me, register, verifyAccount } from './actions'
+import {changePassword, findProfileInfo, forgotPassword, login, logout, me, register, verifyAccount } from './actions'
 
 const initialState = {
     user: null,
@@ -113,6 +113,19 @@ const authSlice = createSlice({
                 state.error = null
             })
             .addCase(verifyAccount.rejected, (state, action) => {
+                state.loading = 'failed'
+                state.error = action.payload
+            })
+
+            .addCase(findProfileInfo.pending, (state) => {
+                state.loading = 'pending'
+            })
+            .addCase(findProfileInfo.fulfilled, (state, action) => {
+                state.loading = 'succeeded'
+                state.user.lastPostsViewed = action.payload.data.lastPostsViewed
+                state.error = null
+            })
+            .addCase(findProfileInfo.rejected, (state, action) => {
                 state.loading = 'failed'
                 state.error = action.payload
             })

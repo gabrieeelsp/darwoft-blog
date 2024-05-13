@@ -11,6 +11,8 @@ const PostsList = () => {
         title: post.title, 
         category: categories[post.category].name, 
         isVisible: post.isVisible ? 'Si' : 'No',
+        countVisits: post.countVisits,
+        countComments: post.countComments || 0,
         actions: <Link to={`${post._id}/editar`} >Editar</Link>
     }))
 
@@ -19,6 +21,8 @@ const PostsList = () => {
             {property: 'title', value: 'Título', columClassName: 'pl-3', rowClassName: 'pl-3 py-2'}, 
             {property: 'category', value: 'Categoría',columClassName: '', rowClassName: 'text-center'}, 
             {property: 'isVisible', value: 'Publicado',columClassName: '', rowClassName: 'text-center'}, 
+            {property: 'countVisits', value: 'Visitas', columClassName: '', rowClassName: ''},
+            {property: 'countComments', value: 'Comentarios', columClassName: '', rowClassName: ''},
             {property: 'actions', value: 'Acción',columClassName: '', rowClassName:'text-center'}
         ],
         body

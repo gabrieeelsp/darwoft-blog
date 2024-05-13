@@ -5,6 +5,7 @@ import postsSlice from '../features/posts/postsSlice';
 import authSlice from '../features/auth/authSlice';
 import usersSlice from '../features/user/usersSlice';
 import categoriesSlice from '../features/categories/categoriesSlice';
+import commentsSlice from '../features/comments/commentsSlice';
 
 export const store = configureStore({
     reducer: {
@@ -13,5 +14,6 @@ export const store = configureStore({
         auth: authSlice,
         users: usersSlice,
         categories: categoriesSlice,
+        comments: commentsSlice,
     },
 })

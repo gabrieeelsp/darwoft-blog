@@ -56,7 +56,7 @@ const getAllHandler = async (req, res, next) => {
         }
 
         return responseHelper(res, {
-            statusCode: 201,
+            statusCode: 200,
             message: 'Búsqueda Realizada con exito',
             data,
         });

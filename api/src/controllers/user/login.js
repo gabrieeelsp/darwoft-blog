@@ -1,3 +1,4 @@
+const ClientError = require('../../errors/ClientError');
 const { userModel } = require('../../models');
 const { compare } = require('../../services/hashService');
 const { generateToken } = require('../../services/jwtService');
@@ -5,12 +6,20 @@ const cleanDocument = require('../../utils/cleanDocument');
 
 const login = async (email, password) => {
     const query = userModel.findOne({ email });
-    query.select('name surname email password roles image isEmailVerified');
+    query.select(
+        'name surname email password roles image isEmailVerified isEnable',
+    );
 
     let user = await query.exec();
 
-    if (!user || !user.isEmailVerified || !compare(password, user.password))
-        return null;
+    if (!user || !compare(password, user.password)) return null;
+
+    console.log(user);
+
+    if (!user.isEmailVerified)
+        throw new ClientError(422, 'Se requiere verificación de cuenta.');
+
+    if (!user.isEnable) throw new ClientError(422, 'Cuenta no habilitada.');
 
     user = cleanDocument(user, ['password']);
 

@@ -14,7 +14,6 @@ const createHandler = async (req, res, next) => {
         const comment = await create(data);
         return responseHelper(res, {
             statusCode: 201,
-            message: 'Comntario creado con exito',
             data: comment,
         });
     } catch (error) {

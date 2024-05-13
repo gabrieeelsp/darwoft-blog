@@ -31,6 +31,7 @@ const UserInfoMenu = () => {
                         </div>
                     
                 </NavLink>
+                {user && haveSomeRole(user, ['autor']) &&
                 <NavLink to='/perfil/publicaciones'
                     className={({ isActive }) => isActive ? "bg-sky-400 text-white rounded-md" : "rounded-md" }
                 >
@@ -38,6 +39,7 @@ const UserInfoMenu = () => {
                             <span className="">Publicaciones</span><FaAlignJustify className="text-xs" />
                         </div>
                 </NavLink>
+                }
                 {user && haveSomeRole(user, ['administrador']) &&
                 <>
                 <NavLink to='/perfil/users'
