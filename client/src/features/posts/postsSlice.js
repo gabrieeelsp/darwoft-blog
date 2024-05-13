@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { createComment, findAll, findAllComments, findOne, update  } from "./actions";
+import { create, createComment, findAll, findAllComments, findOne, update, uploadImage  } from "./actions";
 
 const initialState = {
     posts: null,
@@ -109,7 +109,33 @@ const postsSlice = createSlice({
                 state.error = action.payload
             })
 
-            
+            .addCase(create.pending, (state) => {
+                state.loading = 'pending'
+            })
+            .addCase(create.fulfilled, (state, action) => {
+                state.post = action.payload.data
+                state.loading = 'succeeded'
+                state.error = null
+            })
+            .addCase(create.rejected, (state, action) => {
+                state.post = null
+                state.loading = 'failed'
+                state.error = action.payload
+            })
+
+            .addCase(uploadImage.pending, (state) => {
+                state.loading = 'pending'
+            })
+            .addCase(uploadImage.fulfilled, (state, action) => {
+                state.post = action.payload.data
+                state.loading = 'succeeded'
+                state.error = null
+            })
+            .addCase(uploadImage.rejected, (state, action) => {
+                state.post = null
+                state.loading = 'failed'
+                state.error = action.payload
+            })
     }
 })
 

@@ -114,3 +114,17 @@ export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValu
         return rejectWithValue(error.message);
     }
 })
+
+export const findProfileInfo = createAsyncThunk('auth/findProfileInfo', async (id, { rejectWithValue}) => {
+    try {
+        const url = `users/${id}/profile-info`;
+        const response = await httpService.get(url);
+
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data.error)
+            return rejectWithValue(error.response.data.error)
+
+        return rejectWithValue(error.response)
+    }
+})

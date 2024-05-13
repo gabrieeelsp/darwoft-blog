@@ -52,6 +52,16 @@ const UserSchema = new mongoose.Schema(
                 },
             },
         ],
+        lastPostsViewed: [
+            {
+                _id: false,
+                post: { type: mongoose.Schema.Types.ObjectId, ref: 'Post' },
+                createdAt: {
+                    type: Date,
+                    default: Date.now(),
+                },
+            },
+        ],
     },
     {
         timestamps: true,

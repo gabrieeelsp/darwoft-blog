@@ -74,7 +74,6 @@ export const update = createAsyncThunk('users/update', async ({ id, name, surnam
 })
 
 export const updateRoles = createAsyncThunk('users/updateRoles', async ({ id, roles }, { rejectWithValue }) => {
-    console.log(roles)
     try {
         const url = `users/${id}/update-roles`;
         const data = {
@@ -90,4 +89,14 @@ export const updateRoles = createAsyncThunk('users/updateRoles', async ({ id, ro
         return rejectWithValue(error.response)
     }
 })
+export const addPostViewed = createAsyncThunk('users/addPostViewed', async ({id, postId}) => {
+    try {
+        const url = `users/${id}/add-post-viewed`;
+        const data = {
+            postId
+        }
+        const response = await httpService.post(url, data);
 
+        return response.data;
+    } catch (error) {}
+})

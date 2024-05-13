@@ -3,7 +3,7 @@ import httpService from "../../services/httpService";
 
 export const findAll = createAsyncThunk(
     'posts/findAll', 
-    async ({authorId, categoryId, title, limit, exclude, page, isVisible, save = true}, { rejectWithValue }) => {
+    async ({authorId, categoryId, title, orderBy, limit, exclude, page, isVisible, save = true}, { rejectWithValue }) => {
 
         try {
             let url = `posts?`
@@ -13,6 +13,7 @@ export const findAll = createAsyncThunk(
             if (title) url = url.concat(`title=${title}&`);
             if (isVisible) url = url.concat(`is-visible=${isVisible}&`)
             if (exclude) url = url.concat(`exclude=${exclude}&`)
+            if (orderBy) url = url.concat(`order-by=${orderBy}&`)
 
             if (limit) url = url.concat(`limit=${limit}&`);
             if (page) url = url.concat(`page=${page}&`);

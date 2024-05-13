@@ -19,8 +19,8 @@ const FormSubmit = (props) => {
                     <div className="min-h-5 max-h-5 mt-2 ml-2 text-sm text-red-400 ">
                         { showResponseMessage && status === 'pending' && <img src={loading} className="max-h-5 object-contain" />}
                         { showResponseMessage && status === 'succeeded' && <span className="text-green-800">{succeededMessage}</span>}
-                        { showResponseMessage && status === 'error' && !error.data && <span>{error.message}</span>}
-                        { showResponseMessage && status === 'error' && error.data && <ul>{error.data.map(e => <li key={e.field}>{e.message}</li>)}</ul>}
+                        { showResponseMessage && status === 'falied' && !error.data && <span>{error.message}</span>}
+                        { showResponseMessage && status === 'failed' && error.data && <ul>{error.data.map(e => <li key={e.field}>{e.message}</li>)}</ul>}
                     </div>
                 </div>
             </div>

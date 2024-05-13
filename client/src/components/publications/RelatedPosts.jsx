@@ -9,7 +9,13 @@ const RelatedPosts = (props) => {
     const [posts, setPosts] = useState()
 
     useEffect(() => {
-        dispatch(findAll({categoryId, limit: 5, exclude: postId, save: false})).unwrap()
+        dispatch(findAll({
+            categoryId, 
+            limit: 5, 
+            exclude: postId, 
+            isVisible: true, 
+            save: false
+        })).unwrap()
             .then((resp) => setPosts(resp.data.posts))
     }, [dispatch, categoryId, postId])
 

@@ -8,7 +8,7 @@ const Footer = () => {
     const { categories } = useSelector((state) => state.app)
     return (
         <>
-            <div className=" bg-sky-900 text-slate-400 pb-5" >
+            <div className=" bg-sky-900 text-slate-400 pb-5 mt-5" >
                 <div className='mx-auto max-w-5xl flex flex-col sm:flex-row sm:justify-between'>
                     <div className='flex flex-col items-center sm:items-start p-5'>
                         <div className='h-9'>

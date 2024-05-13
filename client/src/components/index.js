@@ -60,6 +60,9 @@ import Commemts             from './publications/comments/Comments';
 import UserData             from "./profile/admin/users/UserData";
 import UserStatusForm       from "./profile/admin/users/UserStatusForm";
 import UserRolesForm        from "./profile/admin/users/UserRolesForm";
+import UserComments         from "./profile/admin/users/UserComments";
+
+import LastPostsViewed      from "./profile/LastPostsViewed";
 
 export {
     Header,
@@ -123,4 +126,7 @@ export {
     UserData,
     UserStatusForm,
     UserRolesForm,
+    UserComments,
+
+    LastPostsViewed,
 }

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import { findOne } from "../../../../features/user/actions";
 import { cleanSlice } from "../../../../features/user/usersSlice";
-import { UserData, UserRolesForm, UserStatusForm } from "../../../../components";
+import { UserComments, UserData, UserRolesForm, UserStatusForm } from "../../../../components";
 import ImageNotFound from '../../../../assets/Image-not-found.png'
 
 const UserEdit = () => {
@@ -63,7 +63,7 @@ const UserEdit = () => {
                         </div>
                     </div>
                 </> }
-                {user && tabSelected === 'comments' && <span>Coments</span> }
+                {user && tabSelected === 'comments' && <UserComments /> }
             </div>
             
         </>

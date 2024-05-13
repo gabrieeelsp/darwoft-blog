@@ -11,6 +11,16 @@ const getOptionsSearch = (options) => {
     const filters = {};
     const modifiers = {};
 
+    if (options['order-by'] === 'visits')
+        modifiers.sort = {
+            countVisits: options['order-dir'] ? options['order-dir'] : -1,
+        };
+
+    if (options['order-by'] === 'comments')
+        modifiers.sort = {
+            countComments: options['order-dir'] ? options['order-dir'] : -1,
+        };
+
     modifiers.limit = options.limit ? Number(options.limit) : undefined;
     modifiers.page =
         options.page && options.page > 0 ? Number(options.page) : undefined;
@@ -62,8 +72,7 @@ const getAllHandler = async (req, res, next) => {
         }
 
         return responseHelper(res, {
-            statusCode: 201,
-            message: 'Búsqueda Realizada con exito',
+            statusCode: 200,
             data,
         });
     } catch (error) {
