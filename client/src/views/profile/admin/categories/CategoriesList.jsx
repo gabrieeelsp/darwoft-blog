@@ -1,11 +1,13 @@
-import { Link, useSearchParams } from "react-router-dom"
+import { Link, useOutletContext, useSearchParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { FiPlus } from "react-icons/fi";
 import { findAll } from "../../../../features/categories/actions";
 import { CategoriesList as CategoriesListComponent } from "../../../../components";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const CategoriesList = () => {
+    const [ setShowCartSidebar ] = useOutletContext()
     const dispatch = useDispatch()
     const { categories } = useSelector((state) => state.categories)
     const [currentQueryParameters] = useSearchParams();
@@ -25,7 +27,12 @@ const CategoriesList = () => {
     return (
         <>
             <div className="flex justify-between gap-3 py-3 px-3 text-md bg-gray-50 border-b border-b-slate-200 font-bold text-slate-600">
-                <span>Categorías</span>  
+                <div className="flex items-center gap-3">
+                    <button className="md:hidden" onClick={() => setShowCartSidebar(true)}>
+                        <RxHamburgerMenu className="text-xl" />
+                    </button>
+                    <span>categorías</span>
+                </div> 
                 <Link 
                     to='nuevo'
                         className="flex gap-2 items-center bg-sky-500 hover:bg-sky-600 text-white  px-3 h-6 rounded-sm"

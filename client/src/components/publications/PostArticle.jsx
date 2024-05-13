@@ -27,7 +27,7 @@ const PostArticle = () => {
                     <span >{capitalize(post.author.name)} {capitalize(post.author.surname)}</span><span>|</span><span className='italic'>{fechaFormateada}</span>
                 </div>
                 <div className='grid grid-cols-12 gap-5 mt-3 '>
-                    <div className='col-span-8'>
+                    <div className='col-span-12 md:col-span-8'>
                         <div className="w-full h-64 overflow-hidden rounded-md" >
                             <img className="w-full h-full object-cover" src={`${import.meta.env.VITE_URL_API}/images/${post.image}`} />
                         </div>
@@ -38,7 +38,7 @@ const PostArticle = () => {
 
                         <Comments />
                     </div>
-                    <div className='col-span-4'>
+                    <div className='col-span-12 md:col-span-4'>
                         <RelatedPosts postId={post._id} categoryId={post.category._id} />
                     </div>
                 </div>

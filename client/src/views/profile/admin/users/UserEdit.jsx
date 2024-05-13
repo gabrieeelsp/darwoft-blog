@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { useEffect, useState } from "react";
 
 
@@ -7,13 +7,14 @@ import { findOne } from "../../../../features/user/actions";
 import { cleanSlice } from "../../../../features/user/usersSlice";
 import { UserComments, UserData, UserRolesForm, UserStatusForm } from "../../../../components";
 import ImageNotFound from '../../../../assets/Image-not-found.png'
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const UserEdit = () => {
+    const [ setShowCartSidebar ] = useOutletContext()
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.users)
     const { userId } = useParams();
-    const { roles } = useSelector((state) => state.app)
 
     const [tabSelected, setTabSelected] = useState('info') // info | comments | posts
 
@@ -28,9 +29,13 @@ const UserEdit = () => {
     return (
         <>
             <div className="flex justify-between gap-3 py-3 px-3 text-md bg-gray-50 border-b border-b-slate-200 font-bold text-slate-600">
-                <div>
+
+                <div className="flex items-center gap-3">
+                    <button className="md:hidden" onClick={() => setShowCartSidebar(true)}>
+                        <RxHamburgerMenu className="text-xl" />
+                    </button>
                     <button className="hover:text-sky-500" onClick={() =>navigate(-1)}>Mis Publicaciones</button> / <span>Editar</span>
-                </div>
+                </div> 
             </div>
             <div className="flex gap-5 border-b border-slate-200 mr-3 ml-10 my-4 pb-1">
                 <button 

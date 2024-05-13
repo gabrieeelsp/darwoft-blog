@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { ImageProfile, UserInfoMenu } from "../";
 import { capitalize } from "../../utils";
 
-const UserInfo = () => {
+const UserInfo = (props) => {
+    const { onClose } = props
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const { name, surname, roles } = useSelector((state) => state.auth.user)
@@ -20,7 +21,7 @@ const UserInfo = () => {
 
     return (
         <>
-            <div className="flex flex-col items-center py-3 px-2">
+            <div className="flex flex-col items-center py-3 px-2" onClick={onClose}>
                 <ImageProfile />
                 <span className="mt-2 text-slate-800 text-center">{ `${capitalize(name, true)} ${capitalize(surname, true)}` }</span>
                 <span className="text-sm italic text-slate-500">

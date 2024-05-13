@@ -28,7 +28,7 @@ const EditPostImageForm = () => {
                     <label className="col-start-2 col-span-2" htmlFor="name">Imagen</label>
                     {post.image && <>
                         <div className="col-span-9 h-52 border border-slate-300 shadow-md relative">
-                            <img className="w-full h-full object-cover" src={`http://localhost:8001/images/${post.image}`} alt="" />
+                            <img className="w-full h-full object-cover" src={`${import.meta.env.VITE_URL_API}/images/${post.image}`} alt="" />
                             <button onClick={handlerClickRemove} className="text-slate-500 hover:text-red-500 absolute top-2 right-2"><RiCloseLargeLine /></button>
                         </div>
                         

@@ -22,9 +22,11 @@ function App() {
             <div className="flex flex-col min-h-screen bg-slate-50 text-lg text-slate-800" >
                 <header >
                     <UserMenu />
-                    <Header />
+                    <div className="sm:px-5">
+                        <Header />
+                    </div>
                 </header>
-                <main className="flex-1 py-1 flex w-full mx-auto max-w-6xl ">
+                <main className="flex-1 py-1 flex w-full mx-auto max-w-6xl px-2 md:px-5 ">
                     <Outlet />
                     
                 </main>

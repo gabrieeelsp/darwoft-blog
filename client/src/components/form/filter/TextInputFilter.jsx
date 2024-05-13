@@ -8,7 +8,7 @@ const TextInputFilter = (props) => {
     return (
         <>
             <input 
-                className="focus:outline-none border border-slate-300 h-6 rounded-sm px-2"
+                className="focus:outline-none border border-slate-300 h-7 rounded-sm px-2"
                 type="text" 
                 placeholder={placeholder}
                 name={name}

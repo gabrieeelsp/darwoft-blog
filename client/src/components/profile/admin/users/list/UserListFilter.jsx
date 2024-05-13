@@ -10,7 +10,7 @@ const UserListFilter = () => {
 
     return (
         <> 
-            <div className="flex justify-end gap-2">
+            <div className="flex flex-col md:flex-row md:justify-end gap-2">
                 <TextInputFilter 
                     handlerInputChange={handlerInputChange}
                     name='name'

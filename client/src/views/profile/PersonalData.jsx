@@ -2,8 +2,11 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { findOne } from "../../features/user/actions";
 import { EditUserImageForm, PersonalDataForm } from "../../components";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { useOutletContext } from "react-router-dom";
 
 const PersonalData = () => {
+    const [ setShowCartSidebar ] = useOutletContext()
     const dispatch = useDispatch();
     const { _id } = useSelector((state) => state.auth.user)
     const { user } = useSelector((state) => state.users)
@@ -17,7 +20,11 @@ const PersonalData = () => {
     return (
         <>
             <div className="flex justify-between gap-3 py-3 px-3 text-md bg-gray-50 border-b border-b-slate-200 font-bold text-slate-600">
-                <div>
+
+                <div className="flex items-center gap-3">
+                    <button className="md:hidden" onClick={() => setShowCartSidebar(true)}>
+                        <RxHamburgerMenu className="text-xl" />
+                    </button>
                     <span>Datos personales</span>
                 </div>
             </div>
