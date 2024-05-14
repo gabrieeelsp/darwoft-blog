@@ -12,7 +12,7 @@ const CategoriesList = () => {
     const body = categories.map((category) => (
         {
             name: capitalize(category.name).concat(' ' + capitalize(category.surname, true)), 
-            actions: <Link to={`${category._id}/editar`} >Editar</Link>
+            actions: <Link className="bg-green-500 text-white font-bold px-3 py-0.5 rounded" to={`${category._id}/editar`} >Editar</Link>
         }
     ))
 

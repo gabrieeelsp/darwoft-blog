@@ -28,7 +28,7 @@ const PersonalData = () => {
                     <span>Datos personales</span>
                 </div>
             </div>
-            <div className="flex gap-5 border-b border-slate-200 mr-3 ml-16 my-4 pb-1">
+            <div className="flex gap-5 border-b border-slate-200 mr-3 ml-4 sm:ml-10 my-4 pb-1">
                 <button 
                     onClick={() => setTabSelected('info')} 
                     className={`${tabSelected === 'info' ? 'text-sky-700' : ''} font-bold`}

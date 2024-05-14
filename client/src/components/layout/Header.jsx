@@ -6,7 +6,7 @@ const Header = () => {
     const { categories } = useSelector((state) => state.app)
     return (
         <>
-            <div className="flex flex-col items-center max-w-6xl mx-auto pt-5 pb-3 border-b border-slate-500 ">
+            <div className="flex flex-col items-center pt-5 pb-3 border-b border-slate-500 ">
             
                 
                 <div className="flex flex-col sm:flex-row justify-between w-full  ">

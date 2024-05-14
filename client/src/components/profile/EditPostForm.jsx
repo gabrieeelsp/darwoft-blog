@@ -30,7 +30,7 @@ const EditPostForm = () => {
     return (
         <>
             <form onSubmit={handlerSubmit} >
-                <div className="p-3">
+                <div className="py-3 px-4 sm:pl-10">
                     <TextInput 
                         handlerInputChange={handlerInputChange}
                         name='title'
@@ -59,8 +59,8 @@ const EditPostForm = () => {
                     />
                     
                     <div className="grid grid-cols-12">
-                        <label className="col-start-2 mt-1 col-span-2" htmlFor="">Extracto</label>
-                        <div className='col-span-9'>
+                        <label className="mt-1 col-span-8 sm:col-span-2" htmlFor="">Extracto</label>
+                        <div className='col-span-12 sm:col-span-10'>
                             <EditorWYSWYG 
                                 value={formData.excerpt}
                                 handlerChange={handlerInputChange}
@@ -71,8 +71,8 @@ const EditPostForm = () => {
                     </div>
 
                     <div className="grid grid-cols-12 mt-5">
-                        <label className="col-start-2 mt-1 col-span-2" htmlFor="">Contenido</label>
-                        <div className='col-span-9'>
+                        <label className="mt-1 col-span-8 sm:col-span-2" htmlFor="">Contenido</label>
+                        <div className='col-span-12 sm:col-span-10'>
                             <EditorWYSWYG 
                                 value={formData.content}
                                 handlerChange={handlerInputChange}

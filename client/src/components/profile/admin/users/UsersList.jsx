@@ -12,8 +12,8 @@ const UsersList = () => {
         {
             name: capitalize(user.name).concat(' ' + capitalize(user.surname, true)), 
             roles: user.roles.map(role => capitalize(role.name)).join(', '),
-            status: user.isEnable ? <span className="bg-green-400 text-white font-bold px-2 rounded py-0.5">Habilitado</span> : <span className="bg-gray-700 text-white font-bold px-2 py-0.5 rounded">Desabilitado</span>,
-            actions: <Link to={`${user._id}/edit`}>Ver</Link>
+            status: user.isEnable ? <span className="bg-green-400 text-white font-bold px-4 rounded-xl py-0.5">Habilitado</span> : <span className="bg-gray-700 text-white font-bold px-2 py-0.5 rounded-xl">Desabilitado</span>,
+            actions: <Link className="bg-sky-500 text-white font-bold px-3 py-0.5 rounded" to={`${user._id}/edit`}>Ver</Link>
                 
         }
     ))

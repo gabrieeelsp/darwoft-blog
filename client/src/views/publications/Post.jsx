@@ -16,7 +16,6 @@ const Post = () => {
     useEffect(() => {
         dispatch(findOne({id: postSlug, isVisible: true})).unwrap()
             .then((resp) => {
-                console.log('enviando')
                 if (user) dispatch(addPostViewed({id: user._id, postId: resp.data._id}))
             })       
     }, [dispatch, postSlug])
@@ -30,7 +29,7 @@ const Post = () => {
 
     return (
         <>
-            <div className="pt-2">
+            <div className="pt-2 px-3 sm:px-3 md:px-1 lg:px-0">
                 {post && 
                     <>
                         <PostArticle />

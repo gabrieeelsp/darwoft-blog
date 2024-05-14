@@ -10,13 +10,13 @@ const FormSubmit = (props) => {
     return (
         <>
             <div className="grid grid-cols-12 mt-2">
-                <div className="col-start-4 col-span-8">
+                <div className="col-span-12 sm:col-start-3 sm:col-span-8">
                     <button 
-                        className=" bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-1 px-4 rounded"
+                        className=" bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-1 px-4 rounded w-full sm:w-36"
                         type="submit"
                         disabled={showResponseMessage && status === 'pending'}
                     >Guardar</button>
-                    <div className="min-h-5 max-h-5 mt-2 ml-2 text-sm text-red-400 ">
+                    <div className="min-h-5 max-h-5 mt-2 ml-2 text-sm text-red-400 text-center sm:text-left ">
                         { showResponseMessage && status === 'pending' && <img src={loading} className="max-h-5 object-contain" />}
                         { showResponseMessage && status === 'succeeded' && <span className="text-green-800">{succeededMessage}</span>}
                         { showResponseMessage && status === 'falied' && !error.data && <span>{error.message}</span>}

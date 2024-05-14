@@ -7,10 +7,11 @@ import Sidebar from "./Sidebar"
 const ProfileLayout = () => {
     const navigate = useNavigate()
 
-    const { user, loading } = useSelector((state) => state.auth)
+    const { user, verified } = useSelector((state) => state.auth)
+    // if(!user) navigate('/', {replace: true})
     useEffect(() => {        
-        if (loading === 'failed' && !user) navigate('/', {replace: true})
-    }, [navigate, user, loading])
+        if (verified && !user) navigate('/', {replace: true})
+    }, [navigate, user, verified])
 
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
