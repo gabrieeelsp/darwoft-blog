@@ -29,12 +29,12 @@ const LastPostsCategory = (props) => {
             
             {posts && (
                 <>
-                    <div className="grid md:grid-cols-8">
+                    <div className="grid grid-cols-8">
                         
                         <div className="col-span-8 md:col-span-3 flex flex-col justify-between gap-3 pl-3 pt-3 border-dotted border-r border-slate-300">
                             {posts.slice(1,3).map((post) => <PostShowFifth key={post._id} post={post} /> )}
                         </div>
-                        <div className="col-span-5">
+                        <div className="col-span-8 md:col-span-5">
                             <PostShowFirst post={posts[0]} />
                         </div>
                     </div>

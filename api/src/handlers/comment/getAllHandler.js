@@ -13,7 +13,7 @@ const getOptionsSearch = (options) => {
 
     modifiers.limit = options.limit ? Number(options.limit) : undefined;
     modifiers.page =
-        options.page && options.page > 0 ? Number(options.page) : 1;
+        options.page && options.page > 0 ? Number(options.page) : undefined;
 
     modifiers.offset = modifiers.limit
         ? getOffset(modifiers.limit, modifiers.page)
@@ -45,7 +45,7 @@ const getAllHandler = async (req, res, next) => {
         };
 
         let countPosts = null;
-        if (modifiers.limit) {
+        if (modifiers.page) {
             countPosts = await count(filters);
 
             data.pagination = {

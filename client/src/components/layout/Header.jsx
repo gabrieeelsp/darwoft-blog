@@ -15,7 +15,7 @@ const Header = () => {
                             <img src={logo} className="w-full h-full object-contain" />
                         </Link>
                     </div>
-                    <div className="flex justify-center items-end gap-8  font-bold" >
+                    <div className="flex justify-center items-end gap-8 mt-3 sm:mt-0 font-bold" >
                         {categories && Object.keys(categories).map((categoryId) => <NavLink key={categoryId} to={`/seccion/${categories[categoryId].slug}`} >{categories[categoryId].name}</NavLink> )}
                     </div>
                 </div>

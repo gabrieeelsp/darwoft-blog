@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CommentForm from './CommentForm';
 import CommentsList from './CommentsList';
@@ -10,9 +10,19 @@ const Comments = () => {
     const { _id } = useSelector((state) => state.posts.post)
     const dispatch = useDispatch()
 
+    const [showMessages, setShowMessages] = useState(false)
+    const [showMoreButton, setShowMoreButton] = useState(false)
+    const [page, setPage] = useState(1)
+
+    const limit = 5;
+
     useEffect(() => {
-        dispatch(findAllComments({postId: _id}))
-    }, [dispatch, _id])
+        showMessages && dispatch(findAllComments({postId: _id, limit, page})).unwrap()
+            .then((resp) => {
+                setShowMoreButton(true)
+                resp.data.comments.length < limit && setShowMoreButton(false)
+            })
+    }, [dispatch, _id, page, showMessages])
 
     return (
         <>
@@ -27,7 +37,18 @@ const Comments = () => {
                             <span>Debes ingresar para poder comentar en esta publicación.</span>
                         </div>
                     </> }
+                    
                     <CommentsList />
+                    <div className='text-center mt-5'>
+                        {!showMessages &&<button
+                            onClick={() => setShowMessages(true)} 
+                            className='border border-slate-400 shadow-md bg-slate-100 px-4 py-1 rounded hover:bg-white '>Mostrar mensajes</button>
+                        }
+                        {showMessages && showMoreButton && <button
+                            onClick={() => setPage(page + 1)} 
+                            className='border border-slate-400 shadow-md bg-slate-100 px-4 py-1 rounded hover:bg-white '>Mostrar más</button>
+                        }
+                    </div>
                 </div>
             </section> 
         </>

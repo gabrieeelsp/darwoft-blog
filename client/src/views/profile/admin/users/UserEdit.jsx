@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 
 import { findOne } from "../../../../features/user/actions";
 import { cleanSlice } from "../../../../features/user/usersSlice";
-import { UserComments, UserData, UserRolesForm, UserStatusForm } from "../../../../components";
-import ImageNotFound from '../../../../assets/Image-not-found.png'
+import { UserComments, UserData, UserRolesForm } from "../../../../components";
+import ImageNotFound from '../../../../assets/Imagenotfound.png'
 import { RxHamburgerMenu } from "react-icons/rx";
 
 const UserEdit = () => {
@@ -62,7 +62,7 @@ const UserEdit = () => {
                             </div>
                         </div>
 
-                        <div className="">
+                        <div className="mr-4">
                             <UserRolesForm />
                         </div>
                     </div>
