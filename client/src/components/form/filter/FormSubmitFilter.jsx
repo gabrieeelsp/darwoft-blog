@@ -7,9 +7,9 @@ const FormSubmitFilter = (props) => {
     return (
         <>
             <button 
-                className="bg-sky-500 hover:bg-sky-600 text-white font-bold px-4 h-6 rounded-sm"
+                className="bg-sky-500 hover:bg-sky-600 text-white font-bold px-4 rounded-sm"
                 onClick={handlerSubmit}
-            ><FaSearch /></button> 
+            ><FaSearch className="hidden md:inline" /><span className="md:hidden">Buscar</span></button> 
         </>
     )
 }

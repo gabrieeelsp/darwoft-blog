@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom"
-import { FaRegUser, FaAlignJustify, FaUsers } from "react-icons/fa";
+import { FaRegUser, FaAlignJustify, FaUsers, FaHouseUser, FaBook } from "react-icons/fa";
 
 import { useSelector } from "react-redux";
 import { haveSomeRole } from "../../../utils";
@@ -27,7 +27,7 @@ const UserInfoMenu = () => {
                     className={({ isActive }) => isActive ? "bg-sky-400 text-white rounded-md" : "rounded-md" }
                     >
                         <div className="flex justify-between items-center uppercase px-2 py-1">
-                            <span className="">Mis Datos</span><FaRegUser className="text-xs" />
+                            <span className="">Mis Datos</span><FaHouseUser className="text-xs" />
                         </div>
                     
                 </NavLink>
@@ -36,7 +36,7 @@ const UserInfoMenu = () => {
                     className={({ isActive }) => isActive ? "bg-sky-400 text-white rounded-md" : "rounded-md" }
                 >
                     <div className="flex justify-between items-center uppercase px-2 py-1">
-                            <span className="">Publicaciones</span><FaAlignJustify className="text-xs" />
+                            <span className="">Publicaciones</span><FaBook className="text-xs" />
                         </div>
                 </NavLink>
                 }
@@ -53,7 +53,7 @@ const UserInfoMenu = () => {
                     className={({ isActive }) => isActive ? "bg-sky-400 text-white rounded-md" : "rounded-md" }
                 >
                     <div className="flex justify-between items-center uppercase px-2 py-1">
-                            <span className="">Categorias</span><FaUsers className="text-xs" />
+                            <span className="">Categorias</span><FaAlignJustify className="text-xs" />
                         </div>
                 </NavLink>
                 </>

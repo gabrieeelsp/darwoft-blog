@@ -4,6 +4,7 @@ import {changePassword, findProfileInfo, forgotPassword, login, logout, me, regi
 const initialState = {
     user: null,
     accessToken: null,
+    verified: false,
 
     loading: 'idle', // 'idle' | 'pending' | 'succeeded' | 'failed'
     error: null,
@@ -22,6 +23,9 @@ const authSlice = createSlice({
         cleanStatus: (state) => {
             state.loading = 'idle'
             state.error = null
+        },
+        setVerified: (state) => {
+            state.verified = true
         }
     },
     extraReducers(builder) {
@@ -72,10 +76,12 @@ const authSlice = createSlice({
                 state.user = action.payload.data
                 state.accessToken = localStorage.getItem('accessToken') // repensar si esta bien llamar al localstorage desde aca o se prefiere que la api devuelva el token
                 state.error = null
+                state.verified = true
             })
             .addCase(me.rejected, (state, action) => {
                 state.loading = 'failed'
                 state.error = action.payload
+                state.verified = true
             })
 
             .addCase(register.pending, (state) => {
@@ -132,6 +138,6 @@ const authSlice = createSlice({
     }
 })
 
-export const { updateUser, cleanStatus } = authSlice.actions;
+export const { updateUser, cleanStatus, setVerified } = authSlice.actions;
 
 export default authSlice.reducer;

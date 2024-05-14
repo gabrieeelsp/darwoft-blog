@@ -26,7 +26,7 @@ const PersonalDataForm = () => {
     return (
         <>
             <form onSubmit={handlerSubmit} >
-                <div className="p-3">
+                <div className="py-3 px-4 sm:pl-10">
                     <TextInput 
                         handlerInputChange={handlerInputChange}
                         name='name'

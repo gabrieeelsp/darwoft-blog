@@ -11,7 +11,7 @@ const CheckInput = (props) => {
         <>
             <div className="grid grid-cols-12 items-center mb-4 ">
 
-                <div className="col-start-4 col-span-1 flex gap-3">
+                <div className="col-span-8 sm:col-start-3 sm:col-span-2 flex gap-3">
                     <input
                         checked={value}
                         className="cursor-pointer" 

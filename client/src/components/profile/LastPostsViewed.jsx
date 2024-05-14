@@ -1,8 +1,6 @@
 import { useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
-import { Datatable } from '../'
-import { formatDistanceToNow } from 'date-fns';
-import { es } from 'date-fns/locale';
+import { Datatable } from '..'
 
 const LastPostsViewed = () => {
     const { lastPostsViewed } = useSelector((state) => state.auth.user)
@@ -11,19 +9,15 @@ const LastPostsViewed = () => {
     const body = lastPostsViewed.map((postViewed) => ({
         title: <Link to={`/${postViewed.post.slug}`} target="_blank" >{postViewed.post.title}</Link>, 
         category: categories[postViewed.post.category].name, 
-        createdAt: formatDistanceToNow(postViewed.createdAt, { addSuffix: false, locale: es }),
     }))
 
     const data = {
         header: [
             {property: 'title', value: 'Título', columClassName: 'pl-3', rowClassName: 'pl-3 py-2'}, 
             {property: 'category', value: 'Categoría',columClassName: '', rowClassName: 'text-center'}, 
-            {property: 'createdAt', value: '', columClassName: '', rowClassName: ''}
         ],
         body
-    }
-
-    
+    }    
 
     return (
         <>
@@ -32,7 +26,6 @@ const LastPostsViewed = () => {
                 <div className="p-2"><Datatable data={data} showHeader={false} />  </div>
                       
             </div>
-            
         </>
     )
 }

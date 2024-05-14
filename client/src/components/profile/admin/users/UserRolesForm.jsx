@@ -64,39 +64,36 @@ const UserRolesForm = () => {
         setStateRoles({...stateRoles, [roleName]: {...stateRoles[roleName], hasRole: false, isEnable: undefined}})
     }
     return (
-        <>
-            <div className="py-3 border border-slate-200">
-                <div className="flex items-start">
-                    <label htmlFor="" className="w-40 pl-10 font-bold">Permisos</label>
-                    <div className=" flex  gap-2 text-md">
-                        {Object.keys(initialRoles).map((key, index) => 
-                        <div 
-                            className=" flex items-center gap-2 border border-slate-200 p-1"
-                            key={key + '-' + index}>
-                                <div 
+        <>  
+            <div className="mt-5  border border-slate-200 rounded p-2 mb-3">
+                <div className="grid grid-cols-12 sm:items-center">
+                    <label htmlFor="" className="col-span-12 sm:col-span-2 font-bold">Permisos</label>
+                    <div className="col-span-12 sm:col-span-8 flex  items-center gap-2">
+                        {Object.keys(initialRoles).map((key, index) =>
+                            <div key={key + '-' + index}
+                                className="w-[60%] sm:w-[40%] lg:w-[30%] flex p-1 border border-slate-200 rounded gap-2"
+                            >
+                                <span
                                     onClick={() => handleClickToggle(stateRoles[key].name)}
-                                    className={`cursor-pointer w-36 text-center ${stateRoles[key].hasRole && stateRoles[key].isEnable ? 'bg-sky-500 text-white    ' : stateRoles[key].hasRole ? 'bg-slate-500' : ''} rounded`}>
-                                    <span className={``}>{capitalize(stateRoles[key].name)}</span>
-                                </div>
-                            
+                                    className={`cursor-pointer text-center flex-1 rounded  ${stateRoles[key].hasRole && stateRoles[key].isEnable ? 'bg-sky-500 text-white    ' : stateRoles[key].hasRole ? 'bg-slate-500' : ''}`}
+                                >{capitalize(stateRoles[key].name)}</span>
                                 <button
                                     disabled={!stateRoles[key].hasRole}
                                     onClick={() => handleClickRemove(stateRoles[key].name)}
                                     className={`${stateRoles[key].hasRole ? 'text-red-500' : 'text-slate-200'}`}
                                 ><AiOutlineClose /></button>
-                        </div>
-                    )}
+                            </div>
+                        )}
                     </div>
                     
                 </div>
-                <div className="flex items-start mt-4">
-                    <div className="w-40"></div>
-                    <div className=" flex items-center">
+                <div className="grid grid-cols-12">
+                    <div className="col-span-12 sm:col-start-3 sm:col-span-9 flex items-center  ">
                         <button 
                             onClick={handleClick}
-                            className={`bg-green-500 hover:bg-green-600 text-white font-bold w-28 rounded`}
-                        >Guardar</button>
-                        <div className="ml-5">
+                            className={`bg-green-500 hover:bg-green-600 text-white font-bold  rounded px-2 mt-2`}
+                        >Actualizar permisos</button>
+                        <div className="mt-3 ml-5 ">
                             { loading && <img src={loadingImage} className="max-h-5 object-contain" />}
                             { !loading && result === 'succeeded' &&<FaCheck className="text-green-500" />}
                             { !loading && result === 'failed' && <span>Se ha producido un error</span>}
@@ -104,7 +101,10 @@ const UserRolesForm = () => {
 
                     </div>
                 </div>
+                
             </div>
+                
+            
         </>
     )
 }

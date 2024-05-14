@@ -1,11 +1,13 @@
-import { Link, useSearchParams } from "react-router-dom"
+import { Link, useOutletContext, useSearchParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { FiPlus } from "react-icons/fi";
 import { findAll } from "../../../../features/user/actions";
 import { UsersList as UsersListComponent } from "../../../../components";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 const UsersList = () => {
+    const [ setShowCartSidebar ] = useOutletContext()
     const dispatch = useDispatch()
     const { users } = useSelector((state) => state.users)
     const [currentQueryParameters] = useSearchParams();
@@ -26,15 +28,12 @@ const UsersList = () => {
     return (
         <>
             <div className="flex justify-between gap-3 py-3 px-3 text-md bg-gray-50 border-b border-b-slate-200 font-bold text-slate-600">
-                <span>Mis Publicaciones</span>  
-                <Link 
-                    to='nuevo'
-                        className="flex gap-2 items-center bg-sky-500 hover:bg-sky-600 text-white  px-3 h-6 rounded-sm"
-                        >
-                            <FiPlus />
-                            <span>Nuevo</span>
-                        
-                    </Link>  
+                <div className="flex items-center gap-3">
+                    <button className="md:hidden" onClick={() => setShowCartSidebar(true)}>
+                        <RxHamburgerMenu className="text-xl" />
+                    </button>
+                    <span>Gestión de usuarios</span>
+                </div>   
             </div>
             <div className="p-6">
                 {users && <UsersListComponent />}

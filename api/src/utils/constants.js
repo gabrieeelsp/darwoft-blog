@@ -1,4 +1,4 @@
-const roles = ['autor', 'editor', 'administrador'];
+const roles = ['autor', 'administrador'];
 const genders = ['masculino', 'femenino', 'no especifica'];
 
 module.exports = {

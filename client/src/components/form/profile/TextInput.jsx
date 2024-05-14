@@ -11,17 +11,17 @@ const TextInput = (props) => {
     return (
         <>
             <div className="grid grid-cols-12 items-center">
-                <label className="col-start-2 col-span-2" htmlFor={name}>{label}</label>
+                <label className="col-span-8 sm:col-span-2" htmlFor={name}>{label}</label>
                 <input 
                     id={name}
                     type={isPassword ? 'password' : 'text'}
                     name={name}
-                    className="col-span-9 focus:outline-none border border-slate-300 px-2 py-1 shadow-md" 
+                    className="col-span-12 sm:col-span-10 focus:outline-none border border-slate-300 px-2 py-1 shadow-md" 
                     value={value} 
                     onChange={handlerInputChange}
                     placeholder={placeholder}
                     />
-                <div className="col-start-4 col-span-9  min-h-4 mt-1 ml-2 text-xs text-red-400">{ error }</div>
+                <div className="col-start-2 sm:col-start-4 col-span-9  min-h-4 mt-1 sm:ml-2 text-xs text-red-400">{ error }</div>
             </div>
         </>
     )

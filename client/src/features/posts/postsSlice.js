@@ -86,7 +86,8 @@ const postsSlice = createSlice({
                 state.loading = 'pending'
             })
             .addCase(findAllComments.fulfilled, (state, action) => {
-                state.post.comments = action.payload.data.comments
+                console.log(action.payload)
+                state.post.comments = state.post.comments.concat(action.payload.data.comments)
                 state.loading = 'succeeded'
                 state.error = null
             })

@@ -8,7 +8,7 @@ const Login = () => {
 
     const { user } = useSelector((state) => state.auth);
     useEffect(() => {
-        if (user) navigate('/')
+        if (user) navigate('/perfil')
     }, [navigate, user])
 
     return (

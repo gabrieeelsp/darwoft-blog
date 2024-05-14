@@ -14,8 +14,6 @@ const login = async (email, password) => {
 
     if (!user || !compare(password, user.password)) return null;
 
-    console.log(user);
-
     if (!user.isEmailVerified)
         throw new ClientError(422, 'Se requiere verificación de cuenta.');
 
