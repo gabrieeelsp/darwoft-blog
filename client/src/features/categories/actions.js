@@ -25,7 +25,7 @@ export const findAll = createAsyncThunk(
         }
 })
 
-export const update = createAsyncThunk('categories/update', async ({id, name, description}, { rejectWithValue }) => {
+export const update = createAsyncThunk('categories/update',  async ({id, name, description}, { rejectWithValue }) => {
     try {
         const url = `categories/${id}`
         const response = await httpService.put(url, {name, description});
