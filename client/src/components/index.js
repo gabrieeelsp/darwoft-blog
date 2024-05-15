@@ -54,6 +54,7 @@ import UserListFilter       from "./profile/admin/users/list/UserListFilter";
 import CategoriesList       from "./profile/admin/categories/CategoriesList";
 import CategoriesListFilter from "./profile/admin/categories/list/CategoriesListFilter";
 import CategoryEditForm     from "./profile/admin/categories/CategoryEditForm";
+import NewCategoryForm      from "./profile/admin/categories/NewCategoryForm";
 
 import Commemts             from './publications/comments/Comments';
 
@@ -121,6 +122,7 @@ export {
     CategoriesList,
     CategoriesListFilter,
     CategoryEditForm,
+    NewCategoryForm,
 
     Commemts,
     UserData,

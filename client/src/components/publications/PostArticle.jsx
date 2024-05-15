@@ -11,7 +11,7 @@ import Comments from "./comments/Comments";
 const PostArticle = () => {
     const { post } = useSelector(state => state.posts)
 
-    const fechaFormateada = post ? format(post.createdAt, "dd 'de' MMMM 'de' yyyy", { locale: es }) : null
+    // const fechaFormateada = post ? format(post.createdAt, "dd 'de' MMMM 'de' yyyy", { locale: es }) : null
 
     return (
         <>
@@ -24,7 +24,7 @@ const PostArticle = () => {
                             className="w-full h-full object-cover z-0" 
                             src={`${import.meta.env.VITE_URL_API}/images/${post.author.image}`} alt="" />
                     </div>       
-                    <span >{capitalize(post.author.name)} {capitalize(post.author.surname)}</span><span>|</span><span className='italic'>{fechaFormateada}</span>
+                    <span >{capitalize(post.author.name)} {capitalize(post.author.surname)}</span><span>|</span><span className='italic'>{format(post.createdAt, "dd 'de' MMMM 'de' yyyy", { locale: es })}</span>
                 </div>
                 <div className='grid grid-cols-12 gap-5 mt-3 '>
                     <div className='col-span-12 md:col-span-8'>

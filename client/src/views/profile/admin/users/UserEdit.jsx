@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 
 import { findOne } from "../../../../features/user/actions";
 import { cleanSlice } from "../../../../features/user/usersSlice";
-import { UserComments, UserData, UserRolesForm } from "../../../../components";
+import { UserData, UserRolesForm } from "../../../../components";
 import ImageNotFound from '../../../../assets/Imagenotfound.png'
 import { RxHamburgerMenu } from "react-icons/rx";
 
@@ -15,8 +15,6 @@ const UserEdit = () => {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.users)
     const { userId } = useParams();
-
-    const [tabSelected, setTabSelected] = useState('info') // info | comments | posts
 
     useEffect(() => {
         dispatch(findOne(userId));
@@ -37,18 +35,8 @@ const UserEdit = () => {
                     <button className="hover:text-sky-500" onClick={() =>navigate(-1)}>Gestión de usuarios</button> / <span>Editar</span>
                 </div> 
             </div>
-            {/* <div className="flex gap-5 border-b border-slate-200 mr-3 ml-4 sm:ml-10 my-4 pb-1">
-                <button 
-                    onClick={() => setTabSelected('info')} 
-                    className={`${tabSelected === 'info' ? 'text-sky-700' : ''} font-bold`}
-                    >Info</button>
-                <button 
-                    onClick={() => setTabSelected('comments')}
-                    className={`${tabSelected === 'comments' ? 'text-sky-700' : ''} font-bold`}
-                    >Comentarios</button>
-            </div> */}
             <div className="">
-                {user && tabSelected === 'info' && <>
+                {user && <>
                     <div className="ml-4 sm:ml-10 mt-4">
                         <div className="grid grid-cols-12">
                             <div className="col-span-12 md:col-span-8">
@@ -67,7 +55,7 @@ const UserEdit = () => {
                         </div>
                     </div>
                 </> }
-                {user && tabSelected === 'comments' && <UserComments /> }
+                
             </div>
             
         </>

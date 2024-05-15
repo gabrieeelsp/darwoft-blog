@@ -25,10 +25,10 @@ export const findAll = createAsyncThunk(
         }
 })
 
-export const update = createAsyncThunk('categories/update', async ({id, name, description}, { rejectWithValue }) => {
+export const update = createAsyncThunk('categories/update', async ({id, name, description, isVisible}, { rejectWithValue }) => {
     try {
         const url = `categories/${id}`
-        const response = await httpService.put(url, {name, description});
+        const response = await httpService.put(url, {name, description, isVisible});
         
         return response.data;
     } catch (error) {
@@ -47,6 +47,19 @@ export const findOne = createAsyncThunk('categories/findOne', async (id, { rejec
         return response.data;
     } catch (error) {
         // error.response => es un mensaje de error que yo envié
+        if (error.response && error.response.data.error) 
+            return rejectWithValue(error.response.data.error);
+
+        return rejectWithValue(error.message);
+    }
+})
+
+export const create = createAsyncThunk('categories/create', async ({ name, description }, { rejectWithValue }) => {
+    try {
+        const response = await httpService.post('/categories', { name, description });
+
+        return response.data;
+    } catch (error) {
         if (error.response && error.response.data.error) 
             return rejectWithValue(error.response.data.error);
 

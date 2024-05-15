@@ -16,10 +16,10 @@ const postsSlice = createSlice({
     initialState,
     reducers: {
         updatePost: (state, action) => {
-            if ( !state.posts ) return
-            const postUdated = state.posts.find((post) => post._id === action.payload.id)
-            postUdated.name = action.payload.name
-            postUdated.isVisible = action.payload.isVisible
+            // if ( !(current(state)).posts ) return
+            // const postUdated = state.posts.find((post) => post._id === action.payload.id)
+            // postUdated.name = action.payload.name
+            // postUdated.isVisible = action.payload.isVisible
         },
         cleanSlice: (state) => {
             state.loading = 'idle'
