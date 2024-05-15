@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { findAll, findOne, update } from './actions';
+import { create, findAll, findOne, update } from './actions';
 
 const initialState = {
     categories: null,
@@ -69,6 +69,20 @@ const categoriesSlice = createSlice({
         })
         .addCase(findOne.rejected, (state, action) => {
             state.categories = null
+            state.loading = 'failed'
+            state.error = action.payload
+        })
+
+        .addCase(create.pending, (state) => {
+            state.loading = 'pending'
+        })
+        .addCase(create.fulfilled, (state, action) => {
+            state.category = action.payload.data
+            state.loading = 'succeeded'
+            state.error = null
+        })
+        .addCase(create.rejected, (state, action) => {
+            state.post = null
             state.loading = 'failed'
             state.error = action.payload
         })

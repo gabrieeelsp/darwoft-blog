@@ -53,7 +53,7 @@ const Pagination = (props) => {
                     text={current_page}
                     />
 
-                {current_page !== total_pages && 
+                {total_pages > 0  && current_page !== total_pages && 
                 <PaginationButton 
                     handleClick={handleClick}
                     link={current_page + 1}
@@ -68,14 +68,14 @@ const Pagination = (props) => {
                     />}
 
                 <PaginationButton 
-                    isDisable={total_pages === current_page} 
+                    isDisable={!total_pages || total_pages === current_page} 
                     handleClick={handleClick}
                     link={current_page + 1}
                     text={<LuChevronRight />}
                     />
 
                 <PaginationButton 
-                    isDisable={current_page === total_pages} 
+                    isDisable={!total_pages || current_page === total_pages} 
                     handleClick={handleClick}
                     link={total_pages}
                     text={<LuChevronsRight />}

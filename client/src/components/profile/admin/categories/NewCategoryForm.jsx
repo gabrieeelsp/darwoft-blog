@@ -1,26 +1,30 @@
 import { useDispatch, useSelector } from "react-redux";
 import { categoryValidator as validator } from "../../../../validators/categoryValidator";
-
+import { create } from "../../../../features/categories/actions";
 import useForm from "../../../../hooks/useForm";
-import { CheckInput, FormSubmit, TextInput } from "../../../";
-import { update } from "../../../../features/categories/actions";
-import { updateCategory } from "../../../../features/app/appSlice";
 
-const CategoryEditForm = () => {
+import { useNavigate } from 'react-router-dom'
+import { FormSubmit, TextInput } from "../../../";
+import { addCategory } from "../../../../features/app/appSlice";
+
+const NewCategoryForm = () => {
+    const navigate = useNavigate()
     const dispatch = useDispatch(); 
-
-    const { category, loading, error } = useSelector((state) => state.categories)
+    const { loading, error } = useSelector((state) => state.posts)
 
     const formFields = {
-        name: category.name,
-        description: category.description,
-        isVisible: category.isVisible,
+        name: '',
+        description: '',
     }
 
     const onSubmit = () => {
-        dispatch(update({...formData, id: category._id})).unwrap()
-            .then(() => dispatch(updateCategory({...formData, id: category._id})))
-            .catch(() => {})       
+        dispatch(create({...formData})).unwrap()
+            .then((resp) => {
+                dispatch(addCategory(resp.data))
+                setTimeout(() => {
+                    navigate(`/perfil/categorias`, { replace: true})
+                }, 1000)
+            } )
     }
 
     const {formData, formErrors, handlerInputChange, handlerSubmit, showResponseMessage} = useForm({initialState: formFields, onSubmit, validator})
@@ -44,25 +48,16 @@ const CategoryEditForm = () => {
                         name='description'
                         isPassword={false}
                         error={formErrors.description}
-                        placeholder='Descripción'
-                        label='Descripción'
+                        placeholder='Desscripción'
+                        label='Desscripción'
                         value={formData.description}
                     />
-
-                    <CheckInput
-                            handlerInputChange={handlerInputChange}
-                            name='isVisible'
-                            label='Publicar'
-                            value={formData.isVisible}
-                        />
-
                     
-
                     <FormSubmit 
                         showResponseMessage={showResponseMessage}
                         error={error}
                         status={loading}
-                        succeededMessage='Se ha actualizado exitosamente'
+                        succeededMessage='Se ha creado exitosamente'
                     />
                 </div>
                 
@@ -71,4 +66,4 @@ const CategoryEditForm = () => {
     )
 }
 
-export default CategoryEditForm
+export default NewCategoryForm

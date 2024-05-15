@@ -31,7 +31,7 @@ const CategoriesList = () => {
                     <button className="md:hidden" onClick={() => setShowCartSidebar(true)}>
                         <RxHamburgerMenu className="text-xl" />
                     </button>
-                    <span>categorías</span>
+                    <span>Gestión de Categorías</span>
                 </div> 
                 <Link 
                     to='nuevo'

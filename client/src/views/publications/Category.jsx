@@ -13,6 +13,7 @@ const Category = () => {
             { 
             <div>
                 <h1 className="ml-3 mt-2 text-2xl font-bold">{category && capitalize(category.name)}</h1>
+                <h2 className="ml-3  text-sm font-bold">{category && capitalize(category.description)}</h2>
                 {category && <LastPosts categoryId={category._id} />}
             </div>
             }
