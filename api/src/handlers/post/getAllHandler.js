@@ -21,6 +21,11 @@ const getOptionsSearch = (options) => {
             countComments: options['order-dir'] ? options['order-dir'] : -1,
         };
 
+    if (!options['order-by'])
+        modifiers.sort = {
+            createdAt: -1,
+        };
+
     modifiers.limit = options.limit ? Number(options.limit) : undefined;
     modifiers.page =
         options.page && options.page > 0 ? Number(options.page) : undefined;
