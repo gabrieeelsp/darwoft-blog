@@ -16,7 +16,7 @@ const Header = () => {
                         </Link>
                     </div>
                     <div className="flex justify-center items-end gap-8 mt-3 sm:mt-0 font-bold" >
-                        {categories && Object.keys(categories).filter(cId => categories[cId].isVisible).map((categoryId) => <NavLink key={categoryId} to={`/seccion/${categories[categoryId].slug}`} >{categories[categoryId].name}</NavLink> )}
+                        {categories && Object.keys(categories).map((categoryId) => <NavLink key={categoryId} to={`/seccion/${categories[categoryId].slug}`} >{categories[categoryId].name}</NavLink> )}
                     </div>
                 </div>
                 

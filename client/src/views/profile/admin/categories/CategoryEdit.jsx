@@ -29,7 +29,7 @@ const CategoryEdit = () => {
                     <button className="md:hidden" onClick={() => setShowCartSidebar(true)}>
                         <RxHamburgerMenu className="text-xl" />
                     </button>
-                    <button className="hover:text-sky-500" onClick={() =>navigate(-1)}>Gestión de Categorias</button> / <span>Editar</span>
+                    <button className="hover:text-sky-500" onClick={() =>navigate(-1)}>Categorias</button> / <span>Editar</span>
                 </div> 
             </div>
 

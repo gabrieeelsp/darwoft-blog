@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 import { create, createComment, findAll, findAllComments, findOne, update, uploadImage  } from "./actions";
 
@@ -16,10 +16,10 @@ const postsSlice = createSlice({
     initialState,
     reducers: {
         updatePost: (state, action) => {
-            // if ( !(current(state)).posts ) return
-            // const postUdated = state.posts.find((post) => post._id === action.payload.id)
-            // postUdated.name = action.payload.name
-            // postUdated.isVisible = action.payload.isVisible
+            if ( !state.posts ) return
+            const postUdated = state.posts.find((post) => post._id === action.payload.id)
+            postUdated.name = action.payload.name
+            postUdated.isVisible = action.payload.isVisible
         },
         cleanSlice: (state) => {
             state.loading = 'idle'
@@ -86,10 +86,8 @@ const postsSlice = createSlice({
                 state.loading = 'pending'
             })
             .addCase(findAllComments.fulfilled, (state, action) => {
-                const oldComments = action.payload.data.comments.filter((c) => {
-                    return !(current(state).post.comments.find(item => item._id === c._id))
-                })
-                state.post.comments = state.post.comments.concat(oldComments)
+                console.log(action.payload)
+                state.post.comments = state.post.comments.concat(action.payload.data.comments)
                 state.loading = 'succeeded'
                 state.error = null
             })

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { categoryValidator as validator } from "../../../../validators/categoryValidator";
 
 import useForm from "../../../../hooks/useForm";
-import { CheckInput, FormSubmit, TextInput } from "../../../";
+import { FormSubmit, TextInput } from "../../../";
 import { update } from "../../../../features/categories/actions";
 import { updateCategory } from "../../../../features/app/appSlice";
 
@@ -14,13 +14,11 @@ const CategoryEditForm = () => {
     const formFields = {
         name: category.name,
         description: category.description,
-        isVisible: category.isVisible,
     }
 
     const onSubmit = () => {
         dispatch(update({...formData, id: category._id})).unwrap()
-            .then(() => dispatch(updateCategory({...formData, id: category._id})))
-            .catch(() => {})       
+            .then(() => dispatch(updateCategory({...formData, id: category._id})))        
     }
 
     const {formData, formErrors, handlerInputChange, handlerSubmit, showResponseMessage} = useForm({initialState: formFields, onSubmit, validator})
@@ -48,13 +46,6 @@ const CategoryEditForm = () => {
                         label='Descripción'
                         value={formData.description}
                     />
-
-                    <CheckInput
-                            handlerInputChange={handlerInputChange}
-                            name='isVisible'
-                            label='Publicar'
-                            value={formData.isVisible}
-                        />
 
                     
 

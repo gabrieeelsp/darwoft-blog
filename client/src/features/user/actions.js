@@ -39,7 +39,7 @@ export const findOne = createAsyncThunk( 'users/findOne', async (id, { rejectWit
     }
 })
 
-export const uploadImage = createAsyncThunk('users/uploadImage', async ({ id, formData }, { rejectWithValue }) => {
+export const uploadImage = createAsyncThunk('posts/uploadImage', async ({ id, formData }, { rejectWithValue }) => {
     try {
         const url = `/users/${id}/upload-image`
         const response = await httpService.post(url, formData, { headers: {'Content-Type': 'multipart/form-data' }});
