@@ -8,7 +8,6 @@ import { RiCloseLargeLine } from "react-icons/ri";
 const EditUserImageForm = () => {
     const dispatch = useDispatch();
     const { user, error } = useSelector((state) => state.users)
-    console.log('userImage')
 
     const handlerInputChange = (event) => {
         let formData = new FormData();
@@ -21,8 +20,6 @@ const EditUserImageForm = () => {
     const handlerClickRemove = () => {
         dispatch(removeImage())
     }
-
-    console.log(user)
 
     return (
         <>

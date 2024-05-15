@@ -14,7 +14,8 @@ const EditPostForm = () => {
     const formFields = {
         title: post.title,
         isVisible: post.isVisible,
-        categoryId: post.category._id,
+        // categoryId: post.category._id,
+        categoryId: post.category,
         excerpt: post.excerpt || '',
         content: post.content || '',
     }
