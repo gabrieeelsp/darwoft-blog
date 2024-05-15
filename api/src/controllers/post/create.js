@@ -1,7 +1,8 @@
 const { postModel } = require('../../models');
 
 const create = async (data) => {
-    const post = await postModel.create(data);
+    let post = await postModel.create(data);
+    post = await post.populate('category');
 
     return post;
 };

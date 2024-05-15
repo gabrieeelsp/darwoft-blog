@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 import { create, createComment, findAll, findAllComments, findOne, update, uploadImage  } from "./actions";
 
@@ -86,8 +86,10 @@ const postsSlice = createSlice({
                 state.loading = 'pending'
             })
             .addCase(findAllComments.fulfilled, (state, action) => {
-                console.log(action.payload)
-                state.post.comments = state.post.comments.concat(action.payload.data.comments)
+                const oldComments = action.payload.data.comments.filter((c) => {
+                    return !(current(state).post.comments.find(item => item._id === c._id))
+                })
+                state.post.comments = state.post.comments.concat(oldComments)
                 state.loading = 'succeeded'
                 state.error = null
             })
