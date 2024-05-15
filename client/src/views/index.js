@@ -20,7 +20,6 @@ import PostEdit             from "./profile/PostEdit";
 import UsersList            from "./profile/admin/users/UsersList";
 import CategoriesList       from "./profile/admin/categories/CategoriesList";
 import CategoryEdit         from "./profile/admin/categories/CategoryEdit";
-import CategoryCreate         from "./profile/admin/categories/CategoryCreate";
 
 import UserEdit             from "./profile/admin/users/UserEdit";
 
@@ -48,7 +47,6 @@ export {
 
     CategoriesList,
     CategoryEdit,
-    CategoryCreate,
 
     UserEdit,
 }

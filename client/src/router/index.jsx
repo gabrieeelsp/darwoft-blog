@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App'
-import { Category, ChangePassword, ForgotPassword, Home, Login, PersonalData, Post, PostCreate, PostEdit, PostsList, ProfileLayout, Profile, Register, UsersList, VerifyAccount, CategoriesList, CategoryEdit, UserEdit, CategoryCreate } from '../views'
+import { Category, ChangePassword, ForgotPassword, Home, Login, PersonalData, Post, PostCreate, PostEdit, PostsList, ProfileLayout, Profile, Register, UsersList, VerifyAccount, CategoriesList, CategoryEdit, UserEdit } from '../views'
 
 
 const createRouter = () => {
@@ -81,10 +81,6 @@ const createRouter = () => {
                         {
                             path: 'categorias/:categoryId/editar',
                             element: <CategoryEdit />
-                        },
-                        {
-                            path: 'categorias/nuevo',
-                            element: <CategoryCreate />
                         },
                     ]
                 },

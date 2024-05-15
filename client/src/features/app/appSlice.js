@@ -23,11 +23,8 @@ const appSlice = createSlice({
         updateCategory: (state, action) => {
             state.categories[action.payload.id].name = action.payload.name
             state.categories[action.payload.id].description = action.payload.description
-            state.categories[action.payload.id].isVisible = action.payload.isVisible
         },
-        addCategory: (state, action) => {
-            state.categories[action.payload._id] = action.payload
-        },
+
 
     },
     extraReducers(builder) {
@@ -60,6 +57,6 @@ export const getCategoryBySlug = (state, slug) => {
     }
 }
     
-export const { updateCategory, addCategory } = appSlice.actions;
+export const { updateCategory } = appSlice.actions;
 
 export default appSlice.reducer;

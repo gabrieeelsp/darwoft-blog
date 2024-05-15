@@ -9,6 +9,7 @@ const EditUserImageForm = () => {
     const dispatch = useDispatch();
     const { user, error } = useSelector((state) => state.users)
 
+
     const handlerInputChange = (event) => {
         let formData = new FormData();
         formData.append('file', event.target.files[0]);
@@ -20,6 +21,8 @@ const EditUserImageForm = () => {
     const handlerClickRemove = () => {
         dispatch(removeImage())
     }
+
+    console.log(user)
 
     return (
         <>

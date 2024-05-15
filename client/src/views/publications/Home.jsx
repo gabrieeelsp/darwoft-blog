@@ -7,7 +7,7 @@ const Home = () => {
         <>
             <div>
                 <LastPosts />
-                { categories && Object.keys(categories).filter(cId => categories[cId].isVisible).map((categoryId) => <LastPostsCategory key={categoryId} category={categories[categoryId]} />)}
+                { categories && Object.keys(categories).map((categoryId) => <LastPostsCategory key={categoryId} category={categories[categoryId]} />)}
             </div>
         </>
     )

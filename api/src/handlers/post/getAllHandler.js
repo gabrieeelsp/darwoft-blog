@@ -76,7 +76,6 @@ const getAllHandler = async (req, res, next) => {
             data,
         });
     } catch (error) {
-        console.log(error);
         return next(error);
     }
 };
