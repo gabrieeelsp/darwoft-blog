@@ -9,7 +9,7 @@ const getOneById = async (id, filters) => {
     const post = await postModel
         .findOne({ ...filters, [property]: id })
         .populate('author', 'name surname image')
-        .populate('category', 'name')
+        // .populate('category', 'name')
         .exec();
 
     if (post && property === 'slug') {

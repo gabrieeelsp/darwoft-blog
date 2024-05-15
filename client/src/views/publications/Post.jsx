@@ -29,7 +29,7 @@ const Post = () => {
 
     return (
         <>
-            <div className="pt-2 px-3 sm:px-3 md:px-1 lg:px-0">
+            <div className="pt-2 px-3 sm:px-3 md:px-1 lg:px-0 flex w-full">
                 {post && 
                     <>
                         <PostArticle />
