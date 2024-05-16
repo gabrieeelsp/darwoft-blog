@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require('path');
@@ -23,10 +24,10 @@ transporter
 
 const send = async ({ to, subject, message }) => {
     const info = await transporter.sendMail({
-        from: `"CYT Notificaciones" <${GMAIL_EMAIL}>`, // sender address
-        to, // list of receivers
-        subject, // Subject line
-        html: message, // html body
+        from: `"CYT Notificaciones" <${GMAIL_EMAIL}>`,
+        to,
+        subject,
+        html: message,
     });
 
     return info;

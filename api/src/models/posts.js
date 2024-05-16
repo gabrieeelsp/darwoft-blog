@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
 const { default: slugify } = require('slugify');
 
@@ -41,11 +42,6 @@ const PostSchema = new mongoose.Schema(
     },
     {
         timestamps: true,
-        statics: {
-            findBySlug(slug) {
-                return this.findOne({ slug });
-            },
-        },
     },
 );
 

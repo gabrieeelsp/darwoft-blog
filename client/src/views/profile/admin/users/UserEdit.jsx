@@ -13,7 +13,7 @@ const UserEdit = () => {
     const [ setShowCartSidebar ] = useOutletContext()
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { user, loading, error } = useSelector((state) => state.users)
+    const { user } = useSelector((state) => state.users)
     const { userId } = useParams();
 
     useEffect(() => {
@@ -23,8 +23,6 @@ const UserEdit = () => {
             dispatch(cleanSlice())
         }
     }, [dispatch, userId])
-
-    if ( loading === 'failed' && error ) return <div className="flex"><Error /></div>
 
     return (
         <>

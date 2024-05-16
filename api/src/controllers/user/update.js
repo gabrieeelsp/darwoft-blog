@@ -15,7 +15,10 @@ const update = async (id, data) => {
         delete values.gender;
     }
 
-    if (data.password) values.password = hash(data.password);
+    if (data.password) {
+        values.password = hash(data.password);
+        values.tokensRevokedAt = Date.now();
+    }
 
     let user = await userModel.findByIdAndUpdate(
         { _id: id },
@@ -25,7 +28,12 @@ const update = async (id, data) => {
         },
     );
 
-    user = cleanDocument(user, ['password']);
+    user = cleanDocument(user, [
+        'password',
+        'tokensRevokedAt',
+        'isEmailVerified',
+        'lastPostsViewed',
+    ]);
 
     return user;
 };

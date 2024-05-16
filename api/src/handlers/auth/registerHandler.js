@@ -24,7 +24,6 @@ const registerHandler = async (req, res, next) => {
 
         return responseHelper(res, {
             statusCode: 201,
-            message: 'Usuario creado con exito',
             data: user,
         });
     } catch (error) {
