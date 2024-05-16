@@ -38,9 +38,9 @@ router.post(
 
 router.put(
     '/:postId',
-    authMiddleware, // authentication
-    validateRolMiddleware(['autor']), // authorization
-    validateUpdate, // valida el formulario
+    authMiddleware,
+    validateRolMiddleware(['autor']),
+    validateUpdate,
     updateHandler,
 );
 

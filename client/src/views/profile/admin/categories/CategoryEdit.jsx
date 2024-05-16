@@ -11,7 +11,7 @@ const CategoryEdit = () => {
     const [ setShowCartSidebar ] = useOutletContext()
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { category, loading, error } = useSelector((state) => state.categories)
+    const { category } = useSelector((state) => state.categories)
     const { categoryId } = useParams();
 
     useEffect(() => {
@@ -22,7 +22,6 @@ const CategoryEdit = () => {
         }
     }, [dispatch, categoryId])
 
-    if ( loading === 'failed' && error ) return <div className="flex"><Error /></div>
 
     return (
         <>

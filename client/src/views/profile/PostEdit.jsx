@@ -10,7 +10,7 @@ const PostEdit = () => {
     const [ setShowCartSidebar ] = useOutletContext()
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { post, loading, error } = useSelector((state) => state.posts)
+    const { post } = useSelector((state) => state.posts)
     const { postId } = useParams();
 
     const [tabSelected, setTabSelected] = useState('info')
@@ -22,8 +22,6 @@ const PostEdit = () => {
             dispatch(cleanSlice())
         }
     }, [dispatch, postId])
-
-    if ( loading === 'failed' && error ) return <div className="flex"><Error /></div>
 
     return (
         <>

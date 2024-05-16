@@ -29,17 +29,11 @@ server.use((err, req, res, next) => {
         return res.status(err.statusCode).json({ error });
     }
 
-    // si es un error inesperado se puede realizar algun accion como mandar un mail
-
     return res.status(500).json({
         error: {
             message: getErrorDBName(err) || err.message,
         },
     });
 });
-
-// process.on('unhandledRejection', function (err) {
-//     console.log('seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
-// });
 
 module.exports = server;

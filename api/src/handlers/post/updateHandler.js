@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const { matchedData } = require('express-validator');
 const update = require('../../controllers/post/update');
 const ClientError = require('../../errors/ClientError');
@@ -32,8 +33,6 @@ const updateHandler = async (req, res, next) => {
     } catch (error) {
         return next(error);
     }
-
-    if (!post) return next(new ClientError(404, 'Post no encontrado', null));
 
     return responseHelper(res, {
         statusCode: 200,
