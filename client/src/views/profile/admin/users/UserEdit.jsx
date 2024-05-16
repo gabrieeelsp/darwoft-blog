@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 import { findOne } from "../../../../features/user/actions";
 import { cleanSlice } from "../../../../features/user/usersSlice";
-import { UserData, UserRolesForm } from "../../../../components";
+import { Error, UserData, UserRolesForm } from "../../../../components";
 import ImageNotFound from '../../../../assets/Imagenotfound.png'
 import { RxHamburgerMenu } from "react-icons/rx";
 
@@ -13,7 +13,7 @@ const UserEdit = () => {
     const [ setShowCartSidebar ] = useOutletContext()
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { user } = useSelector((state) => state.users)
+    const { user, loading, error } = useSelector((state) => state.users)
     const { userId } = useParams();
 
     useEffect(() => {
@@ -23,6 +23,8 @@ const UserEdit = () => {
             dispatch(cleanSlice())
         }
     }, [dispatch, userId])
+
+    if ( loading === 'failed' && error ) return <div className="flex"><Error /></div>
 
     return (
         <>

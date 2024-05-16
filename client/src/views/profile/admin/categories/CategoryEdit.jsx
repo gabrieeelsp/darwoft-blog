@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import { useEffect } from "react";
 
-import { CategoryEditForm } from "../../../../components";
+import { CategoryEditForm, Error } from "../../../../components";
 import { findOne } from "../../../../features/categories/actions";
 import { cleanSlice } from "../../../../features/categories/categoriesSlice";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -11,7 +11,7 @@ const CategoryEdit = () => {
     const [ setShowCartSidebar ] = useOutletContext()
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { category } = useSelector((state) => state.categories)
+    const { category, loading, error } = useSelector((state) => state.categories)
     const { categoryId } = useParams();
 
     useEffect(() => {
@@ -21,6 +21,8 @@ const CategoryEdit = () => {
             dispatch(cleanSlice())
         }
     }, [dispatch, categoryId])
+
+    if ( loading === 'failed' && error ) return <div className="flex"><Error /></div>
 
     return (
         <>
